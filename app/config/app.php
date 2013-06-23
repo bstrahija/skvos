@@ -114,7 +114,8 @@ return array(
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 
-		'Profiler\ProfilerServiceProvider',
+		// 'Profiler\ProfilerServiceProvider',
+		'Juy\Profiler\Providers\ProfilerServiceProvider',
 
 	),
 
@@ -181,7 +182,7 @@ return array(
 		'Validator'       => 'Illuminate\Support\Facades\Validator',
 		'View'            => 'Illuminate\Support\Facades\View',
 
-		'Profiler'        => 'Profiler\Facades\Profiler',
+		'Profiler'        => 'Juy\Profiler\Facades\Profiler',
 
 	),
 
