@@ -6,7 +6,8 @@
 		"laravel/framework": "4.0.*",
 		"loic-sharma/profiler": "1.1.*",
 		"dflydev/markdown": "1.0.*",
-		"imagine/imagine": "0.4.*"
+		"imagine/imagine": "0.4.*",
+		"juy/profiler": "dev-master"
 	},
 	"autoload": {
 		"classmap": [
