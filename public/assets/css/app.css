@@ -35,5 +35,6 @@ p {
     color:#555;
 }
 
+.app .anbu-tabs { text-align: left; }
 .app .anbu-tabs li { margin: 0 5px; padding: 0; font-size: 12px; }
 .app .anbu-count { border-radius: 8px; }
