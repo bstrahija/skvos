@@ -11,7 +11,13 @@
 |
 */
 
-Route::get('/', function()
+// ! Auth routes
+Route::get('login',  array('as' => 'login',      'uses' => 'App\Controllers\AuthController@getLogin'));
+Route::post('login', array('as' => 'login.post', 'uses' => 'App\Controllers\AuthController@postLogin'));
+Route::get('logout', array('as' => 'logout',     'uses' => 'App\Controllers\AuthController@getLogout'));
+
+// ! App routes
+Route::group(array('before' => 'auth'), function()
 {
-	return View::make('hello');
+	Route::get('/', array('as' => 'dashboard', 'uses' => 'App\Controllers\DashboardController@getIndex'));
 });
