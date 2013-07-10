@@ -24,7 +24,7 @@ h5, h6     { font-family: Helvetica, sans-serif; font-size: 11px; text-transform
 #app .container-fluid     { margin: 0; padding: 0; }
 #app #main                { padding-top: 43px; }
 @media (max-width: 979px) { #app #main { padding-top: 0; } }
-#hd1 .button              { margin: 0; padding: 3px 0; width: 16px; height: auto; line-height: 100%; border-width: 2px; font-size: 10px; text-align: center; position: relative; top: 8px; }
+#hd1 .button              { margin: 0; padding: 3px 0; width: 17px; height: auto; line-height: 100%; border-width: 2px; font-size: 10px; text-align: center; position: relative; top: 8px; }
 #hd1 .button:hover        { color: #fff; text-decoration: none; }
 #hd1 .pull-right          { right: 18px; }
 #hd1 .pull-left           { left: 18px; }
