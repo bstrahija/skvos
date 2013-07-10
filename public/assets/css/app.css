@@ -1,27 +1,41 @@
+@import url(http://fonts.googleapis.com/css?family=Lobster+Two:400,700);
 @import url(http://fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext);
 @import url(http://fonts.googleapis.com/css?family=Oswald:400,700&subset=latin,latin-ext);
 
 /* Common */
-body { margin:0; font-family:Helvetica, sans-serif; color: #333; background: #ededed; }
+body { margin:0; font-family:Helvetica, sans-serif; color: #333; background: #ededed url(../img/bg_ticks.png) repeat 50% 50%; }
 
 
 /* Typography */
-h1         { font-family: "Lobster", Helvetica, sans-serif; color: #eee; font-size: 16px; font-weight: normal; margin: 0; }
+h1         { font-family: "Lobster Two", Helvetica, sans-serif; color: #eee; font-size: 16px; font-weight: normal; margin: 0; }
 h2, h3, h4 { font-family: "Oswald", Helvetica, sans-serif; color: #de7e38; font-weight: normal; text-shadow: 0 1px 0 rgba(255,255,255,.8); }
 h2         { text-transform: uppercase; }
 h3         { text-transform: uppercase; }
-h5, h6     { font-family: Helvetica, sans-serif; font-size: 11px; text-transform: uppercase; color: #888; }
+h5, h6     { font-family: Helvetica, sans-serif; font-size: 11px; text-transform: uppercase; color: #888; text-shadow: 0 1px 0 rgba(255,255,255,.8); }
+#app input:focus { box-shadow: 0 0 6px #96b32b; border-color: #96b32b; }
 
 
 /* Layout */
-#app { max-width: 480px; margin: 0 auto; }
-#hd1 { text-align: center; background: #333; }
+#app                  { max-width: 480px; margin: 0 auto; }
+#hd1                  { text-align: center; background: transparent; margin: 0 -20px; }
+#hd1 .navbar          { background: transparent; }
+#hd1 .navbar-inner    { background: transparent; padding: 0; }
+#hd1 header           { background: #333; }
+#app .container-fluid { margin: 0; padding: 0; }
+#app #main            { padding-top: 43px; }
+@media (max-width: 979px) { #app #main { padding-top: 0; } }
 
 
 /* Dashboard */
-.dashboard h2 { font-size: 12px; color: #333; font-family: Helvetica, sans-serif; font-weight: bold; }
+.dashboard h2                  { font-size: 12px; color: #333; font-family: Helvetica, sans-serif; font-weight: bold; margin: -1px 0 0 0; line-height: 120%; background: rgba(150,150,150,.1); padding: 20px 20px 16px 20px; margin-left: -20px; margin-right: -20px; }
+.dashboard h3                  { margin: 0; line-height: 130%; }
 .dashboard h3, .dashboard h3 a { color: #93b557; }
 .dashboard h3 a:hover          { color: #a4c668; text-decoration: none; }
+.dashboard h6                  { margin: 5px 0 0 0; padding: 0; line-height: 130%; }
+.dashboard hr                  { border-top: 1px solid rgba(0,0,0,.1); border-bottom: 1px solid rgba(255,255,255,.4); margin: 0 -20px; clear: both; }
+.dashboard .panel              { margin: 0 0 0 0; }
+.dashboard .panel li           { padding: 12px 0 0 0; }
+.dashboard .panel li hr        { margin-top: 12px; }
 
 .dashboard .past h3,
 .dashboard .past h3 a       { color: #31abb5; }

@@ -3,9 +3,7 @@
 <head>
 	@include('_partial.meta')
 </head>
-<body>
-@include('_partial.header')
-
+<body class="auth">
 <div id="app">
 	<div class="container-fluid" id="main">
 		<div class="row-fluid">

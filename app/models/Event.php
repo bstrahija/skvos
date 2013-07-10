@@ -53,4 +53,13 @@ class Event extends Eloquent {
 		return $query->where('date', '<', Carbon::today()->format('Y-m-d'));
 	}
 
+	/**
+	 * Return a period
+	 * @return string
+	 */
+	public function getPeriodAttribute()
+	{
+		return date('d.m. @ H:i', strtotime($this->attributes['from'])) . ' - ' . date('H:i', strtotime($this->attributes['to']));
+	}
+
 }
