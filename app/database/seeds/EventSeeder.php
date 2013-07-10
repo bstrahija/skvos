@@ -1,12 +1,13 @@
 <?php
 
-use App\Models\Event, Carbon\Carbon;
+use App\Models\Event, App\Models\Invitation, Carbon\Carbon;
 
 class EventSeeder extends Seeder {
 
 	public function run()
 	{
 		DB::table('events')->delete();
+		DB::table('invitations')->delete();
 
 		// ! Today
 		Event::create(array(
@@ -29,6 +30,19 @@ class EventSeeder extends Seeder {
 			'from'  => Carbon::today()->subWeeks(2)->addHours('18'),
 			'to'    => Carbon::today()->subWeeks(2)->addHours('20')->addMinutes(30),
 		));
+
+		// ! Connect users to events
+		Invitation::create(array('user_id' => 1, 'event_id' => 1, 'confirmed' => 1));
+		Invitation::create(array('user_id' => 2, 'event_id' => 1, 'confirmed' => 1));
+		Invitation::create(array('user_id' => 3, 'event_id' => 1, 'confirmed' => 0));
+		Invitation::create(array('user_id' => 4, 'event_id' => 1, 'confirmed' => 0));
+		Invitation::create(array('user_id' => 1, 'event_id' => 2, 'confirmed' => 1));
+		Invitation::create(array('user_id' => 2, 'event_id' => 2, 'confirmed' => 0));
+		Invitation::create(array('user_id' => 3, 'event_id' => 2, 'confirmed' => 1));
+		Invitation::create(array('user_id' => 1, 'event_id' => 3, 'confirmed' => 1));
+		Invitation::create(array('user_id' => 2, 'event_id' => 3, 'confirmed' => 1));
+		Invitation::create(array('user_id' => 3, 'event_id' => 3, 'confirmed' => 1));
+		Invitation::create(array('user_id' => 4, 'event_id' => 3, 'confirmed' => 1));
 	}
 
 }
