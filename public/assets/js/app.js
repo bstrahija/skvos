@@ -16,7 +16,7 @@ App = {
 	init: function() {
 		console.log("App initializing...");
 
-		// App.Content.init();
+		App.Content.init();
 		// App.Layout.init();
 		// App.Events.init();
 
@@ -95,7 +95,3 @@ App = {
 	}
 
 };
-
-
-// ! Initialize
-$(function() { App.init(); });

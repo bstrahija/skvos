@@ -33,6 +33,12 @@ class UserSeeder extends Seeder {
 			'first_name'  => 'Ivan',
 			'last_name'   => 'Kanoti',
 		));
+		User::create(array(
+			'email'       => 'info@zoranjambor.com',
+			'password'    => Hash::make("g09to1g5"),
+			'first_name'  => 'Zoran',
+			'last_name'   => 'Jambor',
+		));
 	}
 
 }

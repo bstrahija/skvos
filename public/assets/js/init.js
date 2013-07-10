@@ -1,0 +1,2 @@
+// ! Initialize
+$(function() { App.init(); });

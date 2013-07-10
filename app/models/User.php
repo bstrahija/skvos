@@ -20,6 +20,16 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	 */
 	protected $hidden = array('password');
 
+	public function invitations()
+	{
+		return $this->belongsTo('App\Models\User');
+	}
+
+	public function invitation()
+	{
+		return $this->belongsTo('App\Models\User');
+	}
+
 	/**
 	 * Get the unique identifier for the user.
 	 *
@@ -56,7 +66,18 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	 */
 	public function getFullNameAttribute()
 	{
-		return $this->attributes['first_name'] . ' ' . $this->attributes['first_name'];
+		return $this->attributes['first_name'] . ' ' . $this->attributes['last_name'];
+	}
+
+	/**
+	 * Get if user confirmed invitation to event
+	 * @return mixed
+	 */
+	public function getConfirmedAttribute()
+	{
+		if (isset($this->pivot->confirmed) and $this->pivot->confirmed) return $this->pivot->confirmed;
+
+		return false;
 	}
 
 }

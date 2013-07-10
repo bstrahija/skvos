@@ -3,7 +3,7 @@
 @import url(http://fonts.googleapis.com/css?family=Oswald:400,700&subset=latin,latin-ext);
 
 /* Common */
-body { margin:0; font-family:Helvetica, sans-serif; color: #333; background: #ededed url(../img/bg_ticks.png) repeat 50% 50%; }
+body { margin:0; font-family:Helvetica, sans-serif; color: #333; background: #ededed url(../img/bg_ticks.png) repeat 50% 0; }
 
 
 /* Typography */
@@ -20,7 +20,7 @@ h5, h6     { font-family: Helvetica, sans-serif; font-size: 11px; text-transform
 #hd1                      { text-align: center; background: transparent; margin: 0 -20px; height: 40px; }
 #hd1 .navbar              { background: transparent; }
 #hd1 .navbar-inner        { background: transparent; padding: 0; }
-#hd1 header               { background: #333; }
+#hd1 header               { background: #222 url(../img/bg_binding_dark.png); }
 #app .container-fluid     { margin: 0; padding: 0; }
 #app #main                { padding-top: 43px; }
 @media (max-width: 979px) { #app #main { padding-top: 0; } }
@@ -37,20 +37,26 @@ footer p                  { font-size: 10px; color: #ccc; text-shadow: 0 1px 0 #
 .dashboard h3                  { margin: 0; line-height: 130%; }
 .dashboard h3, .dashboard h3 a { color: #93b557; }
 .dashboard h3 a:hover          { color: #a4c668; text-decoration: none; }
-.dashboard h6                  { margin: 5px 0 0 0; padding: 0; line-height: 130%; }
+.dashboard h6                  { margin: 5px 0 12px 0; padding: 0; line-height: 130%; }
 .dashboard hr                  { border-top: 1px solid rgba(0,0,0,.1); border-bottom: 1px solid rgba(255,255,255,.4); margin: 0 -20px; clear: both; }
 .dashboard .panel              { margin: 0 0 0 0; }
 .dashboard .panel li           { padding: 12px 20px 0 20px; margin: 0 -20px; }
 .dashboard .panel li:hover     { background: rgba(255,255,255,.3); }
-.dashboard .panel li hr        { margin-top: 12px; }
+.dashboard .panel li hr        { margin-top: 0; }
 
 .dashboard .past h3,
 .dashboard .past h3 a       { color: #31abb5; }
 .dashboard .past h3 a:hover { color: #209aa4; text-decoration: none; }
 
-
 .dashboard ul { list-style-type: none; margin: 0; padding: 0; }
 .dashboard ul li { list-style-type: none; margin: 0; padding: 0; }
+
+.people                  { margin: 0 -20px 0 -20px; padding: 10px 20px; background: #ccc url(../img/bg_binding_dark.png) repeat 50% 50%; display: none; }
+.people .table           { font-size: 11px; margin: 0; color: #eee; text-shadow: 0 -1px 0 rgba(0,0,0,.4); }
+.people .table td        { border: 0; padding: 0 10px 0 0; }
+.people .table .slim     { width: 1%; }
+.people .icon-ok-sign    { color: #0a0; }
+.people .icon-minus-sign { color: #c00; }
 
 
 /* Debug */

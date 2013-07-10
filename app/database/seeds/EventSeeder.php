@@ -36,6 +36,7 @@ class EventSeeder extends Seeder {
 		Invitation::create(array('user_id' => 2, 'event_id' => 1, 'confirmed' => 1));
 		Invitation::create(array('user_id' => 3, 'event_id' => 1, 'confirmed' => 0));
 		Invitation::create(array('user_id' => 4, 'event_id' => 1, 'confirmed' => 0));
+		Invitation::create(array('user_id' => 5, 'event_id' => 1, 'confirmed' => 0));
 		Invitation::create(array('user_id' => 1, 'event_id' => 2, 'confirmed' => 1));
 		Invitation::create(array('user_id' => 2, 'event_id' => 2, 'confirmed' => 0));
 		Invitation::create(array('user_id' => 3, 'event_id' => 2, 'confirmed' => 1));
@@ -43,6 +44,7 @@ class EventSeeder extends Seeder {
 		Invitation::create(array('user_id' => 2, 'event_id' => 3, 'confirmed' => 1));
 		Invitation::create(array('user_id' => 3, 'event_id' => 3, 'confirmed' => 1));
 		Invitation::create(array('user_id' => 4, 'event_id' => 3, 'confirmed' => 1));
+		Invitation::create(array('user_id' => 5, 'event_id' => 3, 'confirmed' => 0));
 	}
 
 }

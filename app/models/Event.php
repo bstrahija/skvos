@@ -12,7 +12,7 @@ class Event extends Eloquent {
 	 */
 	public function attendees()
 	{
-		return $this->belongsToMany('App\Models\User', 'invitations')->where('confirmed', 1);
+		return $this->belongsToMany('App\Models\User', 'invitations')->where('confirmed', 1)->orderBy('first_name');
 	}
 
 	/**
@@ -21,7 +21,7 @@ class Event extends Eloquent {
 	 */
 	public function invitees()
 	{
-		return $this->belongsToMany('App\Models\User', 'invitations');
+		return $this->belongsToMany('App\Models\User', 'invitations')->orderBy('first_name')->withPivot('confirmed');
 	}
 
 	/**
