@@ -26,7 +26,7 @@
 		</div>
 
 		<div class="form-actions">
-			<button type="submit" class="button glow button-pill button-action btn-login">Login</button>
+			<button type="submit" class="button glow button-pill button-action btn-login"><i class="icon-lock"></i> Login</button>
 		</div>
 	</div>
 

@@ -14,6 +14,10 @@
 	</div>
 </div>
 
+<footer>
+	<p>&copy; <?php echo date('Y'); ?> Skvoš &amp; Beer inc.</p>
+</footer>
+
 @include('_partial.assets_foot')
 
 </body>

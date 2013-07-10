@@ -7,7 +7,7 @@ body { margin:0; font-family:Helvetica, sans-serif; color: #333; background: #ed
 
 
 /* Typography */
-h1         { font-family: "Lobster Two", Helvetica, sans-serif; color: #eee; font-size: 16px; font-weight: normal; margin: 0; }
+h1         { font-family: "Lobster Two", Helvetica, sans-serif; color: #eee; font-size: 20px; font-weight: normal; margin: 0; }
 h2, h3, h4 { font-family: "Oswald", Helvetica, sans-serif; color: #de7e38; font-weight: normal; text-shadow: 0 1px 0 rgba(255,255,255,.8); }
 h2         { text-transform: uppercase; }
 h3         { text-transform: uppercase; }
@@ -16,14 +16,20 @@ h5, h6     { font-family: Helvetica, sans-serif; font-size: 11px; text-transform
 
 
 /* Layout */
-#app                  { max-width: 480px; margin: 0 auto; }
-#hd1                  { text-align: center; background: transparent; margin: 0 -20px; }
-#hd1 .navbar          { background: transparent; }
-#hd1 .navbar-inner    { background: transparent; padding: 0; }
-#hd1 header           { background: #333; }
-#app .container-fluid { margin: 0; padding: 0; }
-#app #main            { padding-top: 43px; }
+#app                      { max-width: 480px; margin: 0 auto; }
+#hd1                      { text-align: center; background: transparent; margin: 0 -20px; height: 40px; }
+#hd1 .navbar              { background: transparent; }
+#hd1 .navbar-inner        { background: transparent; padding: 0; }
+#hd1 header               { background: #333; }
+#app .container-fluid     { margin: 0; padding: 0; }
+#app #main                { padding-top: 43px; }
 @media (max-width: 979px) { #app #main { padding-top: 0; } }
+#hd1 .button              { margin: 0; padding: 3px 0; width: 16px; height: auto; line-height: 100%; border-width: 2px; font-size: 10px; text-align: center; position: relative; top: 8px; }
+#hd1 .button:hover        { color: #fff; text-decoration: none; }
+#hd1 .pull-right          { right: 18px; }
+#hd1 .pull-left           { left: 18px; }
+footer                    { text-align: center; }
+footer p                  { font-size: 10px; color: #ccc; text-shadow: 0 1px 0 #111; }
 
 
 /* Dashboard */
