@@ -1,40 +1,38 @@
-body {
-    margin:0;
-    font-family:Helvetica, sans-serif;
-    text-align:center;
-    color: #999;
-    background: #f8f8f8;
-}
+@import url(http://fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext);
+@import url(http://fonts.googleapis.com/css?family=Oswald:400,700&subset=latin,latin-ext);
 
-.welcome {
-   width: 300px;
-   height: 300px;
-   position: absolute;
-   left: 50%;
-   top: 50%;
-   margin-left: -150px;
-   margin-top: -150px;
-}
+/* Common */
+body { margin:0; font-family:Helvetica, sans-serif; color: #333; background: #ededed; }
 
-a, a:visited {
-    color:#FF5949;
-    text-decoration:none;
-}
 
-a:hover {
-    text-decoration:underline;
-}
+/* Typography */
+h1         { font-family: "Lobster", Helvetica, sans-serif; color: #eee; font-size: 16px; font-weight: normal; margin: 0; }
+h2, h3, h4 { font-family: "Oswald", Helvetica, sans-serif; color: #de7e38; font-weight: normal; text-shadow: 0 1px 0 rgba(255,255,255,.8); }
+h2         { text-transform: uppercase; }
+h3         { text-transform: uppercase; }
+h5, h6     { font-family: Helvetica, sans-serif; font-size: 11px; text-transform: uppercase; color: #888; }
 
-ul li {
-    display:inline;
-    margin:0 1.2em;
-}
 
-p {
-    margin:2em 0;
-    color:#555;
-}
+/* Layout */
+#app { max-width: 480px; margin: 0 auto; }
+#hd1 { text-align: center; background: #333; }
 
-.app .anbu-tabs { text-align: left; }
-.app .anbu-tabs li { margin: 0 5px; padding: 0; font-size: 12px; }
-.app .anbu-count { border-radius: 8px; }
+
+/* Dashboard */
+.dashboard h2 { font-size: 12px; color: #333; font-family: Helvetica, sans-serif; font-weight: bold; }
+.dashboard h3, .dashboard h3 a { color: #93b557; }
+.dashboard h3 a:hover          { color: #a4c668; text-decoration: none; }
+
+.dashboard .past h3,
+.dashboard .past h3 a       { color: #31abb5; }
+.dashboard .past h3 a:hover { color: #209aa4; text-decoration: none; }
+
+
+.dashboard ul { list-style-type: none; margin: 0; padding: 0; }
+.dashboard ul li { list-style-type: none; margin: 0; padding: 0; }
+
+
+/* Debug */
+#app .anbu-tabs { text-align: left; }
+#app .anbu-tabs li { margin: 0 5px; padding: 0; font-size: 12px; }
+#app .anbu-count { border-radius: 8px; }

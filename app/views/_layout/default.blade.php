@@ -6,15 +6,18 @@
 
 	<link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
 	<link rel="stylesheet" href="{{ asset('assets/css/bootstrap-responsive.min.css') }}">
+	<link rel="stylesheet" href="{{ asset('assets/css/app.css') }}">
 </head>
 <body>
-<div class="container">
-	@include('_partial.header')
+<div id="app">
+	<div class="container-fluid">
+		@include('_partial.header')
 
-	<div class="row">
+		<div class="row-fluid">
 
-		@yield('content')
+			@yield('content')
 
+		</div>
 	</div>
 </div>
 
