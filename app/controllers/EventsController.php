@@ -17,8 +17,20 @@ class EventsController extends BaseController {
 	 */
 	public function index()
 	{
-		echo "Index";
-		die();
+		// @TODO: Nicer event list, editing stuff, archive, etc.
+		// For now a simple redirection to the dashboard
+		return Redirect::route('dashboard');
+	}
+
+	public function show($id)
+	{
+		$event   = Event::find($id);
+		$matches = $event->matches;
+
+		return View::make('events.show', array(
+			'event'   => $event,
+			'matches' => $matches,
+		));
 	}
 
 	/**
@@ -97,7 +109,6 @@ class EventsController extends BaseController {
 		// Remove some
 		foreach ($event->invitees as $invitee)
 		{
-			// Detach
 			if ( ! in_array($invitee->id, $players)) $event->invitees()->detach($invitee->id);
 		}
 

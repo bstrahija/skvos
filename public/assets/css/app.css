@@ -52,7 +52,7 @@ footer p                  { font-size: 10px; color: #ccc; text-shadow: 0 1px 0 #
 .dashboard h3                    { margin: 0; line-height: 130%; font-size: 22px; }
 .dashboard h3, .dashboard h3 a.t { color: #93b557; }
 .dashboard h3 a.t:hover          { color: #a4c668; text-decoration: none; }
-.dashboard h3 a.button           { height: auto; width: 18px; padding: 0; text-align: center; line-height: 150%; position: relative; top: 3px; }
+.dashboard h3 a.button           { height: auto; width: 18px; padding: 0; text-align: center; line-height: 150%; position: relative; top: 3px; margin: 0 0 0 10px; }
 .dashboard h3 a.button:hover     { text-decoration: none; }
 .dashboard h6                    { margin: 5px 0 12px 0; padding: 0; line-height: 130%; }
 .dashboard hr                    { border-top: 1px solid rgba(0,0,0,.1); border-bottom: 1px solid rgba(255,255,255,.4); margin: 0 -20px; clear: both; }

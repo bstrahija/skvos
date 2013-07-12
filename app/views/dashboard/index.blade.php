@@ -10,7 +10,9 @@
 			<ul class="panel upcoming">
 				<li>
 					<h3>
-						<a href="{{ route('events.edit', $event->id) }}" class="button button-circle button-action button-tiny pull-right"><i class="icon-trophy"></i></a>
+						@if (Auth::user()->role == 'admin')
+							<a href="{{ route('events.edit', $event->id) }}" class="button button-circle button-action button-tiny pull-right"><i class="icon-trophy"></i></a>
+						@endif
 						<a href="{{ route('events.show', $event->id) }}" class="toggle t">{{ $event->title }}</a>
 					</h3>
 					<h6 class="clearfix">
@@ -69,7 +71,10 @@
 				@foreach ($events as $event)
 					<li>
 						<h3>
-							<a href="{{ route('events.edit', $event->id) }}" class="button button-circle button-action button-tiny pull-right"><i class="icon-trophy"></i></a>
+							<a href="{{ route('events.show', $event->id) }}" class="button button-circle button-action button-tiny pull-right"><i class="icon-trophy"></i></a>
+							@if (Auth::user()->role == 'admin')
+								<a href="{{ route('events.edit', $event->id) }}" class="button button-circle button-caution button-tiny pull-right"><i class="icon-pencil"></i></a>
+							@endif
 							<a href="{{ route('events.show', $event->id) }}" class="toggle t">{{ $event->title }}</a>
 						</h3>
 						<h6 class="clearfix">
@@ -125,7 +130,10 @@
 				@foreach ($past as $event)
 					<li>
 						<h3>
-							<a href="{{ route('events.edit', $event->id) }}" class="button button-circle button-primary button-tiny pull-right"><i class="icon-trophy"></i></a>
+							<a href="{{ route('events.show', $event->id) }}" class="button button-circle button-primary button-tiny pull-right"><i class="icon-trophy"></i></a>
+							@if (Auth::user()->role == 'admin')
+								<a href="{{ route('events.edit', $event->id) }}" class="button button-circle button-caution button-tiny pull-right"><i class="icon-pencil"></i></a>
+							@endif
 							<a href="{{ route('events.show', $event->id) }}" class="toggle t">{{ $event->title }}</a>
 						</h3>
 						<h6 class="clearfix">
