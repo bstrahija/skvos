@@ -127,4 +127,39 @@ class Event extends Eloquent {
 		return false;
 	}
 
+	/**
+	 * Number of sets the user has won on this event
+	 * @param  int  $userId
+	 * @return int
+	 */
+	public function userWonSets($userId)
+	{
+		$won = 0;
+
+		foreach ($this->matches as $match)
+		{
+			if ($match->player1_id == $userId) $won += (int) $match->player1_sets_won;
+			if ($match->player2_id == $userId) $won += (int) $match->player2_sets_won;
+		}
+
+		return (int) $won;
+	}
+
+	/**
+	 * Number of matches the user has won on this event
+	 * @param  int  $userId
+	 * @return int
+	 */
+	public function userWonMatches($userId)
+	{
+		$won = 0;
+
+		foreach ($this->matches as $match)
+		{
+			if ($match->winner_id == $userId) $won++;
+		}
+
+		return (int) $won;
+	}
+
 }

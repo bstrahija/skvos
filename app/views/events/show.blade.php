@@ -3,6 +3,23 @@
 @section('content')
 
 <div class="matches">
+	<h2>Pregled</h2>
+
+	<ul>
+		@foreach ($event->attendees as $user)
+			<li>
+				<h4>
+					{{ $user->full_name }}
+					<em>je dobio {{ $event->userWonSets($user->id) }} setova i {{ $event->userWonMatches($user->id) }} mečeva</em>
+				</h4>
+			</li>
+		@endforeach
+	</ul>
+
+	<hr>
+
+	<h2>Mečevi</h2>
+
 	<ul>
 		@foreach ($matches as $match)
 			<li>
