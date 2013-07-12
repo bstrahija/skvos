@@ -7,11 +7,13 @@ class DashboardController extends BaseController {
 	public function getIndex()
 	{
 		// Get all upcoming events and last 5 past events
-		$upcomingEvents = Event::upcoming()->get();
+		$nextEvent      = Event::next()->first();
+		$upcomingEvents = Event::upcoming()->skip(1)->take(10)->get();
 		$pastEvents     = Event::past()->take(5)->get();
 
 		return View::make('dashboard.index', array(
 			'events' => $upcomingEvents,
+			'event'  => $nextEvent,
 			'past'   => $pastEvents,
 		));
 	}
