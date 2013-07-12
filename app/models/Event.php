@@ -21,7 +21,7 @@ class Event extends Eloquent {
 	 */
 	public function invitees()
 	{
-		return $this->belongsToMany('App\Models\User', 'invitations')->orderBy('first_name')->withPivot('confirmed');
+		return $this->belongsToMany('App\Models\User', 'invitations')->orderBy('first_name')->withPivot('confirmed', 'cancelled');
 	}
 
 	/**
@@ -85,6 +85,42 @@ class Event extends Eloquent {
 			foreach ($this->invitees as $invitee)
 			{
 				if ($userId == $invitee->id) return true;
+			}
+		}
+
+		return false;
+	}
+
+	/**
+	 * Check if user has confirmed attendace
+	 * @param  int     $userId
+	 * @return boolean
+	 */
+	public function isUserConfirmed($userId)
+	{
+		if ($this->invitees)
+		{
+			foreach ($this->invitees as $invitee)
+			{
+				if ($userId == $invitee->id and $invitee->confirmed == 1) return true;
+			}
+		}
+
+		return false;
+	}
+
+	/**
+	 * Check if user is invited to event
+	 * @param  int     $userId
+	 * @return boolean
+	 */
+	public function isUserCancelled($userId)
+	{
+		if ($this->invitees)
+		{
+			foreach ($this->invitees as $invitee)
+			{
+				if ($userId == $invitee->id and $invitee->cancelled == 1) return true;
 			}
 		}
 

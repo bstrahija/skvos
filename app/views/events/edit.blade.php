@@ -60,6 +60,37 @@
 				</div>
 			</div>
 
+			<div class="control-group">
+				<label for="players" class="control-label">Potvrde</label>
+				<div class="controls attendance">
+					<table class="table">
+						<thead>
+							<tr>
+								<th><i class="icon-check-sign"></i></th>
+								<th>Igrač</th>
+								<th><i class="icon-thumbs-up"></i> / <i class="icon-thumbs-down"></i></th>
+							</tr>
+						</thead>
+						<tbody>
+							@foreach ($invitees as $user)
+								<?php $status = $event->isUserConfirmed($user->id) ? 'confirmed' : 'unknown'; ?>
+								<?php $status = $event->isUserCancelled($user->id) ? 'cancelled' : $status; ?>
+
+								<tr class="status status-{{ $status }}">
+									<td class="status"><i class="icon-check-sign"></i></td>
+									<td>{{ $user->full_name }}</td>
+									<td><select name="attendance[{{ $user->id }}]" id="attendance" style="font-size: 11px; height: 130%;">
+										<option value="">Neizjašnjen</option>
+										<option value="confirmed" <?php echo ($event->isUserConfirmed($user->id)) ? 'selected="selected"' : '' ?>>Dolazi</option>
+										<option value="cancelled" <?php echo ($event->isUserCancelled($user->id)) ? 'selected="selected"' : '' ?>>Ne dolazi</option>
+									</select></td>
+								</tr>
+							@endforeach
+						</tbody>
+					</table>
+				</div>
+			</div>
+
 			<div class="form-actions">
 				<hr>
 				<a href="#" class="button button-circle button-action button-save submit"><i class="icon-cloud-upload"></i></a>

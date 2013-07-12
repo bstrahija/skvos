@@ -71,8 +71,9 @@ class EventsController extends BaseController {
 		$event = Event::find($id);
 
 		return View::make('events.edit', array(
-			'event' => $event,
-			'users' => User::orderBy('first_name')->get(),
+			'event'    => $event,
+			'users'    => User::orderBy('first_name')->get(),
+			'invitees' => $event->invitees,
 		));
 	}
 
@@ -108,6 +109,17 @@ class EventsController extends BaseController {
 				$invitation = new Invitation;
 				$invitation->user_id  = (int) $player;
 				$invitation->event_id = (int) $event->id;
+				$invitation->save();
+			}
+		}
+
+		// Attendance
+		foreach (Input::get('attendance') as $userId => $attendance) {
+			$invitation = Invitation::where('event_id', $id)->where('user_id', $userId)->first();
+
+			if ($invitation) {
+				$invitation->confirmed = ($attendance == 'confirmed') ? 1 : 0;
+				$invitation->cancelled = ($attendance == 'cancelled') ? 1 : 0;
 				$invitation->save();
 			}
 		}

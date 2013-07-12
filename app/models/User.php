@@ -80,4 +80,15 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		return false;
 	}
 
+	/**
+	 * Get if user confirmed invitation to event
+	 * @return mixed
+	 */
+	public function getCancelledAttribute()
+	{
+		if (isset($this->pivot->cancelled) and $this->pivot->cancelled) return $this->pivot->cancelled;
+
+		return false;
+	}
+
 }

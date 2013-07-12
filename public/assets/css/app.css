@@ -82,6 +82,12 @@ footer p                  { font-size: 10px; color: #ccc; text-shadow: 0 1px 0 #
 	.add-event         { margin: 16px auto; text-align: center; }
 	.add-event .button { line-height: 30px; font-size: 13px; display: inline-block; width: 30px; height: 30px; }
 
+	/* Edit attendance */
+	.attendance .table { font-size: 12px; }
+	.attendance .status-confirmed i { color: #0a6; }
+	.attendance .status-cancelled i { color: #a42; }
+	.attendance .status-unknown i   { color: #888; }
+
 
 
 
