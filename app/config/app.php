@@ -117,6 +117,7 @@ return array(
 		// 'Profiler\ProfilerServiceProvider',
 		// 'Juy\Profiler\Providers\ProfilerServiceProvider',
 		'Onigoetz\Profiler\ProfilerServiceProvider',
+		'Krucas\Notification\NotificationServiceProvider',
 
 	),
 
@@ -184,6 +185,8 @@ return array(
 		'View'            => 'Illuminate\Support\Facades\View',
 
 		// 'Profiler'        => 'Juy\Profiler\Facades\Profiler',
+		'Carbon'          => 'Carbon\Carbon',
+		'Notification'    => 'Krucas\Notification\Facades\Notification',
 
 	),
 

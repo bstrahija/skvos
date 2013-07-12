@@ -20,6 +20,13 @@ App = {
 		// App.Layout.init();
 		// App.Events.init();
 
+		// Submit buttons
+		$("form a.submit").click(function() {
+			$(this).closest("form").submit();
+			return false;
+		});
+
+		// Remove yellow chrome bg
 		if (navigator.userAgent.toLowerCase().indexOf("chrome") >= 0) {
 			var intervalId = 0;
 			$(window).load(function() {

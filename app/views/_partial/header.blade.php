@@ -4,7 +4,7 @@
 			<header>
 				<a href="{{ route('settings') }}" class="button button-circle button-tiny pull-left"><i class="icon-cog"></i></a>
 				<a href="{{ route('logout') }}" class="button button-circle button-tiny pull-right"><i class="icon-lock"></i></a>
-				<h1>Skvosh.in</h1>
+				<h1><a href="{{ route('dashboard') }}">Skvosh.in</a></h1>
 			</header>
 		</div>
 	</div>

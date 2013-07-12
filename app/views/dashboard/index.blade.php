@@ -10,7 +10,10 @@
 			<ul class="panel upcoming">
 				@foreach ($events as $event)
 					<li>
-						<h3><a href="#" class="toggle">{{ $event->title }}</a></h3>
+						<h3>
+							<a href="{{ route('events.edit', $event->id) }}" class="button button-circle button-action button-tiny pull-right"><i class="icon-trophy"></i></a>
+							<a href="{{ route('events.show', $event->id) }}" class="toggle t">{{ $event->title }}</a>
+						</h3>
 						<h6 class="clearfix">
 							{{ $event->period }}
 
@@ -51,6 +54,12 @@
 			<hr>
 		@endif
 
+		@if (Auth::user()->role == "admin")
+			<div class="add-event">
+				<a href="{{ route('events.create') }}" class="button button-circle button-action"><i class="icon-plus"></i></a>
+			</div>
+		@endif
+
 
 
 
@@ -62,7 +71,10 @@
 			<ul class="panel past">
 				@foreach ($past as $event)
 					<li>
-						<h3><a href="#" class="toggle">{{ $event->title }}</a></h3>
+						<h3>
+							<a href="{{ route('events.edit', $event->id) }}" class="button button-circle button-primary button-tiny pull-right"><i class="icon-trophy"></i></a>
+							<a href="{{ route('events.show', $event->id) }}" class="toggle t">{{ $event->title }}</a>
+						</h3>
 						<h6 class="clearfix">
 							{{ $event->period }}
 

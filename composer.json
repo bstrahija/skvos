@@ -8,7 +8,8 @@
 		"dflydev/markdown": "1.0.*",
 		"imagine/imagine": "0.4.*",
 		"juy/profiler": "dev-master",
-		"onigoetz/profiler": "dev-master"
+		"onigoetz/profiler": "dev-master",
+		"edvinaskrucas/notification": "1.*"
 	},
 	"autoload": {
 		"classmap": [

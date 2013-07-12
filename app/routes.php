@@ -19,6 +19,7 @@ Route::get('logout', array('as' => 'logout',     'uses' => 'App\Controllers\Auth
 // ! App routes
 Route::group(array('before' => 'auth'), function()
 {
-	Route::get('/',        array('as' => 'dashboard', 'uses' => 'App\Controllers\DashboardController@getIndex'));
-	Route::get('settings', array('as' => 'settings',  'uses' => 'App\Controllers\SettingsController@getIndex'));
+	Route::get('/',           array('as' => 'dashboard', 'uses' => 'App\Controllers\DashboardController@getIndex'));
+	Route::resource('events', 'App\Controllers\EventsController');
+	Route::get('settings',    array('as' => 'settings',  'uses' => 'App\Controllers\SettingsController@getIndex'));
 });

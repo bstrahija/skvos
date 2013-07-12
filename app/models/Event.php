@@ -62,4 +62,22 @@ class Event extends Eloquent {
 		return date('d.m. @ H:i', strtotime($this->attributes['from'])) . ' - ' . date('H:i', strtotime($this->attributes['to']));
 	}
 
+	/**
+	 * Check if user is invited to event
+	 * @param  int     $userId
+	 * @return boolean
+	 */
+	public function isUserInvited($userId)
+	{
+		if ($this->invitees)
+		{
+			foreach ($this->invitees as $invitee)
+			{
+				if ($userId == $invitee->id) return true;
+			}
+		}
+
+		return false;
+	}
+
 }
