@@ -41,7 +41,7 @@ class Event extends Eloquent {
 	 */
 	public function scopeNext($query)
 	{
-		return $query->where('date', '>=', Carbon::today()->format('Y-m-d'))->orderBy('date', 'desc')->take(1);
+		return $query->where('date', '>=', Carbon::now()->format('Y-m-d'))->orderBy('date', 'asc')->take(1);
 	}
 
 	/**
@@ -51,7 +51,7 @@ class Event extends Eloquent {
 	 */
 	public function scopeUpcoming($query)
 	{
-		return $query->where('date', '>=', Carbon::today()->format('Y-m-d'))->orderBy('date', 'desc');
+		return $query->where('date', '>=', Carbon::now()->format('Y-m-d'))->orderBy('date', 'asc');
 	}
 
 	/**
@@ -61,7 +61,7 @@ class Event extends Eloquent {
 	 */
 	public function scopePast($query)
 	{
-		return $query->where('date', '<', Carbon::today()->format('Y-m-d'))->orderBy('date', 'desc');
+		return $query->where('date', '<', Carbon::now()->format('Y-m-d'))->orderBy('date', 'desc');
 	}
 
 	/**
