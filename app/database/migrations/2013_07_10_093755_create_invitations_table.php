@@ -18,6 +18,7 @@ class CreateInvitationsTable extends Migration {
 			$table->integer('user_id');
 			$table->integer('event_id');
 			$table->integer('confirmed')->default(0);
+			$table->integer('cancelled')->default(0);
 			$table->integer('sent')->default(0);
 			$table->text('note')->nullable();
 			$table->timestamps();
