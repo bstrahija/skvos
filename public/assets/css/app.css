@@ -14,7 +14,9 @@ a, li {
 	-o-transition-duration: 0.3s;
 	transition-duration: 0.3s;
 }
-.button:hover { color: #fff; text-decoration: none; }
+.button:hover  { color: #fff; text-decoration: none; }
+.error-page    { text-align: center; padding: 40px 0; }
+.error-page h2 { margin: 0 0 20px 0; color: #c00; }
 
 /* Typography */
 h1         { font-family: "Lobster Two", Helvetica, sans-serif; color: #eee; font-size: 20px; font-weight: normal; margin: 0; }

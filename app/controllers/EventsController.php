@@ -5,6 +5,12 @@ use Input, Notification, Redirect, Request, View;
 
 class EventsController extends BaseController {
 
+	public function __construct()
+	{
+		// Protect some methods
+		$this->beforeFilter('admin', array('only' => array('create', 'store', 'edit', 'update')));
+	}
+
 	/**
 	 * List of all events
 	 * @return View
