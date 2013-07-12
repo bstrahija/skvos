@@ -7,21 +7,21 @@ class Invitation extends Eloquent {
 	protected $table = 'invitations';
 
 	/**
-	 * Related users attending the event
+	 * Related event
 	 * @return mixed
 	 */
-	public function attendees()
+	public function event()
 	{
-		return $this->belongsTo('App\Models\User')->where('confirmed', 1)->orderBy('first_name');
+		return $this->belongsTo('App\Models\Event');
 	}
 
 	/**
-	 * Related users invited to the event
+	 * Invited user relations
 	 * @return mixed
 	 */
-	public function invitees()
+	public function user()
 	{
-		return $this->belongsTo('App\Models\User')->orderBy('first_name')->withPivot('confirmed');
+		return $this->belongsTo('App\Models\User');
 	}
 
 }

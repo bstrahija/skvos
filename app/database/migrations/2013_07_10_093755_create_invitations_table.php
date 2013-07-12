@@ -21,6 +21,7 @@ class CreateInvitationsTable extends Migration {
 			$table->integer('cancelled')->default(0);
 			$table->integer('sent')->default(0);
 			$table->text('note')->nullable();
+			$table->string('hash');
 			$table->timestamps();
 		});
 	}

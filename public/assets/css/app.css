@@ -17,6 +17,7 @@ a, li {
 .button:hover  { color: #fff; text-decoration: none; }
 .error-page    { text-align: center; padding: 40px 0; }
 .error-page h2 { margin: 0 0 20px 0; color: #c00; }
+#app hr        { border-top: 1px solid rgba(0,0,0,.1); border-bottom: 1px solid rgba(255,255,255,.4); margin: 0 -20px; clear: both; }
 
 /* Typography */
 h1         { font-family: "Lobster Two", Helvetica, sans-serif; color: #eee; font-size: 20px; font-weight: normal; margin: 0; }
@@ -87,6 +88,12 @@ footer p                  { font-size: 10px; color: #ccc; text-shadow: 0 1px 0 #
 	.attendance .status-confirmed i { color: #0a6; }
 	.attendance .status-cancelled i { color: #a42; }
 	.attendance .status-unknown i   { color: #888; }
+
+
+/* Invitations */
+.invitations { text-align: center; }
+#app ul.no-style { list-style-type: none; margin: 30px 0; }
+#app .invitations .form-actions hr { margin-bottom: 15px; }
 
 
 

@@ -5,6 +5,8 @@
 	<div class="form">
 		<h2>Novi termin</h2>
 
+		@include('_partial.notifications')
+
 		{{ Form::open(array('route' => 'events.store')) }}
 
 			<div class="control-group">
