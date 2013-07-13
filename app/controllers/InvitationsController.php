@@ -1,7 +1,7 @@
 <?php namespace App\Controllers;
 
 use App\Models\Event, App\Models\Invitation;
-use Input, Mail, Notification, Redirect, View, URL;
+use Config, Input, Mail, Notification, Redirect, View, URL;
 
 class InvitationsController extends BaseController {
 
@@ -35,24 +35,31 @@ class InvitationsController extends BaseController {
 	 */
 	public function postSend()
 	{
-		$eventId = Input::get('event_id');
-		$event   = Event::find($eventId);
+		$whitelist = Config::get('mail.whitelist');
+		$eventId   = Input::get('event_id');
+		$event     = Event::find($eventId);
 
 		foreach ($event->invitees as $invitee)
 		{
 			$invitation = Invitation::where('user_id', $invitee->id)->where('event_id', $event->id)->first();
 
-			$data = array(
-				'confirmation_link' => URL::route('invitations.confirm', $invitation->hash),
-				'title'             => $event->title,
-			);
-
-			if ($invitee->email == 'bstrahija@gmail.com')
+			if (Input::get('all') == 1 or ! $invitation->sent)
 			{
-				Mail::send('emails.events.invitation', $data, function($m) use ($invitee, $event) {
-					$m->to($invitee->email);
-					$m->subject('Pozivnica za: ' . $event->title);
-				});
+				$data = array(
+					'confirmation_link' => URL::route('invitations.confirm', $invitation->hash),
+					'title'             => $event->title,
+				);
+
+				if ( ! $whitelist or in_array($invitee->email, $whitelist))
+				{
+					Mail::send('emails.events.invitation', $data, function($m) use ($invitee, $event) {
+						$m->to($invitee->email);
+						$m->subject('Pozivnica za: ' . $event->title);
+					});
+				}
+
+				$invitation->sent = 1;
+				$invitation->save();
 			}
 		}
 

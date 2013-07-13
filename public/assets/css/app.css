@@ -18,6 +18,7 @@ a, li {
 .error-page    { text-align: center; padding: 40px 0; }
 .error-page h2 { margin: 0 0 20px 0; color: #c00; }
 #app hr        { border-top: 1px solid rgba(0,0,0,.1); border-bottom: 1px solid rgba(255,255,255,.4); margin: 0 -20px; clear: both; }
+.c             { text-align: center; }
 
 /* Typography */
 h1         { font-family: "Lobster Two", Helvetica, sans-serif; color: #eee; font-size: 20px; font-weight: normal; margin: 0; }

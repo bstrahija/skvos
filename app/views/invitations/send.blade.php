@@ -7,7 +7,7 @@
 
 	@include('_partial.notifications')
 
-	{{ Form::open() }}
+	{{ Form::open(array('action' => 'App\Controllers\InvitationsController@postSend')) }}
 		{{ Form::hidden('event_id', $event->id) }}
 		{{ Form::hidden('all', $all) }}
 
