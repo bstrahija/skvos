@@ -11,9 +11,16 @@ class DatabaseSeeder extends Seeder {
 	{
 		Eloquent::unguard();
 
-		$this->call('UserSeeder');
-		$this->call('EventSeeder');
-		$this->call('MatchSeeder');
+		$env     = App::environment();
+		$seeders = array(
+			'local'      => array('UserSeeder',     'EventSeeder', 'MatchSeeder'),
+			'production' => array('UserProdSeeder', 'EventSeeder', 'MatchSeeder')
+		);
+
+		foreach ($seeders[$env] as $seeder)
+		{
+			$this->call($seeder);
+		}
 	}
 
 }
