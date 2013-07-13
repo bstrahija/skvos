@@ -29,7 +29,7 @@ h3         { text-transform: uppercase; }
 h5, h6     { font-family: Helvetica, sans-serif; font-size: 11px; text-transform: uppercase; color: #888; text-shadow: 0 1px 0 rgba(255,255,255,.8); }
 #app input:focus { box-shadow: 0 0 6px #96b32b; border-color: #96b32b; }
 #app input.select2-input:focus { box-shadow: none; border-color: transparent; }
-
+#app p.not-found { font-size: 18px; color: #aaa; font-family: 'Oswald', Helvetica, sans-serif; font-weight: normal; text-transform: uppercase; padding: 22px 0 22px 0; text-align: center; text-shadow: 0 1px 0 rgba(255,255,255,.6); }
 
 /* Layout */
 #app                      { max-width: 480px; margin: 0 auto; }

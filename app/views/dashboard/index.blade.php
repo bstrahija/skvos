@@ -6,7 +6,7 @@
 		<h2>Slijedeći termin</h2>
 		<hr>
 
-		@if (isset($event) and $event)
+		@if (isset($event) and ! $event->isEmpty())
 			<ul class="panel upcoming">
 				<li>
 					<h3>
@@ -51,7 +51,7 @@
 				</li>
 			</ul>
 		@else
-			<p class="not-found">Nema nadolazećih termina. <a href="#" class="btn btn-success">Dodaj termin</a></p>
+			<p class="not-found"><i class="icon-warning-sign"></i> Nema termina</p>
 			<hr>
 		@endif
 
@@ -67,7 +67,7 @@
 		<h2>Budući termini</h2>
 		<hr>
 
-		@if (isset($events) and $events)
+		@if (isset($events) and ! $events->isEmpty())
 			<ul class="panel upcoming">
 				@foreach ($events as $event)
 					<li>
@@ -114,7 +114,7 @@
 				@endforeach
 			</ul>
 		@else
-			<p class="not-found">Nema nadolazećih termina. <a href="#" class="btn btn-success">Dodaj termin</a></p>
+			<p class="not-found"><i class="icon-warning-sign"></i> Nema nadolazećih termina</p>
 			<hr>
 		@endif
 
@@ -126,7 +126,7 @@
 		<h2>Prošli Termini</h2>
 		<hr>
 
-		@if (isset($past) and $past)
+		@if (isset($past) and ! $past->isEmpty())
 			<ul class="panel past">
 				@foreach ($past as $event)
 					<li>
@@ -173,7 +173,7 @@
 				@endforeach
 			</ul>
 		@else
-			<p class="not-found">Nema prošlih termina.</p>
+			<p class="not-found"><i class="icon-warning-sign"></i> Nema prošlih termina</p>
 			<hr>
 		@endif
 

@@ -1,6 +1,6 @@
 <?php namespace App\Models;
 
-use Carbon\Carbon, Eloquent;
+use Auth, Carbon\Carbon, Eloquent;
 
 class Event extends Eloquent {
 
@@ -41,7 +41,7 @@ class Event extends Eloquent {
 	 */
 	public function scopeNext($query)
 	{
-		return $query->where('date', '>=', Carbon::now()->format('Y-m-d'))->orderBy('date', 'asc')->take(1);
+		return $query->where('date', '>=', Carbon::now()->format('Y-m-d'))->orderBy('date', 'asc')->withAccess()->take(1);
 	}
 
 	/**
@@ -51,7 +51,7 @@ class Event extends Eloquent {
 	 */
 	public function scopeUpcoming($query)
 	{
-		return $query->where('date', '>=', Carbon::now()->format('Y-m-d'))->orderBy('date', 'asc');
+		return $query->where('date', '>=', Carbon::now()->format('Y-m-d'))->orderBy('date', 'asc')->withAccess();
 	}
 
 	/**
@@ -61,7 +61,18 @@ class Event extends Eloquent {
 	 */
 	public function scopePast($query)
 	{
-		return $query->where('date', '<', Carbon::now()->format('Y-m-d'))->orderBy('date', 'desc');
+		return $query->where('date', '<', Carbon::now()->format('Y-m-d'))->orderBy('date', 'desc')->withAccess();
+	}
+
+	/**
+	 * Only the events the user was invited to
+	 * @return object
+	 */
+	public function scopeWithAccess($query)
+	{
+		if (Auth::user()->role == 'admin') return $query;
+
+		return $query->select('events.*')->leftJoin('invitations as inv', 'inv.event_id', '=', 'events.id')->where('inv.user_id', Auth::user()->id);
 	}
 
 	/**
