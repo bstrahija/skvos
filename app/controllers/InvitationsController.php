@@ -14,7 +14,19 @@ class InvitationsController extends BaseController {
 	{
 		$event = Event::find($eventId);
 
-		return View::make('invitations.send', array('event' => $event));
+		return View::make('invitations.send', array('event' => $event, 'all' => false));
+	}
+
+	/**
+	 * Display presend overview
+	 * @param  int $eventId
+	 * @return View
+	 */
+	public function getResend($eventId)
+	{
+		$event = Event::find($eventId);
+
+		return View::make('invitations.send', array('event' => $event, 'all' => true));
 	}
 
 	/**

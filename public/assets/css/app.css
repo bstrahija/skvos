@@ -74,13 +74,17 @@ footer p                  { font-size: 10px; color: #ccc; text-shadow: 0 1px 0 #
 	.dashboard ul li { list-style-type: none; margin: 0; padding: 0; }
 
 	/* Invitees */
-	.people                  { margin: 0 -20px 0 -20px; padding: 10px 20px; background: #ccc url(../img/bg_binding_dark.png) repeat 50% 50%; display: none; }
-	.people .table           { font-size: 11px; margin: 0; color: #eee; text-shadow: 0 -1px 0 rgba(0,0,0,.4); }
-	.people .table td        { border: 0; padding: 0 10px 0 0; }
-	.people .table .slim     { width: 1%; }
-	.people .icon-ok-sign    { color: #0a0; }
-	.people .icon-minus-sign { color: #c00; }
-	.people .icon-envelope   { color: #0a0; }
+	.people                        { margin: 0 -20px 0 -20px; padding: 10px 20px; background: #ccc url(../img/bg_binding_dark.png) repeat 50% 50%; display: none; border-radius: 4px; }
+	.people .table                 { font-size: 11px; margin: 0; color: #eee; text-shadow: 0 -1px 0 rgba(0,0,0,.4); }
+	.people .table td              { border: 0; padding: 0 10px 0 0; }
+	.people .table .slim           { width: 1%; }
+	.people table .icon-ok-sign    { color: #0a0; }
+	.people table .icon-minus-sign { color: #c00; }
+	.people table .icon-envelope   { color: #0a0; }
+	.people .send-tools            { margin: 20px 0 10px 0; }
+	#app .people .send-tools hr    { border-top: 1px solid #000; border-bottom: 1px solid #333; margin-bottom: 16px; }
+	.people .button-circle         { line-height: 30px; font-size: 13px; display: inline-block; width: 30px; height: 30px; }
+
 
 	/* New event */
 	.add-event         { margin: 16px auto; text-align: center; }

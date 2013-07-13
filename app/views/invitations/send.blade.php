@@ -9,6 +9,7 @@
 
 	{{ Form::open() }}
 		{{ Form::hidden('event_id', $event->id) }}
+		{{ Form::hidden('all', $all) }}
 
 		<h2>Termin: {{ $event->title }}</h3>
 		<hr>
@@ -16,9 +17,11 @@
 
 		<ul class="no-style">
 			@foreach ($event->invitees as $invitee)
-				<li>
-					{{ $invitee->full_name }} <strong>&lt;{{ $invitee->email }}&gt;</strong>
-				</li>
+				@if ( ! $invitee->sent or $all)
+					<li>
+						{{ $invitee->full_name }} <strong>&lt;{{ $invitee->email }}&gt;</strong>
+					</li>
+				@endif
 			@endforeach
 		</ul>
 
