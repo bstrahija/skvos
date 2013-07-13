@@ -21,7 +21,7 @@ class Event extends Eloquent {
 	 */
 	public function invitees()
 	{
-		return $this->belongsToMany('App\Models\User', 'invitations')->orderBy('first_name')->withPivot('confirmed', 'cancelled');
+		return $this->belongsToMany('App\Models\User', 'invitations')->orderBy('first_name')->withPivot('confirmed', 'cancelled', 'sent');
 	}
 
 	/**

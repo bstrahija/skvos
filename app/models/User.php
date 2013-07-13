@@ -91,4 +91,15 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		return false;
 	}
 
+	/**
+	 * Get the invitation was sent to the user
+	 * @return mixed
+	 */
+	public function getSentAttribute()
+	{
+		if (isset($this->pivot->sent) and $this->pivot->sent) return $this->pivot->sent;
+
+		return false;
+	}
+
 }

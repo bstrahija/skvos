@@ -46,6 +46,8 @@ h5, h6     { font-family: Helvetica, sans-serif; font-size: 11px; text-transform
 #hd1 .pull-left           { left: 18px; }
 footer                    { text-align: center; }
 footer p                  { font-size: 10px; color: #ccc; text-shadow: 0 1px 0 #111; }
+#app footer               { padding: 30px 0 20px 0; }
+#app footer p             { color: #999; text-shadow: 0 1px 0 #ddd; }
 
 
 /* Dashboard */
@@ -78,6 +80,7 @@ footer p                  { font-size: 10px; color: #ccc; text-shadow: 0 1px 0 #
 	.people .table .slim     { width: 1%; }
 	.people .icon-ok-sign    { color: #0a0; }
 	.people .icon-minus-sign { color: #c00; }
+	.people .icon-envelope   { color: #0a0; }
 
 	/* New event */
 	.add-event         { margin: 16px auto; text-align: center; }
