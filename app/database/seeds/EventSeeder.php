@@ -35,13 +35,13 @@ class EventSeeder extends Seeder {
 		Invitation::create(array('user_id' => 3, 'event_id' => $event->id, 'confirmed' => 0, 'hash' => Str::random(42)));
 		Invitation::create(array('user_id' => 4, 'event_id' => $event->id, 'confirmed' => 0, 'hash' => Str::random(42)));
 
-		// ! Today
+		// ! Tomorrow
 		$event = Event::create(array(
 			'title'     => 'Beer/squash: ' . Carbon::now()->format('d.m.Y.'),
 			'author_id' => 1,
-			'date'      => Carbon::now(),
-			'from'      => Carbon::today()->addHours('18'),
-			'to'        => Carbon::today()->addHours('20')->addMinutes(30),
+			'date'      => Carbon::now()->addDays(1),
+			'from'      => Carbon::today()->addDays(1)->addHours('18'),
+			'to'        => Carbon::today()->addDays(1)->addHours('20')->addMinutes(30),
 		));
 		Invitation::create(array('user_id' => 1, 'event_id' => $event->id, 'confirmed' => 1, 'hash' => Str::random(42)));
 		Invitation::create(array('user_id' => 2, 'event_id' => $event->id, 'confirmed' => 1, 'hash' => Str::random(42)));
@@ -96,6 +96,16 @@ class EventSeeder extends Seeder {
 		Invitation::create(array('user_id' => 1, 'event_id' => $event->id, 'confirmed' => 1, 'hash' => Str::random(42)));
 		Invitation::create(array('user_id' => 2, 'event_id' => $event->id, 'confirmed' => 1, 'hash' => Str::random(42)));
 		Invitation::create(array('user_id' => 5, 'event_id' => $event->id, 'confirmed' => 1, 'hash' => Str::random(42)));
+
+		$event = Event::create(array(
+			'title'     => 'Beer/squash: 15.7.2013.',
+			'author_id' => 1,
+			'date'      => Carbon::createFromDate(2013, 7, 15),
+			'from'      => Carbon::create(2013, 7, 15, 18, 0),
+			'to'        => Carbon::create(2013, 7, 15, 20, 0),
+		));
+		Invitation::create(array('user_id' => 1, 'event_id' => $event->id, 'confirmed' => 1, 'hash' => Str::random(42)));
+		Invitation::create(array('user_id' => 3, 'event_id' => $event->id, 'confirmed' => 1, 'hash' => Str::random(42)));
 	}
 
 }

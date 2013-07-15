@@ -103,6 +103,7 @@ footer p                  { font-size: 10px; color: #ccc; text-shadow: 0 1px 0 #
 .invitations { text-align: center; }
 #app ul.no-style { list-style-type: none; margin: 30px 0; }
 #app .invitations .form-actions hr { margin-bottom: 15px; }
+.invitations-confirm .form-actions a { margin: 0 35px; }
 
 
 

@@ -79,11 +79,11 @@ class InvitationsController extends BaseController {
 	public function getConfirm($hash)
 	{
 		$invitation = Invitation::where('hash', $hash)->first();
-		echo '<pre>'; print_r($invitation->toArray()); echo '</pre>';
-		echo '<pre>'; print_r($invitation->event->toArray()); echo '</pre>';
-		echo '<pre>'; print_r($invitation->user->toArray()); echo '</pre>';
-		echo '<pre>'; print_r($hash); echo '</pre>';
-		die();
+
+		return View::make('invitations.confirm', array(
+			'hash'       => $hash,
+			'invitation' => $invitation,
+		));
 	}
 
 	/**

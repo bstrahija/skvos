@@ -7,7 +7,7 @@
 		<h2>Pozivnica za {{ $title }}</h2>
 
 		<div>
-			Novi termin na koji si pozvan. Svoj dolazak možeš potvrditi klikom na link ispod:
+			Novi termin na koji si pozvan. Svoj dolazak možeš potvrditi klikom na link ispod:<br><br>
 			{{ $confirmation_link }}
 		</div>
 	</body>
