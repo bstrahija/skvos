@@ -40,7 +40,7 @@ Route::filter('auth', function()
 
 Route::filter('admin', function()
 {
-	if (Auth::guest() or Auth::user()->role != 'admin') return View::make('errors.403');
+	if (Auth::guest() or ! User::isAdmin()) return View::make('errors.403');
 });
 
 

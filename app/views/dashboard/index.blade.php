@@ -20,7 +20,7 @@
 			<hr>
 		@endif
 
-		@if (Auth::user()->role == "admin")
+		@if (User::isAdmin())
 			<div class="add-event">
 				<a href="{{ route('events.create') }}" class="button button-circle button-action"><i class="icon-plus"></i></a>
 			</div>

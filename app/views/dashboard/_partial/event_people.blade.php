@@ -31,7 +31,7 @@
 			</tbody>
 		</table>
 
-		@if (Auth::user()->role == 'admin' and $event->date >= Carbon::now()->format('Y-m-d'))
+		@if (User::isAdmin() and $event->date >= Carbon::now()->format('Y-m-d'))
 			<div class="send-tools form clearfix">
 				<hr>
 				<a href="{{ url('invitations/resend', $event->id) }}" class="button button-circle button-royal pull-right" title="Pošalji svima"><i class="icon-envelope-alt"></i></a>

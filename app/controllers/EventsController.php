@@ -1,7 +1,7 @@
 <?php namespace App\Controllers;
 
 use App\Models\Event, App\Models\Invitation, App\Models\Match, App\Models\User;
-use Input, Notification, Redirect, Request, View;
+use Auth, Input, Notification, Redirect, Request, View;
 
 class EventsController extends BaseController {
 
@@ -52,10 +52,11 @@ class EventsController extends BaseController {
 	{
 		// First save the event
 		$event = new Event;
-		$event->title = Input::get('title');
-		$event->date  = Input::get('date');
-		$event->from  = Input::get('date') . ' ' . Input::get('from');
-		$event->to    = Input::get('date') . ' ' . Input::get('to');
+		$event->author_id = Auth::user()->id;
+		$event->title     = Input::get('title');
+		$event->date      = Input::get('date');
+		$event->from      = Input::get('date') . ' ' . Input::get('from');
+		$event->to        = Input::get('date') . ' ' . Input::get('to');
 		$event->save();
 
 		// Then create invitations

@@ -1,5 +1,6 @@
 <?php namespace App\Models;
 
+use Auth;
 use Eloquent;
 use Illuminate\Auth\UserInterface;
 use Illuminate\Auth\Reminders\RemindableInterface;
@@ -61,6 +62,40 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	}
 
 	/**
+	 * Check if user is an admin
+	 * @param  int     $userId
+	 * @return boolean
+	 */
+	public static function isAdmin($userId = null)
+	{
+		// Get user object
+		if ($userId) $user = self::find($userId);
+		else         $user = Auth::user();
+
+		// Not check the role
+		if ($user and ($user->role == 'admin' or $user->role == 'superadmin')) return true;
+
+		return false;
+	}
+
+	/**
+	 * Check if user is an admin
+	 * @param  int     $userId
+	 * @return boolean
+	 */
+	public static function isSuperadmin($userId = null)
+	{
+		// Get user object
+		if ($userId) $user = self::find($userId);
+		else         $user = Auth::user();
+
+		// Not check the role
+		if ($user and ($user->role == 'superadmin')) return true;
+
+		return false;
+	}
+
+	/**
 	 * Full name accessor
 	 * @return string
 	 */
@@ -100,6 +135,23 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		if (isset($this->pivot->sent) and $this->pivot->sent) return $this->pivot->sent;
 
 		return false;
+	}
+
+	/**
+	 * Check is user owns event
+	 * @param  int    $eventId
+	 * @return boolean
+	 */
+	public static function ownsEvent($eventId)
+	{
+		$event = Event::find($eventId);
+
+		if ($event)
+		{
+			if ($event->author->id == Auth::user()->id) return true;
+		}
+
+		return true;
 	}
 
 }

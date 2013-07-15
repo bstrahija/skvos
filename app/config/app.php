@@ -187,6 +187,7 @@ return array(
 		// 'Profiler'        => 'Juy\Profiler\Facades\Profiler',
 		'Carbon'          => 'Carbon\Carbon',
 		'Notification'    => 'Krucas\Notification\Facades\Notification',
+		'User'            => 'App\Models\User',
 
 	),
 

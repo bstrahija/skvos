@@ -7,6 +7,15 @@ class Event extends Eloquent {
 	protected $table = 'events';
 
 	/**
+	 * User that created the event
+	 * @return mixed
+	 */
+	public function author()
+	{
+		return $this->belongsTo('App\Models\User');
+	}
+
+	/**
 	 * Related users attending the event
 	 * @return mixed
 	 */
@@ -70,7 +79,7 @@ class Event extends Eloquent {
 	 */
 	public function scopeWithAccess($query)
 	{
-		if (Auth::user()->role == 'admin') return $query;
+		if (User::isAdmin()) return $query;
 
 		return $query->select('events.*')->leftJoin('invitations as inv', 'inv.event_id', '=', 'events.id')->where('inv.user_id', Auth::user()->id);
 	}
