@@ -29,7 +29,7 @@ class UserSeeder extends Seeder {
 			'last_name'   => 'Srđenović',
 		));
 		User::create(array(
-			'email'       => 'ivan.kanoti@gmail.com',
+			'email'       => 'bakterije99@gmail.com',
 			'password'    => Hash::make("l05t30g2"),
 			'first_name'  => 'Ivan',
 			'last_name'   => 'Kanoti',

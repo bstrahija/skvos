@@ -8,7 +8,7 @@
 
 		<div>
 			Novi termin na koji si pozvan. Svoj dolazak možeš potvrditi klikom na link ispod:<br><br>
-			{{ $confirmation_link }}
+			<a href="{{ $confirmation_link }}">{{ $confirmation_link }}</a>
 		</div>
 	</body>
 </html>

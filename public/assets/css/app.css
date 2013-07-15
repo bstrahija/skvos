@@ -57,10 +57,10 @@ footer p a:hover          { text-decoration: none; color: #eee; }
 
 /* Dashboard */
 .dashboard h2                    { font-size: 12px; color: #333; font-family: Helvetica, sans-serif; font-weight: bold; margin: -1px 0 0 0; line-height: 120%; background: rgba(150,150,150,.1); padding: 20px 20px 16px 20px; margin-left: -20px; margin-right: -20px; }
-.dashboard h3                    { margin: 0; line-height: 130%; font-size: 22px; }
+.dashboard h3                    { margin: 0; line-height: 130%; font-size: 20px; }
 .dashboard h3, .dashboard h3 a.t { color: #93b557; }
 .dashboard h3 a.t:hover          { color: #a4c668; text-decoration: none; }
-.dashboard h3 a.button           { height: auto; width: 18px; padding: 0; text-align: center; line-height: 150%; position: relative; top: 3px; margin: 0 0 0 10px; }
+.dashboard h3 a.button           { height: auto; width: 18px; padding: 0; text-align: center; line-height: 150%; position: relative; top: 1px; margin: 0 0 0 10px; }
 .dashboard h3 a.button:hover     { text-decoration: none; }
 .dashboard h6                    { margin: 5px 0 12px 0; padding: 0; line-height: 130%; }
 .dashboard h6 em                 { font-weight: normal; text-transform: none; margin-left: 8px; }

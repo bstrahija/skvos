@@ -22,7 +22,7 @@
 		<p>Da li dolaziš na termin?</p>
 	@endif
 
-	<br><br>
+	<br>
 
 	{{ Form::open(array('action' => 'App\Controllers\InvitationsController@putConfirm', 'method' => 'put')) }}
 

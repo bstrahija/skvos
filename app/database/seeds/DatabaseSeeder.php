@@ -13,8 +13,8 @@ class DatabaseSeeder extends Seeder {
 
 		$env     = App::environment();
 		$seeders = array(
-			'local'      => array('UserSeeder',     'EventSeeder', 'MatchSeeder'),
-			'production' => array('UserProdSeeder', 'EventSeeder', 'MatchSeeder')
+			'local'      => array('UserSeeder',     'EventSeeder',     'MatchSeeder'),
+			'production' => array('UserProdSeeder', 'EventProdSeeder', 'MatchSeeder')
 		);
 
 		foreach ($seeders[$env] as $seeder)
