@@ -118,6 +118,20 @@ class InvitationsController extends BaseController {
 		$invitation->cancelled = 0;
 		$invitation->save();
 
+		// Prepare data
+		$event  = $invitation->event;
+		$author = $event->author;
+		$data   = array(
+			'title' => $event->title,
+			'user'  => $invitation->user,
+		);
+
+		// Send mail to event author
+		Mail::send('emails.events.invitation_confirm', $data, function($m) use ($invitation, $event, $author) {
+			$m->to($author->email);
+			$m->subject('Potvrda dolaska korisnika "' . $invitation->user->full_name . '" na termin "' . $event->title . '"');
+		});
+
 		Notification::success('Uspješno si potvrdio svoj dolazak.');
 
 		return Redirect::action('App\Controllers\InvitationsController@getConfirm', $hash);
@@ -135,6 +149,20 @@ class InvitationsController extends BaseController {
 		$invitation->confirmed = 0;
 		$invitation->cancelled = 1;
 		$invitation->save();
+
+		// Prepare data
+		$event  = $invitation->event;
+		$author = $event->author;
+		$data   = array(
+			'title' => $event->title,
+			'user'  => $invitation->user,
+		);
+
+		// Send mail to event author
+		Mail::send('emails.events.invitation_cancel', $data, function($m) use ($invitation, $event, $author) {
+			$m->to($author->email);
+			$m->subject('Otkaz dolaska korisnika "' . $invitation->user->full_name . '" na termin "' . $event->title . '"');
+		});
 
 		Notification::success('Uspješno si otkazao svoj dolazak.');
 
