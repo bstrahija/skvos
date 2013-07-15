@@ -1,4 +1,5 @@
 /app/config/production/*
+/app/config/local/*
 /app/database/seeds/production/*
 /bootstrap/compiled.php
 /vendor

@@ -38,6 +38,7 @@ class InvitationsController extends BaseController {
 		$whitelist = Config::get('mail.whitelist');
 		$eventId   = Input::get('event_id');
 		$event     = Event::find($eventId);
+		$sent_to   = array();
 
 		foreach ($event->invitees as $invitee)
 		{
@@ -56,6 +57,7 @@ class InvitationsController extends BaseController {
 						$m->to($invitee->email);
 						$m->subject('Pozivnica za: ' . $event->title);
 					});
+					$sent_to[] = $invitee->email;
 				}
 
 				$invitation->sent = 1;
@@ -63,7 +65,8 @@ class InvitationsController extends BaseController {
 			}
 		}
 
-		Notification::success('Pozivnice su poslane.');
+		if ( ! empty($sent_to)) Notification::success('Pozivnice su poslane na ['.implode(', ', $sent_to).'].');
+		else                    Notification::warning('Nijedna pozivnica nije poslana.');
 
 		return Redirect::to('invitations/send/'.$event->id);
 	}

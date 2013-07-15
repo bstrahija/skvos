@@ -9,7 +9,9 @@
 		"imagine/imagine": "0.4.*",
 		"juy/profiler": "dev-master",
 		"onigoetz/profiler": "dev-master",
-		"edvinaskrucas/notification": "1.*"
+		"edvinaskrucas/notification": "1.*",
+		"iron-io/iron_core": "dev-master",
+		"iron-io/iron_mq": "dev-master"
 	},
 	"autoload": {
 		"classmap": [
