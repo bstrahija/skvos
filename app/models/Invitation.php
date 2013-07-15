@@ -24,4 +24,24 @@ class Invitation extends Eloquent {
 		return $this->belongsTo('App\Models\User');
 	}
 
+	/**
+	 * Only sent invitations
+	 * @param  Query $query
+	 * @return Query
+	 */
+	public function scopeSent($query)
+	{
+		return $query->where('sent', 1);
+	}
+
+	/**
+	 * Only unsent invitations
+	 * @param  Query $query
+	 * @return Query
+	 */
+	public function scopeNotSent($query)
+	{
+		return $query->where('sent', 0);
+	}
+
 }

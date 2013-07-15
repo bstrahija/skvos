@@ -3,6 +3,7 @@ App.Content = {
 	init: function() {
 		this.initDashboard();
 		this.initSelectboxes();
+		this.initInviteConfirmation();
 	},
 
 	initDashboard: function() {
@@ -30,6 +31,26 @@ App.Content = {
 				buttonWidth: '100%'
 			});
 		}
+	},
+
+	initInviteConfirmation: function() {
+		var $ok     = $(".invitations-confirm .form-actions .button-yes");
+		var $no     = $(".invitations-confirm .form-actions .button-no");
+		var $form   = $(".invitations-confirm form");
+		var $method = $(".invitations-confirm input[name=_method]");
+
+		$ok.click(function() {
+			$method.val('PUT');
+			$form.submit();
+			return false;
+		});
+
+		$no.click(function() {
+			$method.val('DELETE');
+			$form.submit();
+			return false;
+		});
+
 	},
 
 	isMobile: function() {

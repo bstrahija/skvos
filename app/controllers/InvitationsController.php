@@ -12,9 +12,14 @@ class InvitationsController extends BaseController {
 	 */
 	public function getSend($eventId)
 	{
-		$event = Event::find($eventId);
+		$event       = Event::find($eventId);
+		$invitations = Invitation::notSent()->where('event_id', $event->id)->get();
 
-		return View::make('invitations.send', array('event' => $event, 'all' => false));
+		return View::make('invitations.send', array(
+			'event'       => $event,
+			'invitations' => $invitations,
+			'all'         => false,
+		));
 	}
 
 	/**
@@ -24,9 +29,14 @@ class InvitationsController extends BaseController {
 	 */
 	public function getResend($eventId)
 	{
-		$event = Event::find($eventId);
+		$event       = Event::find($eventId);
+		$invitations = Invitation::where('event_id', $event->id)->get();
 
-		return View::make('invitations.send', array('event' => $event, 'all' => true));
+		return View::make('invitations.send', array(
+			'event'       => $event,
+			'invitations' => $invitations,
+			'all'         => true,
+		));
 	}
 
 	/**
@@ -87,13 +97,38 @@ class InvitationsController extends BaseController {
 	}
 
 	/**
-	 * Confirm or cancel the invitation
+	 * Confirm invitation
 	 * @param  string $hash
 	 * @return Redirect
 	 */
-	public function postConfirm($hash)
+	public function putConfirm()
 	{
+		$hash       = Input::get('hash');
+		$invitation = Invitation::where('hash', $hash)->first();
+		$invitation->confirmed = 1;
+		$invitation->cancelled = 0;
+		$invitation->save();
 
+		Notification::success('Uspješno si potvrdio svoj dolazak.');
+
+		return Redirect::action('App\Controllers\InvitationsController@getConfirm', $hash);
 	}
 
+	/**
+	 * Cancel the invitation
+	 * @param  string $hash
+	 * @return Redirect
+	 */
+	public function deleteConfirm()
+	{
+		$hash       = Input::get('hash');
+		$invitation = Invitation::where('hash', $hash)->first();
+		$invitation->confirmed = 0;
+		$invitation->cancelled = 1;
+		$invitation->save();
+
+		Notification::success('Uspješno si otkazao svoj dolazak.');
+
+		return Redirect::action('App\Controllers\InvitationsController@getConfirm', $hash);
+	}
 }

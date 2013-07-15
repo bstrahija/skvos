@@ -3,28 +3,42 @@
 @section('content')
 
 <div class="form invitations invitations-confirm">
+	<h3>Potvrda dolaska</h3>
 	<h2>Pozivnica za: {{ $invitation->event->title }}</h2>
-	<p>Da li dolaziš na termin?</p>
+
+	@include('_partial.notifications')
+
+	<hr>
+
+	@if ($invitation->confirmed)
+		<p style="color: #1a6;">Tvoj dolazak je potvrđen</p>
+		<p>Želiš li ipak otkazati dolazak?</p>
+	@elseif ($invitation->cancelled)
+		<p style="color: #c23;">Dolazak je otkazan.</p>
+		<p>Želiš li ipak doći?</p>
+	@else
+		<p>Da li dolaziš na termin?</p>
+	@endif
+
 	<br><br>
 
-	{{ Form::open(array('action' => 'App\Controllers\InvitationsController@postConfirm')) }}
+	{{ Form::open(array('action' => 'App\Controllers\InvitationsController@putConfirm', 'method' => 'put')) }}
 
 		{{ Form::hidden('hash', $hash) }}
 
 		<div class="form-actions">
-			<hr>
-			<a href="#" class="button button-circle button-action button-yes"><i class="icon-ok-sign"></i></a>
-			<a href="#" class="button button-circle button-caution button-no"><i class="icon-remove-sign"></i></a>
+			@if ( ! $invitation->confirmed)
+				<a href="#" class="button button-circle button-action button-yes" title="Da, potvrdi moj dolazak"><i class="icon-ok-sign"></i></a>
+			@endif
+
+			@if ( ! $invitation->cancelled)
+				<a href="#" class="button button-circle button-caution button-no" title="Ne, otkaži"><i class="icon-remove-sign"></i></a>
+			@endif
 		</div>
+
+		<hr>
 
 	{{ Form::close() }}
 </div>
-
-<?php
-	echo '<pre>'; print_r($invitation->toArray()); echo '</pre>';
-	echo '<pre>'; print_r($invitation->event->toArray()); echo '</pre>';
-	echo '<pre>'; print_r($invitation->user->toArray()); echo '</pre>';
-	echo '<pre>'; print_r($hash); echo '</pre>';
-?>
 
 @stop

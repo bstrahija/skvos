@@ -13,22 +13,29 @@
 
 		<h2>Termin: {{ $event->title }}</h3>
 		<hr>
-		<h4>Pozivnice će biti poslane na:</h4>
 
-		<ul class="no-style">
-			@foreach ($event->invitees as $invitee)
-				@if ( ! $invitee->sent or $all)
+		@if ($invitations->isEmpty())
+			<h4>Sve pozivnice su već poslane</h4>
+			<p>Za ponovo slanje kliknite <a href="{{ url('invitations/resend/'.$event->id) }}">ovdje</a>.</p>
+			<br><br><br>
+		@else
+			<h4>Pozivnice će biti poslane na:</h4>
+
+			<ul class="no-style">
+				@foreach ($invitations as $invitation)
 					<li>
-						{{ $invitee->full_name }} <strong>&lt;{{ $invitee->email }}&gt;</strong>
+						{{ $invitation->user->full_name }} <strong>&lt;{{ $invitation->user->email }}&gt;</strong>
 					</li>
-				@endif
-			@endforeach
-		</ul>
+				@endforeach
+			</ul>
 
-		<div class="form-actions">
-			<hr>
-			<a href="#" class="button button-circle button-action button-save submit"><i class="icon-envelope"></i></a>
-		</div>
+			<div class="form-actions">
+				<hr>
+				<a href="#" class="button button-circle button-action button-save submit"><i class="icon-envelope"></i></a>
+			</div>
+		@endif
+
+		<hr>
 
 	{{ Form::close() }}
 
