@@ -47,8 +47,12 @@ h5, h6     { font-family: Helvetica, sans-serif; font-size: 11px; text-transform
 #hd1 .pull-left           { left: 18px; }
 footer                    { text-align: center; }
 footer p                  { font-size: 10px; color: #ccc; text-shadow: 0 1px 0 #111; }
+footer p a                { color: #ccc; }
+footer p a:hover          { text-decoration: none; color: #eee; }
 #app footer               { padding: 30px 0 20px 0; }
-#app footer p             { color: #999; text-shadow: 0 1px 0 #ddd; }
+#app footer p             { color: #999; text-shadow: 0 1px 0 #fff; }
+#app footer p a           { color: #999; }
+#app footer p a:hover     { text-decoration: none; color: #777; }
 
 
 /* Dashboard */

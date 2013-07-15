@@ -5,6 +5,9 @@ use Auth, Input, Notification, Redirect, Request, View;
 
 class EventsController extends BaseController {
 
+	/**
+	 * Restrict access to some methods
+	 */
 	public function __construct()
 	{
 		// Protect some methods

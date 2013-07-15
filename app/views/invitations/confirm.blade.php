@@ -10,11 +10,13 @@
 
 	<hr>
 
+	<p>Bok, {{ $invitation->user->first_name }}</p>
+
 	@if ($invitation->confirmed)
 		<p style="color: #1a6;">Tvoj dolazak je potvrđen</p>
 		<p>Želiš li ipak otkazati dolazak?</p>
 	@elseif ($invitation->cancelled)
-		<p style="color: #c23;">Dolazak je otkazan.</p>
+		<p style="color: #c23;">Tvoj dolazak je otkazan.</p>
 		<p>Želiš li ipak doći?</p>
 	@else
 		<p>Da li dolaziš na termin?</p>

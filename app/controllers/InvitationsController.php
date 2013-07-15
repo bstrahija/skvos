@@ -6,6 +6,15 @@ use Config, Input, Mail, Notification, Redirect, View, URL;
 class InvitationsController extends BaseController {
 
 	/**
+	 * Restrict access to some methods
+	 */
+	public function __construct()
+	{
+		// Protect some methods
+		$this->beforeFilter('auth', array('except' => array('getConfirm', 'putConfirm', 'deleteConfirm')));
+	}
+
+	/**
 	 * Display presend overview
 	 * @param  int $eventId
 	 * @return View

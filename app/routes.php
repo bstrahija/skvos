@@ -21,9 +21,11 @@ Route::group(array('before' => 'auth'), function()
 {
 	Route::get('/',                  array('as' => 'dashboard', 'uses' => 'App\Controllers\DashboardController@getIndex'));
 	Route::resource('events',        'App\Controllers\EventsController');
-	Route::controller('invitations', 'App\Controllers\InvitationsController');
 	Route::get('settings',           array('as' => 'settings',  'uses' => 'App\Controllers\SettingsController@getIndex'));
 });
+
+// Outside of the main group because of confirmations
+Route::controller('invitations', 'App\Controllers\InvitationsController');
 
 // Event confirmations (via hash)
 Route::get('invitations/confirm/{hash}', array('as' => 'invitations.confirm', 'uses' => 'App\Controllers\InvitationsController@getConfirm'));

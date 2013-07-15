@@ -16,7 +16,7 @@
 	</div>
 
 	<footer>
-		<p>&copy; <?php echo date('Y'); ?> Skvoš &amp; Beer inc.</p>
+		<p>&copy; <?php echo date('Y'); ?> <a href="http://creolab.hr">Skvoš &amp; Beer inc.</a></p>
 	</footer>
 </div>
 
