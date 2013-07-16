@@ -146,8 +146,10 @@ class InvitationsController extends BaseController {
 				$whitelist = Config::get('mail.whitelist');
 				if ($whitelist) $to = array_intersect($event->invitees->lists('email'), $whitelist);
 				else            $to = $event->invitees->lists('email');
-				$m->to($to);
-				$m->subject('Potvrda dolaska korisnika "' . $invitation->user->full_name . '" na termin "' . $event->title . '"');
+
+				$m->to(Config::get('mail.from.address'));
+				$m->bcc($to);
+				$m->subject('Yeah, ' . $invitation->user->full_name . '" dolazi na termin: "' . $event->title . '"');
 			});
 
 			Notification::success('Uspješno si potvrdio svoj dolazak.');
@@ -202,8 +204,10 @@ class InvitationsController extends BaseController {
 				$whitelist = Config::get('mail.whitelist');
 				if ($whitelist) $to = array_intersect($event->invitees->lists('email'), $whitelist);
 				else            $to = $event->invitees->lists('email');
-				$m->to($to);
-				$m->subject('Otkaz dolaska korisnika "' . $invitation->user->full_name . '" na termin "' . $event->title . '"');
+
+				$m->to(Config::get('mail.from.address'));
+				$m->bcc($to);
+				$m->subject('Oh no, ' . $invitation->user->full_name . '" ne dolazi na termin: "' . $event->title . '"');
 			});
 
 			Notification::success('Uspješno si otkazao svoj dolazak.');
@@ -212,7 +216,6 @@ class InvitationsController extends BaseController {
 		{
 			Notification::error('Pozivnica nije pronađena.');
 		}
-		die();
 
 		if (Auth::guest()) return Redirect::action('App\Controllers\InvitationsController@getConfirm', $hash);
 		else               return Redirect::route('dashboard');

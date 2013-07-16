@@ -4,10 +4,10 @@
 		<meta charset="utf-8">
 	</head>
 	<body>
-		<p style="color: #a00;">
-			Potvrđen dolazak korisnika
+		<h1>Neeeeeee, otkazan dolazak!</h1>
+		<p>
 			<strong>"{{ $user->full_name }}"</strong>
-			na termin
+			ne dolazi na termin
 			<strong>"{{ $title }}"</strong>
 		</p>
 
