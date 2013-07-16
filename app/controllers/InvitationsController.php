@@ -143,7 +143,10 @@ class InvitationsController extends BaseController {
 
 			// Send mail to event author
 			Mail::send('emails.events.invitation_confirm', $data, function($m) use ($invitation, $event, $author) {
-				$m->to($author->email);
+				$whitelist = Config::get('mail.whitelist');
+				if ($whitelist) $to = array_intersect($event->invitees->lists('email'), $whitelist);
+				else            $to = $event->invitees->lists('email');
+				$m->to($to);
 				$m->subject('Potvrda dolaska korisnika "' . $invitation->user->full_name . '" na termin "' . $event->title . '"');
 			});
 
@@ -196,7 +199,10 @@ class InvitationsController extends BaseController {
 
 			// Send mail to event author
 			Mail::send('emails.events.invitation_cancel', $data, function($m) use ($invitation, $event, $author) {
-				$m->to($author->email);
+				$whitelist = Config::get('mail.whitelist');
+				if ($whitelist) $to = array_intersect($event->invitees->lists('email'), $whitelist);
+				else            $to = $event->invitees->lists('email');
+				$m->to($to);
 				$m->subject('Otkaz dolaska korisnika "' . $invitation->user->full_name . '" na termin "' . $event->title . '"');
 			});
 
@@ -206,6 +212,7 @@ class InvitationsController extends BaseController {
 		{
 			Notification::error('Pozivnica nije pronađena.');
 		}
+		die();
 
 		if (Auth::guest()) return Redirect::action('App\Controllers\InvitationsController@getConfirm', $hash);
 		else               return Redirect::route('dashboard');
