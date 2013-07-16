@@ -3,7 +3,7 @@
 <head>
 	@include('_partial.meta')
 </head>
-<body>
+<body id="skvosh">
 @include('_partial.header')
 
 <div id="app">

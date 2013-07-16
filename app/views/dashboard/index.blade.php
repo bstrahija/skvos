@@ -3,6 +3,9 @@
 @section('content')
 
 	<div class="dashboard">
+
+		@include('_partial.notifications')
+
 		<!-- ! Next -->
 
 		<h2>Slijedeći termin</h2><hr>

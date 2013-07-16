@@ -3,7 +3,7 @@
 <head>
 	@include('_partial.meta')
 </head>
-<body class="auth">
+<body class="auth" id="skvosh">
 <div id="app">
 	<div class="container-fluid" id="main">
 		<div class="row-fluid">

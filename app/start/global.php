@@ -69,6 +69,14 @@ App::down(function()
 	return Response::make("Be right back!", 503);
 });
 
+if (class_exists('Profiler'))
+{
+	if ( ! User::isAdmin() or (User::isAdmin() and ! Input::get('debug')))
+	{
+		Config::set('profiler::profiler', false);
+	}
+}
+
 /*
 |--------------------------------------------------------------------------
 | Require The Filters File

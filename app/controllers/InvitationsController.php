@@ -1,7 +1,7 @@
 <?php namespace App\Controllers;
 
 use App\Models\Event, App\Models\Invitation;
-use Config, Input, Mail, Notification, Redirect, View, URL;
+use Auth, Config, Input, Mail, Notification, Redirect, View, URL;
 
 class InvitationsController extends BaseController {
 
@@ -112,29 +112,50 @@ class InvitationsController extends BaseController {
 	 */
 	public function putConfirm()
 	{
-		$hash       = Input::get('hash');
-		$invitation = Invitation::where('hash', $hash)->first();
-		$invitation->confirmed = 1;
-		$invitation->cancelled = 0;
-		$invitation->save();
+		$invitation = null;
 
-		// Prepare data
-		$event  = $invitation->event;
-		$author = $event->author;
-		$data   = array(
-			'title' => $event->title,
-			'user'  => $invitation->user,
-		);
+		// By hash
+		if ($hash = Input::get('hash'))
+		{
+			$invitation = Invitation::where('hash', $hash)->first();
+		}
+		elseif ( ! Auth::guest() and $invitationId = Input::get('invitation_id'))
+		{
+			$invitation = Invitation::find($invitationId);
 
-		// Send mail to event author
-		Mail::send('emails.events.invitation_confirm', $data, function($m) use ($invitation, $event, $author) {
-			$m->to($author->email);
-			$m->subject('Potvrda dolaska korisnika "' . $invitation->user->full_name . '" na termin "' . $event->title . '"');
-		});
+			// Check the access
+			if ($invitation and $invitation->user_id != Auth::user()->id) $invitation = null;
+		}
 
-		Notification::success('Uspješno si potvrdio svoj dolazak.');
+		if ($invitation)
+		{
+			$invitation->confirmed = 1;
+			$invitation->cancelled = 0;
+			$invitation->save();
 
-		return Redirect::action('App\Controllers\InvitationsController@getConfirm', $hash);
+			// Prepare data
+			$event  = $invitation->event;
+			$author = $event->author;
+			$data   = array(
+				'title' => $event->title,
+				'user'  => $invitation->user,
+			);
+
+			// Send mail to event author
+			Mail::send('emails.events.invitation_confirm', $data, function($m) use ($invitation, $event, $author) {
+				$m->to($author->email);
+				$m->subject('Potvrda dolaska korisnika "' . $invitation->user->full_name . '" na termin "' . $event->title . '"');
+			});
+
+			Notification::success('Uspješno si potvrdio svoj dolazak.');
+		}
+		else
+		{
+			Notification::error('Pozivnica nije pronađena.');
+		}
+
+		if (Auth::guest()) return Redirect::action('App\Controllers\InvitationsController@getConfirm', $hash);
+		else               return Redirect::route('dashboard');
 	}
 
 	/**
@@ -144,28 +165,50 @@ class InvitationsController extends BaseController {
 	 */
 	public function deleteConfirm()
 	{
-		$hash       = Input::get('hash');
-		$invitation = Invitation::where('hash', $hash)->first();
-		$invitation->confirmed = 0;
-		$invitation->cancelled = 1;
-		$invitation->save();
+		$invitation = null;
 
-		// Prepare data
-		$event  = $invitation->event;
-		$author = $event->author;
-		$data   = array(
-			'title' => $event->title,
-			'user'  => $invitation->user,
-		);
+		// By hash
+		if ($hash = Input::get('hash'))
+		{
+			$invitation = Invitation::where('hash', $hash)->first();
+		}
+		elseif ( ! Auth::guest() and $invitationId = Input::get('invitation_id'))
+		{
+			$invitation = Invitation::find($invitationId);
 
-		// Send mail to event author
-		Mail::send('emails.events.invitation_cancel', $data, function($m) use ($invitation, $event, $author) {
-			$m->to($author->email);
-			$m->subject('Otkaz dolaska korisnika "' . $invitation->user->full_name . '" na termin "' . $event->title . '"');
-		});
+			// Check the access
+			if ($invitation and $invitation->user_id != Auth::user()->id) $invitation = null;
+		}
 
-		Notification::success('Uspješno si otkazao svoj dolazak.');
+		if ($invitation)
+		{
+			$invitation->confirmed = 0;
+			$invitation->cancelled = 1;
+			$invitation->save();
 
-		return Redirect::action('App\Controllers\InvitationsController@getConfirm', $hash);
+			// Prepare data
+			$event  = $invitation->event;
+			$author = $event->author;
+			$data   = array(
+				'title' => $event->title,
+				'user'  => $invitation->user,
+			);
+
+			// Send mail to event author
+			Mail::send('emails.events.invitation_cancel', $data, function($m) use ($invitation, $event, $author) {
+				$m->to($author->email);
+				$m->subject('Otkaz dolaska korisnika "' . $invitation->user->full_name . '" na termin "' . $event->title . '"');
+			});
+
+			Notification::success('Uspješno si otkazao svoj dolazak.');
+		}
+		else
+		{
+			Notification::error('Pozivnica nije pronađena.');
+		}
+
+		if (Auth::guest()) return Redirect::action('App\Controllers\InvitationsController@getConfirm', $hash);
+		else               return Redirect::route('dashboard');
 	}
+
 }

@@ -31,11 +31,40 @@
 			</tbody>
 		</table>
 
+		@if ($event->userInvitation and ! $event->passed())
+			<div class="confirm-tools form clearfix">
+				<hr>
+				@if ( ! $event->userInvitation->confirmed and  ! $event->userInvitation->cancelled)
+					<h5>Potvrda dolaska</h5>
+				@elseif ($event->userInvitation->confirmed)
+					<h5>Dolazim!</h5>
+				@elseif ($event->userInvitation->cancelled)
+					<h5>Ne dolazim!</h5>
+				@endif
+
+				@if ( ! $event->userInvitation->confirmed)
+					{{ Form::open(array('method' => 'put', 'action' => 'App\Controllers\InvitationsController@putConfirm')) }}
+						{{ Form::hidden('invitation_id', $event->userInvitation->id) }}
+						<a href="#" class="button button-circle button-action button-yes submit" title="Da, potvrdi moj dolazak"><i class="icon-ok-sign"></i></a>
+					{{ Form::close() }}
+				@endif
+
+				@if ( ! $event->userInvitation->cancelled)
+					{{ Form::open(array('method' => 'delete', 'action' => 'App\Controllers\InvitationsController@deleteConfirm')) }}
+						{{ Form::hidden('invitation_id', $event->userInvitation->id) }}
+						<a href="#" class="button button-circle button-caution button-no submit" title="Ne, otkaži"><i class="icon-remove-sign"></i></a>
+					{{ Form::close() }}
+				@endif
+			</div>
+		@endif
+
 		@if (User::isAdmin() and $event->date >= Carbon::now()->format('Y-m-d'))
 			<div class="send-tools form clearfix">
 				<hr>
+				<h5>Pozivnice</h5>
+
 				<a href="{{ url('invitations/resend', $event->id) }}" class="button button-circle button-royal pull-right" title="Pošalji svima"><i class="icon-envelope-alt"></i></a>
-				<a href="{{ url('invitations/send', $event->id) }}" class="button button-circle button-primary" title="Pošalji svima kojima nije poslano"><i class="icon-envelope"></i></a>
+				<a href="{{ url('invitations/send', $event->id) }}" class="button button-circle button-primary pull-left" title="Pošalji svima kojima nije poslano"><i class="icon-envelope"></i></a>
 			</div>
 		@endif
 	@endif

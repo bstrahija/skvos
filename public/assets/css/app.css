@@ -87,9 +87,15 @@ footer p a:hover          { text-decoration: none; color: #eee; }
 	.people table .icon-ok-sign    { color: #0a0; }
 	.people table .icon-minus-sign { color: #c00; }
 	.people table .icon-envelope   { color: #0a0; }
-	.people .send-tools            { margin: 20px 0 10px 0; }
+	.people .send-tools            { margin: 20px 0 10px 0; text-align: center; }
 	#app .people .send-tools hr    { border-top: 1px solid #000; border-bottom: 1px solid #333; margin-bottom: 16px; }
+	#app .people .send-tools h5    { color: #eee; text-shadow: 0 1px 0 #000; }
 	.people .button-circle         { line-height: 30px; font-size: 13px; display: inline-block; width: 30px; height: 30px; }
+	#app .confirm-tools            { margin: 20px 0 10px 0; text-align: center; }
+	#app .confirm-tools h5         { color: #eee; text-shadow: 0 1px 0 #000; }
+	#app .confirm-tools hr         { border-top: 1px solid #000; border-bottom: 1px solid #333; margin-bottom: 16px; }
+	#app .confirm-tools form { display: inline-block; margin: 0; padding: 0; }
+	#app .confirm-tools a.button   { margin: 0 20px; }
 
 
 	/* New event */
@@ -113,6 +119,6 @@ footer p a:hover          { text-decoration: none; color: #eee; }
 
 
 /* Debug */
-#app .anbu-tabs { text-align: left; }
-#app .anbu-tabs li { margin: 0 5px; padding: 0; font-size: 12px; }
-#app .anbu-count { border-radius: 8px; }
+#skvosh .anbu-tabs { text-align: left; }
+#skvosh .anbu-tabs li { margin: 0 5px; padding: 0; font-size: 11px; }
+#skvosh .anbu-count { border-radius: 8px; }

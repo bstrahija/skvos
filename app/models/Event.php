@@ -42,6 +42,14 @@ class Event extends Eloquent {
 		return $this->hasMany('App\Models\Match');
 	}
 
+	/**
+	 * Invitation for current user
+	 * @return mixed
+	 */
+	public function userInvitation()
+	{
+		return $this->hasOne('App\Models\Invitation', 'event_id')->where('invitations.user_id', Auth::user()->id);
+	}
 
 	/**
 	 * Only upcoming events
@@ -180,6 +188,13 @@ class Event extends Eloquent {
 		}
 
 		return (int) $won;
+	}
+
+	public function passed()
+	{
+		if ($this->to < date('Y-m-d H:i:s')) return true;
+
+		return false;
 	}
 
 }
