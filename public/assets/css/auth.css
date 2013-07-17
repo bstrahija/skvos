@@ -1,4 +1,4 @@
-body.auth                { background: #222; text-align: center; padding: 30px 0 20px 0; }
+body.auth                { background: #222 url(../img/bg_binding_dark.png); text-align: center; padding: 30px 0 20px 0; }
 body.auth h1             { font-size: 40px; color: #eee; text-shadow: 0 -2px #333; line-height: 100%; margin: 0 0 40px 0; }
 body.auth form           { /*box-shadow: 0 0 400px 150px rgba(255,255,255,.1); background: rgba(255,255,255,.1); -webkit-appearance: none;*/ }
 body.auth form .controls { margin: 30px 0; }
