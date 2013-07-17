@@ -5,6 +5,8 @@
 <div class="matches">
 	<?php $now = Carbon::now()->format('Y-m-d H:i:s'); ?>
 
+	@include('_partial.notifications')
+
 	@if ($event->from > $now)
 		<h3 class="c">Termin još nije održan</h3>
 		<br><br><br><br><br><br><br><br><br>
@@ -15,7 +17,11 @@
 
 			<h3>Termin je u tijeku</h3>
 
+			@include('events._partial.add_match')
+
 		@else
+
+			@include('events._partial.add_match')
 
 			@include('events._partial.overview')
 

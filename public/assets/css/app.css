@@ -116,6 +116,19 @@ footer p a:hover          { text-decoration: none; color: #eee; }
 .invitations-confirm .form-actions a { margin: 0 35px; }
 
 
+/* Match add score */
+.event-match-add .player        { width: 31%; }
+.event-match-add .score         {}
+.event-match-add .player select { width: 100%; }
+.event-match-add .score  select { width: 100%; }
+
+
+/* Tables */
+table .l { text-align: left; }
+table .r { text-align: right; }
+table .c { text-align: center; }
+
+
 
 
 /* Debug */
