@@ -174,6 +174,24 @@ class Event extends Eloquent {
 	}
 
 	/**
+	 * Number of sets the user has lost on this event
+	 * @param  int  $userId
+	 * @return int
+	 */
+	public function userLostSets($userId)
+	{
+		$lost = 0;
+
+		foreach ($this->matches as $match)
+		{
+			if ($match->player1_id == $userId) $lost += (int) $match->player2_sets_won;
+			if ($match->player2_id == $userId) $lost += (int) $match->player1_sets_won;
+		}
+
+		return (int) $lost;
+	}
+
+	/**
 	 * Number of matches the user has won on this event
 	 * @param  int  $userId
 	 * @return int
@@ -188,6 +206,23 @@ class Event extends Eloquent {
 		}
 
 		return (int) $won;
+	}
+
+	/**
+	 * Number of matches the user has won on this event
+	 * @param  int  $userId
+	 * @return int
+	 */
+	public function userLostMatches($userId)
+	{
+		$lost = 0;
+
+		foreach ($this->matches as $match)
+		{
+			if (($match->player1_id == $userId or $match->player2_id == $userId) and $match->winner_id != $userId) $lost++;
+		}
+
+		return (int) $lost;
 	}
 
 	public function passed()
