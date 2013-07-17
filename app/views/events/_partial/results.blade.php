@@ -5,17 +5,17 @@
 		<table class="table">
 			<thead>
 				<tr>
-					<td><i class="icon-user"></i></td>
+					<th scope="col"><i class="icon-user"></i></th>
 
 					@foreach ($matches as $num => $match)
-						<td>{{ $num+1 }}.</td>
+						<th scope="col">{{ $num+1 }}.</th>
 					@endforeach
 				</tr>
 			</thead>
 			<tbody>
 				@foreach ($event->attendees as $user)
 					<tr>
-						<td>{{ $user->first_name }}</td>
+						<th scope="row">{{ $user->first_name }}</th>
 						@foreach ($matches as $match)
 							<td>
 								@if ($user->id == $match->player1_id)
