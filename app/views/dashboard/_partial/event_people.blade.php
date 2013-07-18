@@ -3,7 +3,7 @@
 		<table class="table">
 			<tbody>
 				@foreach ($event->invitees as $person)
-					<tr>
+					<tr class="invitation-status{{ ($person->cancelled) ? '-cancelled' : null }}{{ ($person->confirmed) ? '-confirmed' : null }}">
 						<!-- Confirmed -->
 						<td class="slim">
 							@if ($person->confirmed)
