@@ -88,6 +88,10 @@ footer p a:hover          { text-decoration: none; color: #eee; }
 	.people table .icon-minus-sign       { color: #c00; }
 	.people table .icon-envelope         { color: #0a0; }
 	.people .invitation-status-cancelled { opacity: .5; }
+	.people table .res                   { width: 1%; text-align: right; }
+	.people table th                     { line-height: 20px; padding: 8px; }
+	.people table td                     { padding: 8px; }
+	.people table th.res                 { color: #777; }
 	.people .send-tools                  { margin: 20px 0 10px 0; text-align: center; }
 	#app .people .send-tools hr          { border-top: 1px solid #000; border-bottom: 1px solid #333; margin-bottom: 16px; }
 	#app .people .send-tools h5          { color: #eee; text-shadow: 0 1px 0 #000; }

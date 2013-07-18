@@ -1,9 +1,20 @@
 <div class="people">
 	@if ($event->invitees)
 		<table class="table">
+			@if ( ! $event->matches->isEmpty())
+				<thead>
+					<th></th>
+					<th></th>
+					<th></th>
+					@foreach ($event->matches as $num => $match)
+						<th class="r res">{{ $num + 1 }}</th>
+					@endforeach
+				</thead>
+			@endif
+
 			<tbody>
 				@foreach ($event->invitees as $person)
-					<tr class="invitation-status{{ ($person->cancelled) ? '-cancelled' : null }}{{ ($person->confirmed) ? '-confirmed' : null }}">
+					<tr class="invitation-status{{ ($person->cancelled) ? '-cancelled' : null; }}{{ ($person->confirmed) ? '-confirmed' : null; }}">
 						<!-- Confirmed -->
 						<td class="slim">
 							@if ($person->confirmed)
@@ -26,6 +37,18 @@
 
 						<!-- ! Name -->
 						<td>{{ $person->full_name }}</td>
+
+						@foreach ($event->matches as $match)
+							<td class="r res">
+								@if ($person->id == $match->player1_id)
+									{{ $match->player1_sets_won }}
+								@elseif ($person->id == $match->player2_id)
+									{{ $match->player2_sets_won }}
+								@else
+									-
+								@endif
+							</td>
+						@endforeach
 					</tr>
 				@endforeach
 			</tbody>
