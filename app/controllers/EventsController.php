@@ -1,7 +1,7 @@
 <?php namespace App\Controllers;
 
 use App\Models\Event, App\Models\Invitation, App\Models\Match, App\Models\User;
-use Auth, Input, Notification, Redirect, Request, View;
+use Auth, Input, Notification, Redirect, Request, Str, View;
 
 class EventsController extends BaseController {
 
