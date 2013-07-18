@@ -3,6 +3,8 @@
 @import url(http://fonts.googleapis.com/css?family=Oswald:400,700&subset=latin,latin-ext);
 
 /* Common */
+html { overflow: -moz-scrollbars-vertical; overflow-y: scroll; }
+html, body { height: 100%; }
 body { margin: 0 auto; font-family: Helvetica, sans-serif; color: #333; background: #ededed url(../img/bg_ticks.png) repeat 50% 0; }
 a, li {
 	-webkit-transition-property: background, color;
