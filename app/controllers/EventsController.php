@@ -124,6 +124,7 @@ class EventsController extends BaseController {
 				$invitation = new Invitation;
 				$invitation->user_id  = (int) $player;
 				$invitation->event_id = (int) $event->id;
+				$invitation->hash     = Str::random(42);
 				$invitation->save();
 			}
 		}
