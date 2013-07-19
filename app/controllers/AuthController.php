@@ -5,11 +5,19 @@ use Auth, Input, Redirect, Request, View;
 
 class AuthController extends BaseController {
 
+	/**
+	 * Display login screen
+	 * @return View
+	 */
 	public function getLogin()
 	{
 		return View::make('auth.login');
 	}
 
+	/**
+	 * Attempt to login with credentials
+	 * @return Redirect
+	 */
 	public function postLogin()
 	{
 		$credentials = array(
@@ -17,7 +25,7 @@ class AuthController extends BaseController {
 			'password' => Input::get('password')
 		);
 
-		if (Auth::attempt($credentials))
+		if (Auth::attempt($credentials, true))
 		{
 			return Redirect::route('dashboard');
 		}
@@ -25,6 +33,10 @@ class AuthController extends BaseController {
 		return Redirect::route('login')->withErrors(array('login' => 'Wrong username or password!'));
 	}
 
+	/**
+	 * Terminate user session
+	 * @return Redirect
+	 */
 	public function getLogout()
 	{
 		Auth::logout();

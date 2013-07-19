@@ -1,5 +1,7 @@
 <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-responsive.min.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/css/jasny-bootstrap.min.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/css/jasny-bootstrap-responsive.min.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/css/font-awesome.min.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/css/select2.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-multiselect.css') }}">

@@ -115,6 +115,9 @@ footer p a:hover          { text-decoration: none; color: #eee; }
 	.attendance .status-cancelled i { color: #a42; }
 	.attendance .status-unknown i   { color: #888; }
 
+	/* Matches */
+	.matches { text-align: center; }
+
 
 /* Invitations */
 .invitations { text-align: center; }
