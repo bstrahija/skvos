@@ -49,7 +49,7 @@
 			<ul class="thumbnails">
 				@foreach ($event->media as $item)
 					<li class="span3">
-						<a href="{{ asset($item->path) }}" class="thumbnail fresco" data-fresco-group='event-gallery'>
+						<a href="{{ Image::resize($item->path, 800, 800) }}" class="thumbnail lightbox">
 							<img data-src="holder.js/100x100" src="{{ Image::thumb($item->path, 100) }}" alt="">
 						</a>
 					</li>

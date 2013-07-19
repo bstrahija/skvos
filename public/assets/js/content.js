@@ -4,6 +4,7 @@ App.Content = {
 		this.initDashboard();
 		this.initSelectboxes();
 		this.initInviteConfirmation();
+		this.initLighboxes();
 	},
 
 	initDashboard: function() {
@@ -51,6 +52,13 @@ App.Content = {
 			return false;
 		});
 
+	},
+
+	initLighboxes: function() {
+		$(".lightbox").fancybox({
+			padding: 0,
+			margin: 0
+		});
 	},
 
 	isMobile: function() {

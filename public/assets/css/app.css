@@ -135,6 +135,9 @@ table .l { text-align: left; }
 table .r { text-align: right; }
 table .c { text-align: center; }
 
+/* Fancybox tweaks */
+.fancybox-close { top: 2px; right: 2px; }
+
 
 
 

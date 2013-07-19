@@ -112,7 +112,7 @@ class Image {
 
 			// Get file info and try to move
 			$destination = Config::get('media.upload_path') . $dir;
-			$filename    = $file->getClientOriginalName();
+			$filename    = date('YmdHis') . '_' . $file->getClientOriginalName();
 			$path        = '/' . Config::get('media.upload_dir') . '/' . $dir . '/' . $filename;
 			$uploaded    = $file->move($destination, $filename);
 
