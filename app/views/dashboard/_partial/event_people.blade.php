@@ -3,12 +3,11 @@
 		<table class="table">
 			@if ( ! $event->matches->isEmpty())
 				<thead>
-					<th></th>
-					<th></th>
-					<th></th>
-					@foreach ($event->matches as $num => $match)
-						<th class="r res">{{ $num + 1 }}</th>
-					@endforeach
+					<th colspan="3"></th>
+					<th class="res r" scope="col" title="Dobiveni mečevi">M+</th>
+					<th class="res r" scope="col" title="Izbubljeni mečevi">M-</th>
+					<th class="res r" scope="col" title="Dobiveni setovi">S+</th>
+					<th class="res r" scope="col" title="Izbubljeni setovi">S-</th>
 				</thead>
 			@endif
 
@@ -38,17 +37,12 @@
 						<!-- ! Name -->
 						<td>{{ $person->full_name }}</td>
 
-						@foreach ($event->matches as $match)
-							<td class="r res">
-								@if ($person->id == $match->player1_id)
-									{{ $match->player1_sets_won }}
-								@elseif ($person->id == $match->player2_id)
-									{{ $match->player2_sets_won }}
-								@else
-									-
-								@endif
-							</td>
-						@endforeach
+						@if ( ! $event->matches->isEmpty())
+							<td class="res r" title="Dobiveni mečevi">{{ $event->userWonMatches($person->id) }}</td>
+							<td class="res r" title="Izbubljeni mečevi">{{ $event->userLostMatches($person->id) }}</td>
+							<td class="res r" title="Dobiveni setovi">{{ $event->userWonSets($person->id) }}</td>
+							<td class="res r" title="Izbubljeni setovi">{{ $event->userLostSets($person->id) }}</td>
+						@endif
 					</tr>
 				@endforeach
 			</tbody>

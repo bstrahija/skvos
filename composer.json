@@ -19,7 +19,9 @@
 			"app/controllers",
 			"app/models",
 			"app/database/migrations",
-			"app/database/seeds"
+			"app/database/seeds",
+			"app/services",
+			"app/facades"
 		]
 	},
 	"scripts": {

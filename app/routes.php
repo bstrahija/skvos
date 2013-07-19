@@ -20,6 +20,7 @@ Route::get('logout', array('as' => 'logout',     'uses' => 'App\Controllers\Auth
 Route::group(array('before' => 'auth'), function()
 {
 	Route::get('/',                  array('as' => 'dashboard', 'uses' => 'App\Controllers\DashboardController@getIndex'));
+	Route::resource('media',         'App\Controllers\MediaController');
 	Route::resource('events',        'App\Controllers\EventsController');
 	Route::resource('matches',       'App\Controllers\MatchesController');
 	Route::resource('users',         'App\Controllers\UsersController');

@@ -43,6 +43,15 @@ class Event extends Eloquent {
 	}
 
 	/**
+	 * Related multimedia
+	 * @return mixed
+	 */
+	public function media()
+	{
+		return $this->morphMany('App\Models\Media', 'mediable');
+	}
+
+	/**
 	 * Invitation for current user
 	 * @return mixed
 	 */
