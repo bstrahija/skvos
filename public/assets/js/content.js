@@ -17,6 +17,14 @@ App.Content = {
 
 			return false;
 		});
+
+		$(".action-logout a").click(function() {
+			if (confirm("Are you sure you want to logout?")) {
+				return true;
+			}
+
+			return false;
+		});
 	},
 
 	initSelectboxes: function() {

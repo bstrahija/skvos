@@ -4,6 +4,7 @@
 	@include('_partial.meta')
 </head>
 <body id="skvosh">
+
 @include('_partial.header')
 
 <div id="app">
@@ -14,11 +15,9 @@
 
 		</div>
 	</div>
-
-	<footer>
-		<p>&copy; <?php echo date('Y'); ?> <a href="http://creolab.hr">Skvoš &amp; Beer inc.</a></p>
-	</footer>
 </div>
+
+@include('_partial.footer')
 
 @include('_partial.assets_foot')
 
