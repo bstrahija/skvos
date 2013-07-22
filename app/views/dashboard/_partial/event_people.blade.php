@@ -78,10 +78,12 @@
 		@if (User::isAdmin() and $event->date >= Carbon::now()->format('Y-m-d'))
 			<div class="send-tools form clearfix">
 				<hr>
-				<h5>Pozivnice</h5>
+				<h5>Pozivnice / Izmjena</h5>
 
 				<a href="{{ url('invitations/resend', $event->id) }}" class="button button-circle button-royal pull-right" title="Pošalji svima"><i class="icon-envelope-alt"></i></a>
 				<a href="{{ url('invitations/send', $event->id) }}" class="button button-circle button-primary pull-left" title="Pošalji svima kojima nije poslano"><i class="icon-envelope"></i></a>
+
+				<a href="{{ route('events.edit', $event->id) }}" class="button button-circle button-caution"><i class="icon-pencil"></i></a>
 			</div>
 		@endif
 	@endif
