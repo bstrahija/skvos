@@ -25,7 +25,7 @@
 		{{ Form::hidden('resource_type', 'App\Models\Event') }}
 		{{ Form::hidden('redirect', route('events.show', $event->id)) }}
 
-		@if ( ! is_mobile())
+		@if (is_mobile())
 			<div><input type="file" name="image" accept="image/*" capture="camera"></div>
 		@else
 			<div class="fileupload fileupload-new" data-provides="fileupload">
