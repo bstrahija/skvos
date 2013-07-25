@@ -28,7 +28,7 @@ $app->redirectIfTrailingSlash();
 
 $env = $app->detectEnvironment(array(
 
-	'production' => array('skvosh.in', 'www.skvosh.in', 'creo'),
+	'production' => array('skvosh.in', 'www.skvosh.in', 'creo', 'krustr', 'creolab.hr'),
 	'local'      => array('skvosh.dev', '127.0.0.1', 'MBP', 'MBP.local', ''),
 
 ));
