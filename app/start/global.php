@@ -89,3 +89,14 @@ if (class_exists('Profiler'))
 */
 
 require app_path().'/filters.php';
+
+/*
+|--------------------------------------------------------------------------
+| Require some helpers
+|--------------------------------------------------------------------------
+|
+| These are some nice helpers we can use in our templates
+|
+*/
+
+require app_path().'/helpers/detect.php';

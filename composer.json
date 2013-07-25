@@ -11,7 +11,8 @@
 		"onigoetz/profiler": "dev-master",
 		"edvinaskrucas/notification": "1.*",
 		"iron-io/iron_core": "dev-master",
-		"iron-io/iron_mq": "dev-master"
+		"iron-io/iron_mq": "dev-master",
+		"mobiledetect/mobiledetectlib": "dev-master"
 	},
 	"autoload": {
 		"classmap": [
@@ -21,7 +22,8 @@
 			"app/database/migrations",
 			"app/database/seeds",
 			"app/services",
-			"app/facades"
+			"app/facades",
+			"app/helpers"
 		]
 	},
 	"scripts": {

@@ -153,11 +153,11 @@ table .c { text-align: center; }
 
 
 /* Footer nav */
-#fnav      { position: fixed; bottom: 0; left: 0; background: #222; height: 46px; width: 100%; text-align: center; font-size: 18px; }
+#fnav      { position: fixed; bottom: 0; left: 0; height: 46px; width: 100%; text-align: center; font-size: 18px; background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#666), color-stop(100%,#242424)); }
 #fnav nav  { margin: 0 auto; height: 100%; max-width: 480px; }
 #fnav ul   { margin: 0; padding: 0; list-style-type: none; height: 100%; }
 #fnav li   { margin: 0; padding: 0; list-style-type: none; float: left; height: 100%; width: 20%; }
-#fnav li a { display: block; height: 100%; line-height: 46px; color: #f6f6f6; text-shadow: 0 1px 0 #000; border-left: 1px solid rgba(0,0,0,1); border-left: 1px solid rgba(255,255,255,.1); }
+#fnav li a { display: block; height: 100%; line-height: 46px; color: #f6f6f6; text-shadow: 0 1px 0 #000; border-left: 1px solid #1f1f1f; }
 #fnav li a:hover { text-decoration: none; }
 
 	/* Specific icon sizes */

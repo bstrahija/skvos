@@ -25,17 +25,21 @@
 		{{ Form::hidden('resource_type', 'App\Models\Event') }}
 		{{ Form::hidden('redirect', route('events.show', $event->id)) }}
 
-		<div class="fileupload fileupload-new" data-provides="fileupload">
-			<div class="fileupload-preview thumbnail" style="width: 200px; height: 150px; background: #fff;"></div>
-			<div>
-				<span class="button button-rounded btn-file">
-					<span class="fileupload-new">Select image</span>
-					<span class="fileupload-exists">Change</span>
-					<input type="file" name="image" accept="image/*" capture="camera">
-				</span>
-				<a href="#" class="button button-caution button-rounded fileupload-exists" data-dismiss="fileupload">Remove</a>
+		@if ( ! is_mobile())
+			<div><input type="file" name="image" accept="image/*" capture="camera"></div>
+		@else
+			<div class="fileupload fileupload-new" data-provides="fileupload">
+				<div class="fileupload-preview thumbnail" style="width: 200px; height: 150px; background: #fff;"></div>
+				<div>
+					<span class="button button-rounded btn-file">
+						<span class="fileupload-new">Select image</span>
+						<span class="fileupload-exists">Change</span>
+						<input type="file" name="image" accept="image/*" capture="camera">
+					</span>
+					<a href="#" class="button button-caution button-rounded fileupload-exists" data-dismiss="fileupload">Remove</a>
+				</div>
 			</div>
-		</div>
+		@endif
 
 		<button type="submit" class="button button-action button-rounded">Upload</button>
 	{{ Form::close() }}
