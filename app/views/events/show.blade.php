@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="matches">
-	<?php $now = Carbon::now()->format('Y-m-d H:i:s'); ?>
+	<?php $now = Carbon::now(); ?>
 
 	@include('_partial.notifications')
 
@@ -14,8 +14,12 @@
 		<hr>
 
 	@else
-		@if ($now >= $event->from and $now <= $event->to)
-			<h3>Termin je u tijeku</h3>
+		@if ($now >= $event->fromDate and $now->format('Y-m-d') <= $event->toDate->addDay()->format('Y-m-d'))
+			@if ($now >= $event->fromDate and $now <= $event->toDate)
+				<h3>Termin je u tijeku</h3>
+			@else
+				<h3>Termin je održan jučer</h3>
+			@endif
 			<hr>
 
 			@include('events._partial.add_match')

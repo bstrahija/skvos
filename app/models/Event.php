@@ -110,6 +110,16 @@ class Event extends Eloquent {
 		return date('d.m. @ H:i', strtotime($this->attributes['from'])) . ' - ' . date('H:i', strtotime($this->attributes['to']));
 	}
 
+	public function getFromDateAttribute()
+	{
+		return Carbon::createFromFormat('Y-m-d H:i:s', $this->attributes['from']);
+	}
+
+	public function getToDateAttribute()
+	{
+		return Carbon::createFromFormat('Y-m-d H:i:s', $this->attributes['to']);
+	}
+
 	/**
 	 * Check if user is invited to event
 	 * @param  int     $userId
