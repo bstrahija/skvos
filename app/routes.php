@@ -20,10 +20,17 @@ Route::get('logout', array('as' => 'logout',     'uses' => 'App\Controllers\Auth
 Route::group(array('before' => 'auth'), function()
 {
 	Route::get('/',                  array('as' => 'dashboard', 'uses' => 'App\Controllers\DashboardController@getIndex'));
+
+	// ! --> Resources
 	Route::resource('media',         'App\Controllers\MediaController');
 	Route::resource('events',        'App\Controllers\EventsController');
 	Route::resource('matches',       'App\Controllers\MatchesController');
 	Route::resource('users',         'App\Controllers\UsersController');
+
+	// ! --> Stats
+	Route::get('stats', array('as' => 'stats', 'uses' => 'App\Controllers\StatsController@getIndex'));
+
+	// ! --> Settings
 	Route::get('settings',           array('as' => 'settings',  'uses' => 'App\Controllers\SettingsController@getIndex', 'before' => 'admin'));
 });
 
