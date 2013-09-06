@@ -39,3 +39,9 @@ Route::controller('invitations', 'App\Controllers\InvitationsController');
 
 // Event confirmations (via hash)
 Route::get('invitations/confirm/{hash}', array('as' => 'invitations.confirm', 'uses' => 'App\Controllers\InvitationsController@getConfirm'));
+
+// ! Custom 404 view
+App::missing(function($exception)
+{
+	return Response::view('404', array(), 404);
+});

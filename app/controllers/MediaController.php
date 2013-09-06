@@ -1,13 +1,13 @@
 <?php namespace App\Controllers;
 
 use App\Models\Media, App\Models\Event;
-use Auth, DB, Image, Input, Notification, Redirect, Request, Str, Validator, View;
+use Auth, DB, Image, Input, Notification, Redirect, Response, Request, Str, Validator, View;
 
 class MediaController extends BaseController {
 
 	public function index()
 	{
-		echo '<pre>'; print_r(var_dump(Media::all())); echo '</pre>';
+		return Response::json(array());
 	}
 
 	public function store()
