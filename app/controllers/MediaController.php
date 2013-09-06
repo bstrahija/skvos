@@ -5,13 +5,11 @@ use Auth, DB, Image, Input, Notification, Redirect, Response, Request, Str, Vali
 
 class MediaController extends BaseController {
 
-	public function index()
-	{
-		return Response::json(array());
-	}
-
 	public function store()
 	{
+		$validator = Validator::make(Input::all(), array('image' => 'required'));
+		if ($validator->fails()) return Redirect::back();
+
 		$resource      = Input::get('resource');
 		$resource_id   = Input::get('resource_id');
 		$resource_path = $resource . '/' . $resource_id;
