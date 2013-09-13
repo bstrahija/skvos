@@ -8,7 +8,11 @@
 					<th scope="col"><i class="icon-user"></i></th>
 
 					@foreach ($matches as $num => $match)
-						<th scope="col">{{ $num+1 }}.</th>
+						@if (User::isAdmin())
+							<th scope="col"><a href="{{ route('matches.edit', $match->id) }}">{{ $num+1 }}</a>.</th>
+						@else
+							<th scope="col">{{ $num+1 }}.</th>
+						@endif
 					@endforeach
 				</tr>
 			</thead>
