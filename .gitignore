@@ -3,6 +3,7 @@
 /app/database/seeds/production/*
 /bootstrap/compiled.php
 /vendor
+/app/storage/*
 composer.phar
 composer.lock
 .DS_Store
