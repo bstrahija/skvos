@@ -131,6 +131,11 @@ footer p a:hover          { text-decoration: none; color: #eee; }
 .event-match-add .score         {}
 .event-match-add .player select { width: 100%; }
 .event-match-add .score  select { width: 100%; }
+tr.match-result .player { white-space: nowrap; font-size: 12px; }
+tr.match-result .player strong        { opacity: .5; text-decoration: line-through; font-weight: normal; }
+tr.match-result .player strong.winner { opacity: 1; text-decoration: none; font-weight: bold; }
+tr.match-result .result               { white-space: nowrap; font-size: 12px; }
+tr.match-result .result select        { width: 40px; height: 22px; margin: 0; font-size: 12px; }
 
 
 /* Tables */

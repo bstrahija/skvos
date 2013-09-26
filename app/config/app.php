@@ -1,5 +1,7 @@
 <?php
 
+setlocale(LC_TIME, 'hr_HR.UTF8');
+
 return array(
 
 	/*
@@ -52,7 +54,7 @@ return array(
 	|
 	*/
 
-	'locale' => 'en',
+	'locale' => 'hr',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -118,6 +120,7 @@ return array(
 		'Juy\Profiler\Providers\ProfilerServiceProvider',
 		// 'Onigoetz\Profiler\ProfilerServiceProvider',
 		'Krucas\Notification\NotificationServiceProvider',
+		'Clockwork\Support\Laravel\ClockworkServiceProvider',
 
 	),
 
@@ -188,6 +191,7 @@ return array(
 		'Carbon'          => 'Carbon\Carbon',
 		'Image'           => 'App\Facades\ImageFacade',
 		'Notification'    => 'Krucas\Notification\Facades\Notification',
+		'Stats'           => 'App\Services\Stats',
 		'User'            => 'App\Models\User',
 
 	),

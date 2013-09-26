@@ -3,8 +3,12 @@
 @section('content')
 
 <div class="form invitations invitations-confirm">
+	<?php $date = strtotime($invitation->event->date); ?>
+	<?php $time = date('H:i', strtotime($invitation->event->from)); ?>
+
 	<h3>Potvrda dolaska</h3>
 	<h2>Pozivnica za: {{ $invitation->event->title }}</h2>
+	<h5>Na dan: <em>{{ strftime('%A', $date) }}, {{ date('d.m.', $date) }}</em> u <em>{{ $time }}</em></h5>
 
 	@include('_partial.notifications')
 

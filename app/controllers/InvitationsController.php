@@ -68,6 +68,10 @@ class InvitationsController extends BaseController {
 				$data = array(
 					'confirmation_link' => URL::route('invitations.confirm', $invitation->hash),
 					'title'             => $event->title,
+					'when'              => date('d.m.Y.', strtotime($event->date)),
+					'from'              => date('H:i', strtotime($event->from)),
+					'to'                => date('H:i', strtotime($event->to)),
+					'day'               => date('l', strtotime($event->date)),
 				);
 
 				if ( ! $whitelist or in_array($invitee->email, $whitelist))

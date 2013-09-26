@@ -1,19 +1,34 @@
 <?php namespace App\Controllers;
 
 use View;
+use App\Services\Stats;
 
 class StatsController extends BaseController {
 
+	/**
+	 * Stats service
+	 * @var Stats
+	 */
+	protected $stats;
+
+	/**
+	 * Init
+	 * @param Stats $stats
+	 */
+	public function __construct(Stats $stats)
+	{
+		$this->stats = $stats;
+	}
+
+	/**
+	 * Stats overview
+	 * @return View
+	 */
 	public function getIndex()
 	{
-		$data = array(
-			'matches_won' => 0,
-			'matches_lost' => 0,
-			'sets_won' => 0,
-			'sets_lost' => 0,
-		);
+		$leaderboard = $this->stats->matchesLeaderboard();
 
-		return View::make('stats.index', $data);
+		return View::make('stats.index', array('leaderboard' => $leaderboard));
 	}
 
 }
