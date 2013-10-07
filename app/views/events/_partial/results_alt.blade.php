@@ -20,9 +20,9 @@
 						</td>
 
 						<td class="c result">
-							{{ Form::selectRange('player1_sets_won', 1, 20, $match->player1_sets_won) }}
+							{{ Form::selectRange('player1_sets_won', 0, 20, $match->player1_sets_won) }}
 							:
-							{{ Form::selectRange('player2_sets_won', 1, 20, $match->player2_sets_won) }}
+							{{ Form::selectRange('player2_sets_won', 0, 20, $match->player2_sets_won) }}
 						</td>
 
 						<td class="slim r"><i class="icon-save"></i></td>

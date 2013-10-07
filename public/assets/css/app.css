@@ -158,7 +158,7 @@ table .c { text-align: center; }
 
 
 /* Footer nav */
-#fnav      { position: fixed; bottom: 0; left: 0; height: 46px; width: 100%; text-align: center; font-size: 18px; background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#666), color-stop(100%,#242424)); }
+#fnav      { position: fixed; bottom: 0; left: 0; height: 46px; width: 100%; text-align: center; font-size: 18px; background: #222; }
 #fnav nav  { margin: 0 auto; height: 100%; max-width: 480px; }
 #fnav ul   { margin: 0; padding: 0; list-style-type: none; height: 100%; }
 #fnav li   { margin: 0; padding: 0; list-style-type: none; float: left; height: 100%; width: 20%; }
@@ -166,6 +166,8 @@ table .c { text-align: center; }
 #fnav li a:hover { text-decoration: none; }
 
 	/* Specific icon sizes */
-	#fnav .icon-home      { font-size: 22px; }
-	#fnav .icon-dashboard { font-size: 17px; }
-	#fnav .icon-calendar  { font-size: 15px; position: relative; top: -1px; }
+	#fnav .icon-dashboard { font-size: 30px; position: relative; top: 5px; }
+	#fnav .icon-calendar  { font-size: 26px; position: relative; top: 3px; }
+	#fnav .icon-home      { font-size: 35px; position: relative; top: 3px; }
+	#fnav .icon-lock      { font-size: 29px; position: relative; top: 4px; }
+	#fnav .icon-cog       { font-size: 29px; position: relative; top: 4px; }

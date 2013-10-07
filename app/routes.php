@@ -28,10 +28,11 @@ Route::group(array('before' => 'auth'), function()
 	Route::resource('users',         'App\Controllers\UsersController');
 
 	// ! --> Stats
-	Route::get('stats', array('as' => 'stats', 'uses' => 'App\Controllers\StatsController@getIndex'));
+	Route::get('stats',         array('as' => 'stats',         'uses' => 'App\Controllers\StatsController@getIndex'));
+	Route::any('stats/players', array('as' => 'stats.players', 'uses' => 'App\Controllers\StatsController@getPlayers'));
 
 	// ! --> Settings
-	Route::get('settings',           array('as' => 'settings',  'uses' => 'App\Controllers\SettingsController@getIndex', 'before' => 'admin'));
+	Route::get('settings', array('as' => 'settings',  'uses' => 'App\Controllers\SettingsController@getIndex', 'before' => 'admin'));
 });
 
 // Outside of the main group because of confirmations

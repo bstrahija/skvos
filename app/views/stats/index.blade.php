@@ -27,17 +27,21 @@
 					<td>{{ (int) $user->matches_played }}</td>
 					<td style="color: #0a0;"><strong>{{ (int) $user->matches_won }}</strong></td>
 					<td style="color: #c00;">{{ (int) $user->matches_played - $user->matches_won }}</td>
-					<td>{{ round($user->matches_won / $user->matches_played, 3) * 100 }}%</td>
+					<td>{{ ($user->matches_played) ? round($user->matches_won / $user->matches_played, 3) * 100 : 0 }}%</td>
 
 					<td>{{ (int) $user->sets_played }}</td>
 					<td style="color: #0a0;">{{ (int) $user->sets_won }}</td>
 					<td style="color: #c00;">{{ (int) $user->sets_played - $user->sets_won }}</td>
-					<td>{{ round($user->sets_won / $user->sets_played, 3) * 100 }}%</td>
+					<td>{{ ($user->sets_played) ? round($user->sets_won / $user->sets_played, 3) * 100 : 0 }}%</td>
 				</tr>
 			@endforeach
 		</tbody>
 	</table>
 
-	<hr>
+	<hr><br>
+
+	<p style="text-align: center;"><a href="{{ route('stats.players') }}" class="button button-success">Odnos između igrača</a></p>
+
+	<br><hr>
 
 @stop
