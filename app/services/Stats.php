@@ -4,6 +4,12 @@ use DB, User;
 
 class Stats {
 
+	/**
+	 * Stats per user
+	 * @param  string $orderBy
+	 * @param  string $dir
+	 * @return array
+	 */
 	public function userStats($orderBy = 'id', $dir = 'asc')
 	{
 		$users = DB::table('users')

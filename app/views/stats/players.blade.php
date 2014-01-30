@@ -49,6 +49,11 @@
 					</tr>
 				</thead>
 				<tbody>
+					<?php
+						$mp = 0; $mw = 0; $ml = 0; $me = 0;
+						$sp = 0; $sw = 0; $sl = 0; $se = 0;
+					?>
+
 					@foreach ($stats as $stat)
 						<tr>
 							<td><i style="color: #aaa; font-size: 10px;">vs</i> {{ $stat['opponent']->first_name }}</td>
@@ -62,7 +67,31 @@
 							<td style="color: #c00;">{{ (int) $stat['stats']->sets_played - $stat['stats']->sets_won }}</td>
 							<td>{{ ($stat['stats']->sets_played) ? round($stat['stats']->sets_won / $stat['stats']->sets_played, 3) * 100 : 0 }}%</td>
 						</tr>
+
+						<?php
+							$mp += $stat['stats']->matches_played;
+							$mw += $stat['stats']->matches_won;
+							$ml += ((int) $stat['stats']->matches_played - $stat['stats']->matches_won);
+
+							$sp += $stat['stats']->sets_played;
+							$sw += $stat['stats']->sets_won;
+							$sl += ((int) $stat['stats']->sets_played - $stat['stats']->sets_won);
+						?>
+
 					@endforeach
+
+					<tr>
+						<th>Total</th>
+						<th>{{ $mp }}</th>
+						<th>{{ $mw }}</th>
+						<th>{{ $ml }}</th>
+						<th>{{ ($mp) ? round($mw / $mp, 3) * 100 : 0 }}%</th>
+
+						<th>{{ $sp }}</th>
+						<th>{{ $sw }}</th>
+						<th>{{ $sl }}</th>
+						<th>{{ ($sp) ? round($sw / $sp, 3) * 100 : 0 }}%</th>
+					</tr>
 				</tbody>
 			</table>
 

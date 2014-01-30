@@ -20,6 +20,9 @@ App = {
 		// App.Layout.init();
 		// App.Events.init();
 
+		// iOS tweaks
+		App.iosTweaks();
+
 		// Submit buttons
 		$("form a.submit").click(function() {
 			$(this).closest("form").submit();
@@ -98,6 +101,62 @@ App = {
 			return "";
 		} else {
 			return decodeURIComponent(results[1].replace(/\+/g, " "));
+		}
+	},
+
+	/**
+	 * Some iOS tweaks
+	 * @return {void}
+	 */
+	iosTweaks: function() {
+		App.preventSafariLinks();
+
+		// Detect iOS
+		var iOS = ( navigator.userAgent.match(/(iPad|iPhone|iPod)/g) ? true : false );
+
+		// Detect fullscreen app
+		if (window.navigator.standalone) {
+			$("body").addClass("fullscreen");
+		}
+
+		// Add touchstart event for faster touch response
+		document.addEventListener("touchstart", function(){}, true);
+
+		// Remove delay on touch
+		FastClick.attach(document.body);
+
+		// Fix some focus issues with fixed elements on iOS
+		if (iOS) {
+			$(document).on('focus', 'input, textarea, select', function() {
+				$("header, footer").hide();
+			});
+			$(document).on('blur', 'input, textarea, select', function() {
+				$("header, footer").fadeIn(250);
+			});
+		}
+	},
+
+	/**
+	 * Prevent opening links in Safari when on home screen
+	 * @return {void}
+	 */
+	preventSafariLinks: function() {
+		if (("standalone" in window.navigator) && window.navigator.standalone) {
+			var noddy, remotes = false;
+			document.addEventListener('click', function(event) {
+				noddy = event.target;
+
+				while(noddy.nodeName !== "A" && noddy.nodeName !== "HTML") {
+					noddy = noddy.parentNode;
+				}
+
+				if('href' in noddy && noddy.href.indexOf('http') !== -1 && (noddy.href.indexOf(document.location.host) !== -1 || remotes))
+				{
+					event.preventDefault();
+					document.location.href = noddy.href;
+				}
+
+			},false);
 		}
 	}
 
