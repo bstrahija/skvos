@@ -24,7 +24,7 @@
 			@foreach ($leaderboard as $user)
 				@if ($user->matches_played > 5)
 					<tr>
-						<td class="l">{{ $user->nickname }}</td>
+						<td class="l"><a href="{{ route('showcase', $user->id) }}">{{ $user->nickname }}</a></td>
 
 						<td class="r">
 							<strong>{{ ($user->matches_played) ? number_format(($user->matches_won / $user->matches_played) * 100, 2) : 0 }}%</strong><br>

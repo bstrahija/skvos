@@ -52,15 +52,13 @@ Route::group(array('before' => 'auth'), function()
 });
 
 // ! Public routes
-// These routes are meant for sharing on various social sites
-// Or just to take a quick look at the stats without the need to login
-// Also to confirm an event attendance
-Route::get('event-stats/{hash}',           array('as' => 'events.public.stats',      'uses' => 'App\Controllers\EventsController@publicStats'));
-Route::get('event-stats/{hash}',           array('as' => 'events.public.stats',      'uses' => 'App\Controllers\EventsController@publicStats'));
-Route::get('users/{nickname}/stats',       array('as' => 'users.public.stats',       'uses' => 'App\Controllers\UsersController@publicStats'));
-Route::get('users/{nickname}/event-stats', array('as' => 'users.public.event_stats', 'uses' => 'App\Controllers\UsersController@publicEventStats'));
-Route::get('invitations/confirm/{hash}',   array('as' => 'invitations.confirm',      'uses' => 'App\Controllers\InvitationsController@preconfirm'));
-Route::post('invitations/confirm/{hash}',  array('as' => 'invitations.confirm.post', 'uses' => 'App\Controllers\InvitationsController@confirm'));
+Route::get('showcase/{id}',                ['as' => 'showcase',                 'uses' => 'App\Controllers\DashboardController@showcase']);
+Route::get('event-stats/{hash}',           ['as' => 'events.public.stats',      'uses' => 'App\Controllers\EventsController@publicStats']);
+Route::get('event-stats/{hash}',           ['as' => 'events.public.stats',      'uses' => 'App\Controllers\EventsController@publicStats']);
+Route::get('users/{nickname}/stats',       ['as' => 'users.public.stats',       'uses' => 'App\Controllers\UsersController@publicStats']);
+Route::get('users/{nickname}/event-stats', ['as' => 'users.public.event_stats', 'uses' => 'App\Controllers\UsersController@publicEventStats']);
+Route::get('invitations/confirm/{hash}',   ['as' => 'invitations.confirm',      'uses' => 'App\Controllers\InvitationsController@preconfirm']);
+Route::post('invitations/confirm/{hash}',  ['as' => 'invitations.confirm.post', 'uses' => 'App\Controllers\InvitationsController@confirm']);
 
 
 

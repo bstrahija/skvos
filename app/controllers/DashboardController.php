@@ -1,9 +1,9 @@
 <?php namespace App\Controllers;
 
-use Auth, View;
+use Auth, Stats, View;
 use App\Repositories\EventRepository;
 use App\Repositories\InvitationRepository;
-use App\Services\Stats;
+use App\Repositories\UserRepository;
 
 class DashboardController extends BaseController {
 
@@ -14,22 +14,28 @@ class DashboardController extends BaseController {
 	protected $events;
 
 	/**
-	 * Stats service
-	 * @var Stats
+	 * Invitation repository
+	 * @var InvitationRepository
 	 */
-	protected $stats;
+	protected $invitations;
+
+	/**
+	 * User repository
+	 * @var UserRepository
+	 */
+	protected $users;
 
 	/**
 	 * Init rependencies
 	 * @param EventRepository      $events
 	 * @param InvitationRepository $invitations
-	 * @param Stats                $stats
+	 * @param UserRepository       $users
 	 */
-	public function __construct(EventRepository $events, InvitationRepository $invitations, Stats $stats)
+	public function __construct(EventRepository $events, InvitationRepository $invitations, UserRepository $users)
 	{
 		$this->events      = $events;
 		$this->invitations = $invitations;
-		$this->stats       = $stats;
+		$this->users       = $users;
 	}
 
 	/**
@@ -41,13 +47,27 @@ class DashboardController extends BaseController {
 		// Get next event that I'm invited to
 		$event = $this->events->nextForUser(Auth::user()->id);
 		$last  = $this->events->lastForUser(Auth::user()->id);
-		$stats = $this->stats->forUser(Auth::user()->id);
+		$stats = Stats::forUser(Auth::user()->id);
 
 		// Also get invitation for event
 		if ($event) $invitation = $this->invitations->forEventAndUser($event->id, Auth::user()->id);
 		else        $invitation = null;
 
 		return View::make('dashboard.index')->withEvent($event)->withStats($stats)->withInvitation($invitation)->withLast($last);
+	}
+
+	/**
+	 * User showcase
+	 * @param  int $id
+	 * @return View
+	 */
+	public function showcase($id)
+	{
+		// Get the user stats
+		$stats = Stats::forUser($id);
+		$user  = $this->users->find($id);
+
+		return View::make('dashboard.showcase')->withStats($stats)->withUser($user);
 	}
 
 }

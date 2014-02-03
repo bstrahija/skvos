@@ -1,11 +1,16 @@
 @extends('_layout.master')
 
-@section('page_title') Pregled @stop
+@section('page_title') Pregled statistike za: {{ $user->full_name }} @stop
 
 @section('main')
 
-<div class="dashboard">
-	@include('dashboard.event')
+<div class="page match edit-match">
+
+	<h2 class="pg">
+		<i class="fi-trophy"></i> {{ $user->full_name }}
+	</h2>
+
+	<hr>
 
 	<div class="row stat-row">
 		<div class="stat stat-mvp small-6 columns">
@@ -44,13 +49,13 @@
 	</div>
 
 	<div class="info">
-		@if (Auth::user()->photo)
-			<div class="photo" style="background-image: url({{ Image::thumb('/' . Auth::user()->photo, 100) }});"></div>
+		@if ($user->photo)
+			<div class="photo" style="background-image: url({{ Image::thumb('/' . $user->photo, 100) }});"></div>
 		@else
 			<div class="photo" style="background-image: url({{ Image::thumb('/storage/avatars/avatar_dummy.png', 100) }});"></div>
 		@endif
 
-		<h3>{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</h3>
+		<h3>{{ $user->first_name }} {{ $user->last_name }}</h3>
 	</div>
 
 	<div class="row stat-row">
@@ -92,8 +97,8 @@
 	<hr>
 
 	<div>
-		<a href="https://twitter.com/share" class="twitter-share-button" data-url="{{ route('showcase', Auth::user()->id) }}" data-text="Moji squash rezultati #squash #skvoshin" data-via="skvoshin" data-lang="hr">Tweet</a>
-		<div class="fb-like" data-href="{{ route('showcase', Auth::user()->id) }}" data-layout="standard" data-action="like" data-show-faces="false" data-share="false" data-colorscheme="dark"></div>
+		<a href="https://twitter.com/share" class="twitter-share-button" data-text="{{ $user->full_name }}: squash rezultati #squash #skvoshin" data-via="skvoshin" data-lang="hr">Tweet</a>
+		<div class="fb-like" data-layout="standard" data-action="like" data-show-faces="false" data-share="false" data-colorscheme="dark"></div>
 	</div>
 
 </div>

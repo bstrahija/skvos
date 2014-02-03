@@ -18,6 +18,23 @@
 
 <meta name="msapplication-TileColor" content="#222222">
 
+<meta name="title" content="Skvosh.in | @yield('page_title', 'Home')">
+<meta name="keywords" content="skvosh, squash">
+<meta name="description" content="Weekly squash meetups">
+
+<meta name="robots" content="all">
+<meta name="copyright" content="Coffeenjuice">
+
+<meta property="fb:app_id" content="596696940410826">
+<meta property="fb:admins" content="834197248">
+<meta property="og:site_name" content="Skvosh.in |  @yield('page_title', 'Home')">
+<meta property="og:type" content="website">
+
+<meta property="og:title" content="Skvosh.in |  @yield('page_title', 'Home')">
+<meta property="og:url" content="{{ URL::current() }}">
+<meta property="og:image" content="{{ asset('assets/img/fb.jpg') }}">
+<meta property="og:description" content="Weekly squash meetups">
+
 <script src="<?php echo asset('assets/vendor/modernizr.js'); ?>"></script>
 <script src="<?php echo asset('assets/vendor/fastclick.js'); ?>"></script>
 
