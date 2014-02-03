@@ -50,21 +50,7 @@
 
 @elseif ($event->is_over)
 
-	<h3 class="pg with-photo text-center">
-		@if ($event->mvp)
-			@if ($event->mvp->photo)
-				<div class="photo" style="background-image: url({{ Image::thumb('/' . $event->mvp->photo, 100) }});"></div>
-			@else
-				<div class="photo" style="background-image: url({{ Image::thumb('/storage/avatars/avatar_dummy.png', 100) }});"></div>
-			@endif<br>
-
-			MVP :
-			<strong class="mvp">{{ icn('trophy') }} {{ $event->mvp->full_name }}</strong>
-		@else
-			Temin je završio.
-		@endif
-	</h3><hr>
-
+	@include('events.event_mvp')
 	<!-- <p class="warning">{{ icn('alert') }} Ne može se unijeti meč jer temin nije počeo ili je već završio.</p> -->
 
 @else

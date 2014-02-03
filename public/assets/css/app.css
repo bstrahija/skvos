@@ -7,45 +7,47 @@ body.fullscreen { padding-top: 16px; }
 
 /* Global */
 #app h1, #app h2, #app h3, h4, h5, h6 { font-family: 'Roboto', Helvetica sans-serif; font-weight: 100 !important; }
-#canvas              { height: 100%; }
-#canvas > .container { height: 100%; }
-#main                { max-width: 800px; margin: 0 auto; padding: 50px 0 30px 0; display: none; }
-#app h2.pg           { color: rgba(255,255,255,.8); font-size: 26px; padding: 10px 15px 0 15px; }
-#app h2.pg > i       { color: rgba(220,255,220,1); margin-right: 5px; }
-#app h2.pg em        { font-size: 16px; opacity: .8; font-style: normal; font-weight: 100 !important; position: relative; top: 11px; }
-#app h2.pg small     { color: rgba(255,255,255,.7); }
-#app h2.pg .button   { position: relative; margin: 0; position: relative; top: -9px; }
-#app h3.pg           { color: rgba(255,255,255,.8); font-size: 18px; padding: 0px 15px 0 15px; margin: -5px 0; }
-#app h4.pg           { color: rgba(255,255,255,.8); font-size: 15px; padding: 0px 15px 0 15px; margin: -5px 0; }
-#app h5.pg           { color: rgba(255,255,255,.8); font-size: 13px; padding: 0px 15px 0 15px; margin: -5px 0; }
-#app h6.pg           { color: rgba(255,255,255,.8); font-size: 11px; padding: 0px 15px 0 15px; margin: -5px 0; }
-#app div.pg          { padding: 0 15px; }
-#app div.pg p        { font-size: 13px; color: rgba(255,255,255,.8); font-weight: 100; }
-#app hr              { opacity: .1; }
-#app table           { width: 100%; border: 0; background: transparent; }
-#app table td        { color: rgba(255,255,255,.9); padding-left: 15px; }
-#app table th        { color: rgba(255,255,255,.9); padding-left: 15px; line-height: 140%; }
-#app table thead     { background: transparent; }
-#app table thead th  { text-align: center; }
-#app table td a      { color: rgba(255,255,255,.9); }
-#app table td.slim   { width: 1%; }
+#canvas               { height: 100%; }
+#canvas > .container  { height: 100%; }
+#main                 { max-width: 800px; margin: 0 auto; padding: 50px 0 30px 0; display: none; }
+#app h2.pg            { color: rgba(255,255,255,.8); font-size: 26px; padding: 10px 15px 0 15px; }
+#app h2.pg > i        { color: rgba(220,255,220,1); margin-right: 5px; }
+#app h2.pg em         { font-size: 16px; opacity: .8; font-style: normal; font-weight: 100 !important; position: relative; top: 11px; }
+#app h2.pg small      { color: rgba(255,255,255,.7); }
+#app h2.pg .button    { position: relative; margin: 0; position: relative; top: -9px; }
+#app h3.pg            { color: rgba(255,255,255,.8); font-size: 18px; padding: 0px 15px 0 15px; margin: -5px 0; }
+#app h3.pg small      { color: rgba(255,255,255,.8); font-size: 12px; }
+#app h3.pg small span { margin: 0 10px; }
+#app h4.pg            { color: rgba(255,255,255,.8); font-size: 15px; padding: 0px 15px 0 15px; margin: -5px 0; }
+#app h5.pg            { color: rgba(255,255,255,.8); font-size: 13px; padding: 0px 15px 0 15px; margin: -5px 0; }
+#app h6.pg            { color: rgba(255,255,255,.8); font-size: 11px; padding: 0px 15px 0 15px; margin: -5px 0; }
+#app div.pg           { padding: 0 15px; }
+#app div.pg p         { font-size: 13px; color: rgba(255,255,255,.8); font-weight: 100; }
+#app hr               { opacity: .1; }
+#app table            { width: 100%; border: 0; background: transparent; }
+#app table td         { color: rgba(255,255,255,.9); padding-left: 15px; }
+#app table th         { color: rgba(255,255,255,.9); padding-left: 15px; line-height: 140%; }
+#app table thead      { background: transparent; }
+#app table thead th   { text-align: center; }
+#app table td a       { color: rgba(255,255,255,.9); }
+#app table td.slim    { width: 1%; }
 #app table td.check input { margin: 0; padding: 0; }
-#app table td.fade   { color: rgba(255,255,255,.6); }
-#app table td.fade a { color: rgba(255,255,255,.6); }
-#app table td.s      { font-size: 12px; }
-#app table td.r      { text-align: right; }
-#app table td.l      { text-align: left; }
-#app table th.r      { text-align: right; }
-#app table th.l      { text-align: left; }
-#app table th        { color: #fff; }
-#app table label     { margin: 0; padding: 0; font-weight: normal; }
+#app table td.fade    { color: rgba(255,255,255,.6); }
+#app table td.fade a  { color: rgba(255,255,255,.6); }
+#app table td.s       { font-size: 12px; }
+#app table td.r       { text-align: right; }
+#app table td.l       { text-align: left; }
+#app table th.r       { text-align: right; }
+#app table th.l       { text-align: left; }
+#app table th         { color: #fff; }
+#app table label      { margin: 0; padding: 0; font-weight: normal; }
 #app table tr.even, #app table tr.alt, #app table tr:nth-of-type(even) { background: rgba(255,255,255,.05); }
-#app .not-found      { margin: -20px 0 60px 0; padding: 20px; background: rgba(0,0,0,.2); color: rgba(255,105,105,.8); font-family: 'Roboto', sans-serif; font-weight: 100 !important; border-bottom: 1px solid rgba(255,255,255,.1); }
-#app .warning        { margin: -20px 0 60px 0; padding: 20px; background: rgba(0,0,0,.2); color: rgba(255,155,0,.8); font-family: 'Roboto', sans-serif; font-weight: 100 !important; border-bottom: 1px solid rgba(255,255,255,.1); }
-strong.mvp           { color: rgba(100,255,100,.8); }
-#app .button-actions { text-align: center; }
+#app .not-found       { margin: -20px 0 60px 0; padding: 20px; background: rgba(0,0,0,.2); color: rgba(255,105,105,.8); font-family: 'Roboto', sans-serif; font-weight: 100 !important; border-bottom: 1px solid rgba(255,255,255,.1); }
+#app .warning         { margin: -20px 0 60px 0; padding: 20px; background: rgba(0,0,0,.2); color: rgba(255,155,0,.8); font-family: 'Roboto', sans-serif; font-weight: 100 !important; border-bottom: 1px solid rgba(255,255,255,.1); }
+strong.mvp            { color: rgba(100,255,100,.8); }
+#app .button-actions  { text-align: center; }
 #app .button-actions .button { margin-bottom: 0; }
-#app h3 .photo       { width: 60px; height: 60px; border-radius: 30px; background: rgba(255,255,255,.2) no-repeat center center; -webkit-background-size: cover; background-size: cover; border: 3px solid #1a1a1a; display: inline-block; }
+#app h3 .photo        { width: 60px; height: 60px; border-radius: 30px; background: rgba(255,255,255,.2) no-repeat center center; -webkit-background-size: cover; background-size: cover; border: 3px solid #1a1a1a; display: inline-block; }
 
 
 /* Forms */

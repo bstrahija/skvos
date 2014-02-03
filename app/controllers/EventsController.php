@@ -1,10 +1,9 @@
 <?php namespace App\Controllers;
 
-use Auth, Input, Redirect, Vault, View;
+use Auth, Input, Redirect, Stats, Vault, View;
 use App\Repositories\EventRepository;
 use App\Repositories\MatchRepository;
 use App\Repositories\UserRepository;
-use App\Services\Stats;
 
 class EventsController extends BaseController {
 
@@ -27,24 +26,16 @@ class EventsController extends BaseController {
 	protected $users;
 
 	/**
-	 * Stats service
-	 * @var Stats
-	 */
-	protected $stats;
-
-	/**
 	 * Init rependencies
 	 * @param EventRepository $events
 	 * @param MatchRepository $matches
 	 * @param UserRepository  $users
-	 * @param Stats           $stats
 	 */
-	public function __construct(EventRepository $events, MatchRepository $matches, UserRepository $users, Stats $stats)
+	public function __construct(EventRepository $events, MatchRepository $matches, UserRepository $users)
 	{
 		$this->events  = $events;
 		$this->matches = $matches;
 		$this->users   = $users;
-		$this->stats   = $stats;
 
 		// Filters
 		$this->beforeFilter('admin', ['only' => ['create', 'update', 'store', 'edit', 'mvps', 'destroy']]);
@@ -92,7 +83,7 @@ class EventsController extends BaseController {
 		$players     = $event->attendees;
 		$invitees    = $event->invitees;
 		$matches     = $this->matches->forEvent($event->id);
-		$leaderboard = $this->stats->eventLeaderboard($event->id);
+		$leaderboard = Stats::eventLeaderboard($event->id);
 		$event_type  = $event->attendees->count() == 2 ? 'double'    : null;
 		$event_type  = $event->attendees->count() == 3 ? 'tripple'   : $event_type;
 		$event_type  = $event->attendees->count() == 4 ? 'quadruple' : $event_type;
