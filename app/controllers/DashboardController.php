@@ -45,15 +45,16 @@ class DashboardController extends BaseController {
 	public function index()
 	{
 		// Get next event that I'm invited to
-		$event = $this->events->nextForUser(Auth::user()->id);
-		$last  = $this->events->lastForUser(Auth::user()->id);
-		$stats = Stats::forUser(Auth::user()->id);
+		$user  = $this->users->find(Auth::user()->id);
+		$event = $this->events->nextForUser($user->id);
+		$last  = $this->events->lastForUser($user->id);
+		$stats = Stats::forUser($user->id);
 
 		// Also get invitation for event
 		if ($event) $invitation = $this->invitations->forEventAndUser($event->id, Auth::user()->id);
 		else        $invitation = null;
 
-		return View::make('dashboard.index')->withEvent($event)->withStats($stats)->withInvitation($invitation)->withLast($last);
+		return View::make('dashboard.index')->withEvent($event)->withStats($stats)->withInvitation($invitation)->withLast($last)->withUser($user);
 	}
 
 	/**

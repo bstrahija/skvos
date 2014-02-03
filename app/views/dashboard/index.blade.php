@@ -44,13 +44,13 @@
 	</div>
 
 	<div class="info">
-		@if (Auth::user()->photo)
-			<div class="photo" style="background-image: url({{ Image::thumb('/' . Auth::user()->photo, 100) }});"></div>
+		@if ($user->photo)
+			<div class="photo" style="background-image: url({{ Image::thumb('/' . $user->photo, 100) }});"></div>
 		@else
 			<div class="photo" style="background-image: url({{ Image::thumb('/storage/avatars/avatar_dummy.png', 100) }});"></div>
 		@endif
 
-		<h3>{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</h3>
+		<h3>{{ $user->first_name }} {{ $user->last_name }}</h3>
 	</div>
 
 	<div class="row stat-row">
@@ -91,9 +91,10 @@
 
 	<hr>
 
-	<div>
-		<a href="https://twitter.com/share" class="twitter-share-button" data-url="{{ route('showcase', Auth::user()->id) }}" data-text="Moji squash rezultati #squash #skvoshin" data-via="skvoshin" data-lang="hr">Tweet</a>
-		<div class="fb-like" data-href="{{ route('showcase', Auth::user()->id) }}" data-layout="standard" data-action="like" data-show-faces="false" data-share="false" data-colorscheme="dark"></div>
+	<div class="button-actions">
+		<a href="https://twitter.com/intent/tweet?text={{ urlencode($user->full_name.': squash rezultati #squash #skvoshin') }}&amp;url={{ urlencode(route('showcase', $user->id)) }}" class="button tiny round" data-ajax="false" target="_blank">{{ icn('social-twitter') }} Tweet</a>
+		&nbsp;&nbsp;
+		<a href="http://www.facebook.com/sharer/sharer.php?u={{ urlencode(route('showcase', $user->id)) }}" class="button tiny round" data-ajax="false" target="_blank">{{ icn('social-facebook') }} Like</a>
 	</div>
 
 </div>
