@@ -29,29 +29,30 @@ class DeployCommand extends Command {
 		$target = $this->input->getArgument('target', 'development');
 
 		// Target directory
-		if ($target == 'production') $dir = '/var/www/skvosh.in';
-		else                         $dir = '/var/www/dev.skvosh.in';
+		if ($target == 'production') { $dir = '/var/www/skvosh.in';     $branch = 'origin/master'; }
+		else                         { $dir = '/var/www/dev.skvosh.in'; $branch = 'origin/develop'; }
 
 		$this->info("Deploying to $target...");
+		$this->line("");
 		$this->line("Target directory: [$dir] ...");
+		$this->line("---");
 
 		SSH::into('ocean')->run(array(
 			"cd $dir",
 			"php artisan env",
-			'php artisan down',
-			'git fetch --all',
-			'git reset --hard origin/develop',
-			'chown -R www-data *',
-			'chmod -R 0755 *',
-			'chmod -R 0777 app/storage',
-			'chmod -R 0777 public/storage',
-			'composer install --no-scripts',
-			'php artisan migrate',
-			'php artisan up',
+			"php artisan down",
+			"git fetch --all",
+			"git reset --hard $branch",
+			"chown -R www-data *",
+			"chmod -R 0755 *",
+			"chmod -R 0777 app/storage",
+			"chmod -R 0777 public/storage",
+			"composer install --no-scripts",
+			"php artisan migrate",
+			"php artisan up",
 		));
 
-
-
+		$this->line("---");
 		$this->info("Done.");
 	}
 
