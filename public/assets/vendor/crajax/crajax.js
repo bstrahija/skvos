@@ -83,7 +83,7 @@
 				Crajax.oldUrl = href;
 
 				// Close sidebar
-				$("#nav, #main, #hd1").removeClass("menu-active");
+				$("#nav, #main, #hd1, #off-canvas").removeClass("menu-active");
 
 				// Fade it out
 				if ( ! noFade) $target.delay(1000).dequeue().stop().fadeTo(10, .0001);
