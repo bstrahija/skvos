@@ -51,7 +51,6 @@
 						<a href="{{ route('invitations.send', $event->id) }}" class="button tiny round success">{{ icn('mail') }}  Pošalji pozivnice</a>
 					@endif
 
-
 					<a class="close-reveal-modal">&#215;</a>
 				</div>
 			</div>

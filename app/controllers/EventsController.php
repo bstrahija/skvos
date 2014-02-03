@@ -155,9 +155,10 @@ class EventsController extends BaseController {
 	 */
 	public function edit($id)
 	{
-		$event = $this->events->find($id);
+		$event      = $this->events->find($id);
+		$atendeeIds = (array) $event->attendees->lists('id');
 
-		return View::make('events.edit')->withEvent($event);
+		return View::make('events.edit')->withEvent($event)->withAttendeeIds($atendeeIds);
 	}
 
 	/**

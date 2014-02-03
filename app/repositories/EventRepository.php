@@ -319,15 +319,38 @@ class EventRepository extends BaseRepository implements EventRepositoryInterface
 
 		foreach (array_except($data, ['_token', '_method']) as $key => $val)
 		{
-			if     ($key == 'date') $event->$key = Carbon::parse($val)->format('Y-m-d');
-			elseif ($key == 'from') $event->$key = Carbon::parse($val)->format('Y-m-d H:i:s');
-			elseif ($key == 'to')   $event->$key = Carbon::parse($val)->format('Y-m-d H:i:s');
-			else                    $event->$key = $val;
+			if     ($key == 'date')    $event->$key = Carbon::parse($val)->format('Y-m-d');
+			elseif ($key == 'from')    $event->$key = Carbon::parse($val)->format('Y-m-d H:i:s');
+			elseif ($key == 'to')      $event->$key = Carbon::parse($val)->format('Y-m-d H:i:s');
+			elseif ($key == 'players') $this->updateInvitations($eventId, $val);
+			else                       $event->$key = $val;
 		}
 
 		$event->save();
 
 		return $this->find($eventId);
+	}
+
+	/**
+	 * Update event attendance
+	 * @param  int $eventId
+	 * @param  array $players
+	 * @return void
+	 */
+	public function updateInvitations($eventId, $players)
+	{
+		$invitations = Invitation::where('event_id', $eventId)->get();
+
+		if ($invitations->count())
+		{
+			foreach ($invitations as $invitation)
+			{
+				if (in_array($invitation->user_id, $players)) { $invitation->confirmed = 1; $invitation->cancelled = 0; }
+				elseif ($invitation->confirmed == 1)          { $invitation->confirmed = 0; $invitation->cancelled = 1; }
+
+				$invitation->save();
+			}
+		}
 	}
 
 }

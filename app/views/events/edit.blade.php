@@ -66,7 +66,8 @@
 				<ul class="small-block-grid-2 medium-block-grid-3 player-picker">
 					@foreach ($event->invitees as $player)
 						<li>
-							<input type="checkbox" name="players[]" value="{{ $player->id }}" id="players_{{ $player->id }}"><label for="players_{{ $player->id }}">{{ $player->full_name }}</label>
+							<input type="checkbox" name="players[]" value="{{ $player->id }}" id="players_{{ $player->id }}" {{ in_array($player->id, $attendee_ids) ? 'checked="checked"' : null }}>
+							<label for="players_{{ $player->id }}">{{ $player->full_name }}</label>
 						</li>
 					@endforeach
 				</ul>
