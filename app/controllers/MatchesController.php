@@ -52,6 +52,9 @@ class MatchesController extends BaseController {
 	{
 		if ($match = $this->matches->update($id, Input::all()))
 		{
+			$this->events->update($match->event_id, ['mvp_id' => null]);
+			$this->events->mvp($match->event_id);
+
 			return Redirect::route('events.show', $match->event_id)->withAlertSuccess('Spremljeno.');
 		}
 

@@ -110,10 +110,15 @@ class MatchRepository extends BaseRepository implements MatchRepositoryInterface
 	{
 		$match = Match::find($id);
 
+		// All the keys
 		foreach (array_except($data, ['_token', '_method']) as $key => $val)
 		{
 			$match->$key = $val;
 		}
+
+		// Winner
+		if     ($match->player1_score > $match->player2_score) $match->winner_id = $match->player1_id;
+		elseif ($match->player2_score > $match->player1_score) $match->winner_id = $match->player2_id;
 
 		$match->save();
 
