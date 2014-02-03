@@ -1,56 +1,65 @@
-@extends('_layout.default')
+@extends('_layout.master')
 
-@section('content')
+@section('page_title') Izmijeni Meč @stop
 
-<div class="matches">
+@section('main')
 
-	@include('_partial.notifications')
+<div class="page match edit-match">
 
-	<div class="event-match-add form">
-
-		<h3>Izmijeni meč</h3>
-
-		{{ Form::model($match, array('method' => 'put', 'route' => array('matches.update', $match->id))) }}
-			<table class="table">
-				<thead>
-					<tr>
-						<th class="l">Igrač 1</th>
-						<th class="c"><i class="icon-trophy"></i> P1</th>
-						<th class="c">P2 <i class="icon-trophy"></i></th>
-						<th class="r">Igrač 2</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td class="l player">
-							{{ Form::select('player1_id', $match->event->attendees->lists('first_name', 'id')) }}
-						</td>
-
-						<td class="l score">
-							{{ Form::select('player1_sets_won', $scores) }}
-						</td>
-
-
-						<td class="l score">
-							{{ Form::select('player2_sets_won', $scores) }}
-						</td>
-
-						<td class="r player">
-							{{ Form::select('player2_id', $match->event->attendees->lists('first_name', 'id')) }}
-						</td>
-					</tr>
-				</tbody>
-			</table>
-
-			<div class="form-actions">
-				<a href="#" class="button button-circle button-action submit"><i class="icon-trophy"></i></a>
-			</div>
-
-		{{ Form::close() }}
-
-	</div>
+	<h2 class="pg">
+		<i class="fi-trophy"></i> Izmijeni meč
+		<em class="right"><a href="{{ route('events.show') }}" class="button tiny alert round">{{ icn('arrow-left') }}</a></em>
+	</h2>
 
 	<hr>
+
+	{{ Form::open(['route' => ['matches.update', $match->id], 'method' => 'put', 'class' => 'edit-match-form']) }}
+
+		<div class="match-playing row">
+			<div class="columns small-6">
+				<select name="player1_id" id="player1">
+					@foreach ($players as $player)
+						<option value="{{ $player->id }}" {{ $player->id == $match->player1->id ? 'selected="selected"' : null }}>{{ $player->nickname }}</option>
+					@endforeach
+				</select>
+
+				<ul class="button-group round">
+					<li><a href="#" class="inc-dec dec button"><i class="fi-minus"></i></a></li>
+					<li><span class="button secondary res1 res"><input type="text" name="player1_score" class="score" value="{{ $match->player1_score }}" readonly="readonly"></span></li>
+					<li><a href="#" class="inc-dec inc button success"><i class="fi-plus"></i></a></li>
+				</ul>
+			</div>
+
+			<div class="columns small-6">
+				<select name="player2_id" id="player1">
+					@foreach ($players as $player)
+						<option value="{{ $player->id }}" {{ $player->id == $match->player2->id ? 'selected="selected"' : null }}>{{ $player->nickname }}</option>
+					@endforeach
+				</select>
+
+				<ul class="button-group round right">
+					<li><a href="#" class="inc-dec dec button"><i class="fi-minus"></i></a></li>
+					<li><span class="button secondary res2 res"><input type="text" name="player2_score" class="score" value="{{ $match->player2_score }}" readonly="readonly"></span></li>
+					<li><a href="#" class="inc-dec inc button success"><i class="fi-plus"></i></a></li>
+				</ul>
+			</div>
+		</div>
+
+		<hr>
+
+		<div class="row match-add-actions">
+			<button type="submit" class="button success round">{{ icn('download') }} Spremi</button>
+		</div>
+	{{ Form::close() }}
+
+	<hr>
+
+	<div class="row button-actions match-add-actions button-actions">
+		{{ Form::open(['route' => ['matches.destroy', $match->id], 'method' => 'delete', 'class' => 'match-delete-form']) }}
+			<button type="submit" class="button alert success round">{{ icn('trash') }} Obriši meč</button>
+		{{ Form::close() }}
+	</div>
+
 
 </div>
 

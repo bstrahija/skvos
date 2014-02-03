@@ -1,2 +1,5 @@
-// ! Initialize
-$(function() { App.init(); });
+$(function() {
+	App.init();
+})
+
+$(document).foundation();

@@ -1,77 +1,98 @@
 <?php namespace App\Controllers;
 
-use App\Models\User;
-use Auth, Hash, Input, Notification, Redirect, Request, Str, Validator, View;
+use Auth, Input, Redirect, View;
+use App\Repositories\UserRepository;
 
 class UsersController extends BaseController {
 
-	public function index()
+	/**
+	 * User repository
+	 * @var UserRepository
+	 */
+	protected $users;
+
+	/**
+	 * Init dependencies
+	 * @param UserRepository $users
+	 */
+	public function __construct(UserRepository $users)
 	{
-		return View::make('users.index', array('users' => User::orderBy('first_name')->get()));
+		$this->users = $users;
+
+		// Filters
+		$this->beforeFilter('admin', ['except' => ['profile', 'update']]);
 	}
 
+	/**
+	 * List all players/users
+	 * @return View
+	 */
+	public function index()
+	{
+		$users = $this->users->all(Input::all());
+
+		return View::make('users.index')->withUsers($users);
+	}
+
+	/**
+	 * Form for creating a new user
+	 * @return View
+	 */
 	public function create()
 	{
 		return View::make('users.create');
 	}
 
+	/**
+	 * Store a new user
+	 * @return Redirect
+	 */
 	public function store()
 	{
-		// Create validator
-		$validator = Validator::make(Input::all(), User::$rules);
+		if ($user = $this->users->create(Input::all()))
+		{
+			return Redirect::route('users.edit', $user->id)->withAlertSuccess('Spremljeno.');
+		}
 
-		// Failed validation
-		if ($validator->fails()) return Redirect::back()->withErrors($validator)->withInput();
-
-		// Save it
-		$user = new User;
-		$user->email      = Input::get('email');
-		$user->first_name = Input::get('first_name');
-		$user->last_name  = Input::get('last_name');
-		$user->role       = Input::get('role', 'player');
-		$user->password   = Hash::make(Input::get('password'));
-		$user->save();
-
-		Notification::success('Korisnik je spremljen.');
-		return Redirect::route('users.edit', $user->id);
+		return Redirect::back()->withErrors($this->users->errors())->withInput();
 	}
 
+	/**
+	 * Show profile
+	 * @return View
+	 */
+	public function profile()
+	{
+		$user = $this->users->find(Auth::user()->id);
+
+		return View::make('users.profile')->withUser($user);
+	}
+
+	/**
+	 * Edit user data
+	 * @param  int $id
+	 * @return View
+	 */
 	public function edit($id)
 	{
-		return View::make('users.edit', array('user' => User::find($id)));
+		$user = $this->users->find($id);
+
+		return View::make('users.edit')->withUser($user);
 	}
 
+	/**
+	 * Update a user
+	 * @param  int $id
+	 * @return Redirect
+	 */
 	public function update($id)
 	{
-		// Addapt rules
-		User::$rules['password'] = 'min:5';
+		if ($this->users->update($id, Input::all()))
+		{
+			return Redirect::route('profile')->withAlertSuccess('Spremljeno.');
+		}
 
-		// Create validator
-		$validator = Validator::make(Input::all(), User::$rules);
-
-		// Failed validation
-		if ($validator->fails()) return Redirect::back()->withErrors($validator)->withInput();
-
-		// Save it
-		$user = User::find($id);
-		$user->email      = Input::get('email');
-		$user->first_name = Input::get('first_name');
-		$user->last_name  = Input::get('last_name');
-		$user->role       = Input::get('role');
-
-		// Change password
-		if ($password = Input::get('password')) $user->password = Hash::make($password);
-
-		// And save it
-		$user->save();
-
-		Notification::success('Korisnik je spremljen.');
-		return Redirect::route('users.edit', $id);
-	}
-
-	public function delete($id)
-	{
-
+		return Redirect::back()->withErrors($this->users->errors())->withInput();
 	}
 
 }

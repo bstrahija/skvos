@@ -1,97 +1,163 @@
 <?php namespace App\Controllers;
 
-use App\Models\Event, App\Models\Invitation, App\Models\Match, App\Models\User;
-use Auth, Input, Notification, Redirect, Request, Str, View;
+use Auth, Input, Redirect, Vault, View;
+use App\Repositories\EventRepository;
+use App\Repositories\MatchRepository;
+use App\Repositories\UserRepository;
+use App\Services\Stats;
 
 class EventsController extends BaseController {
 
 	/**
-	 * Restrict access to some methods
+	 * Event repository
+	 * @var EventRepository
 	 */
-	public function __construct()
+	protected $events;
+
+	/**
+	 * Match repository
+	 * @var MatchRepository
+	 */
+	protected $matches;
+
+	/**
+	 * User repository
+	 * @var UserRepository
+	 */
+	protected $users;
+
+	/**
+	 * Stats service
+	 * @var Stats
+	 */
+	protected $stats;
+
+	/**
+	 * Init rependencies
+	 * @param EventRepository $events
+	 * @param MatchRepository $matches
+	 * @param UserRepository  $users
+	 * @param Stats           $stats
+	 */
+	public function __construct(EventRepository $events, MatchRepository $matches, UserRepository $users, Stats $stats)
 	{
-		// Protect some methods
-		$this->beforeFilter('admin', array('only' => array('create', 'store', 'edit', 'update')));
+		$this->events  = $events;
+		$this->matches = $matches;
+		$this->users   = $users;
+		$this->stats   = $stats;
+
+		// Filters
+		$this->beforeFilter('admin', ['only' => ['create', 'update', 'store', 'edit', 'mvps', 'destroy']]);
 	}
 
 	/**
-	 * List of all events
-	 * @return View
+	 * Show all events
+	 * @return Response
 	 */
 	public function index()
 	{
-		// @TODO: Nicer event list, editing stuff, archive, etc.
-		// For now a simple redirection to the dashboard
-		return Redirect::route('dashboard');
+		// Get data
+		$event    = $this->events->next();
+		$upcoming = $this->events->upcoming();
+		$past     = $this->events->past();
+
+		return View::make('events.index', compact('event', 'upcoming', 'past'));
 	}
 
+	/**
+	 * Calculate MVP players
+	 * @return Response
+	 */
+	public function mvps()
+	{
+		$events = $this->events->all();
+
+		foreach ($events as $event)
+		{
+			$this->events->mvp($event->id);
+		}
+
+		return $events;
+	}
+
+	/**
+	 * Display single event
+	 * @param  int $id
+	 * @return View
+	 */
 	public function show($id)
 	{
-		$event   = Event::find($id);
-		$matches = $event->matches;
+		$event       = $this->events->find($id);
+		$mvp         = $this->events->mvp($id);
+		$players     = $event->attendees;
+		$invitees    = $event->invitees;
+		$matches     = $this->matches->forEvent($event->id);
+		$leaderboard = $this->stats->eventLeaderboard($event->id);
+		$event_type  = $event->attendees->count() == 2 ? 'double'    : null;
+		$event_type  = $event->attendees->count() == 3 ? 'tripple'   : $event_type;
+		$event_type  = $event->attendees->count() == 4 ? 'quadruple' : $event_type;
 
-		return View::make('events.show', array(
-			'event'   => $event,
-			'matches' => $matches,
+		// Calculate next match
+		$next_match_player_1 = $event->attendees->count() ? $event->attendees->first()->id : 1;
+		$next_match_player_2 = $event->attendees->count() ? $event->attendees->last()->id  : 2;
+
+		return View::make('events.show', compact(
+			'event', 'mvp', 'players', 'invitees', 'matches', 'leaderboard', 'event_type',
+			'next_match_player_1', 'next_match_player_2'
 		));
 	}
 
 	/**
-	 * Create new event
+	 * Match results for event
+	 * @param  int $id
+	 * @return View
+	 */
+	public function matches($id)
+	{
+		$event       = $this->events->find($id);
+		$matches     = $this->matches->forEvent($event->id);
+		$event_type  = $event->attendees->count() == 2 ? 'double'    : null;
+		$event_type  = $event->attendees->count() == 3 ? 'tripple'   : $event_type;
+		$event_type  = $event->attendees->count() == 4 ? 'quadruple' : $event_type;
+
+		return View::make('events.match_results', compact('event', 'matches', 'event_type'));
+	}
+
+	/**
+	 * Display form for new event
 	 * @return View
 	 */
 	public function create()
 	{
-		return View::make('events.create', array(
-			'users' => User::orderBy('first_name')->get(),
-		));
+		$players = $this->users->all();
+
+		return View::make('events.create')->withPlayers($players);
 	}
 
 	/**
-	 * Store new event
+	 * Store a new event
 	 * @return Redirect
 	 */
 	public function store()
 	{
-		// First save the event
-		$event = new Event;
-		$event->author_id = Auth::user()->id;
-		$event->title     = Input::get('title');
-		$event->date      = Input::get('date');
-		$event->from      = Input::get('date') . ' ' . Input::get('from');
-		$event->to        = Input::get('date') . ' ' . Input::get('to');
-		$event->save();
-
-		// Then create invitations
-		foreach (Input::get('players') as $player)
+		if ($event = $this->events->create(Input::all()))
 		{
-			$invitation = new Invitation;
-			$invitation->user_id  = (int) $player;
-			$invitation->event_id = (int) $event->id;
-			$invitation->hash     = Str::random(42);
-			$invitation->save();
+			return Redirect::route('events.index')->withAlertSuccess('Spremljeno.');
 		}
 
-		Notification::success('Termin je spremljen.');
-
-		return Redirect::route('dashboard');
+		return Redirect::back()->withErrors($this->events->errors())->withInput();
 	}
 
 	/**
-	 * Edit an event
+	 * Display form to edit an event
 	 * @param  int $id
 	 * @return View
 	 */
 	public function edit($id)
 	{
-		// Get event data with some preloaded relations
-		$event = Event::find($id);
+		$event = $this->events->find($id);
 
-		return View::make('events.edit', array(
-			'event'    => $event,
-			'users'    => User::orderBy('first_name')->get(),
-			'invitees' => $event->invitees,
-		));
+		return View::make('events.edit')->withEvent($event);
 	}
 
 	/**
@@ -101,49 +167,22 @@ class EventsController extends BaseController {
 	 */
 	public function update($id)
 	{
-		$event = Event::find($id);
-		$event->title = Input::get('title');
-		$event->date  = Input::get('date');
-		$event->from  = Input::get('date') . ' ' . Input::get('from');
-		$event->to    = Input::get('date') . ' ' . Input::get('to');
-		$event->save();
-
-		// Now the players
-		$players = Input::get('players');
-
-		// Remove some
-		foreach ($event->invitees as $invitee)
+		if ($event = $this->events->update($id, Input::all()))
 		{
-			if ( ! in_array($invitee->id, $players)) $event->invitees()->detach($invitee->id);
+			return Redirect::route('events.edit', $id)->withAlertSuccess('Spremljeno.');
 		}
 
-		// Add some
-		foreach ($players as $player)
-		{
-			if ( ! $event->isUserInvited($player))
-			{
-				$invitation = new Invitation;
-				$invitation->user_id  = (int) $player;
-				$invitation->event_id = (int) $event->id;
-				$invitation->hash     = Str::random(42);
-				$invitation->save();
-			}
-		}
+		return Redirect::back()->withErrors($this->events->errors());
+	}
 
-		// Attendance
-		foreach (Input::get('attendance') as $userId => $attendance) {
-			$invitation = Invitation::where('event_id', $id)->where('user_id', $userId)->first();
+	/**
+	 * Delete existing event
+	 * @param  int $id
+	 * @return Redirect
+	 */
+	public function destroy($id)
+	{
 
-			if ($invitation) {
-				$invitation->confirmed = ($attendance == 'confirmed') ? 1 : 0;
-				$invitation->cancelled = ($attendance == 'cancelled') ? 1 : 0;
-				$invitation->save();
-			}
-		}
-
-		Notification::success('Termin je spremljen.');
-
-		return Redirect::route('events.edit', $id);
 	}
 
 }

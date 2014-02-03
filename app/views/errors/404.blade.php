@@ -1,10 +1,21 @@
-@extends('_layout.default')
+@extends('_layout.master')
 
-@section('content')
+@section('page_title') Greška 404 @stop
 
-<div class="error-page">
-	<h2>Error 404</h2>
-	<p>Nije pronađeno</p>
+@section('main')
+
+<div class="page error-page">
+
+	<h2 class="pg">
+		<i class="fi-alert"></i> Error 404
+	</h2>
+
+	<hr>
+
+	<p class="not-found">Nije pronađeno</p>
+
+	<hr>
+
 </div>
 
 @stop

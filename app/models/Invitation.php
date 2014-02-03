@@ -1,10 +1,21 @@
 <?php namespace App\Models;
 
-use Carbon\Carbon, Eloquent;
+class Invitation extends \Eloquent {
 
-class Invitation extends Eloquent {
+	/**
+	 * Guard fields from mass assignment
+	 * @var array
+	 */
+	protected $guarded = array('id');
 
-	protected $table = 'invitations';
+	/**
+	 * Invited user
+	 * @return mixed
+	 */
+	public function user()
+	{
+		return $this->belongsTo('App\Models\User');
+	}
 
 	/**
 	 * Related event
@@ -15,33 +26,5 @@ class Invitation extends Eloquent {
 		return $this->belongsTo('App\Models\Event');
 	}
 
-	/**
-	 * Invited user relations
-	 * @return mixed
-	 */
-	public function user()
-	{
-		return $this->belongsTo('App\Models\User');
-	}
-
-	/**
-	 * Only sent invitations
-	 * @param  Query $query
-	 * @return Query
-	 */
-	public function scopeSent($query)
-	{
-		return $query->where('sent', 1);
-	}
-
-	/**
-	 * Only unsent invitations
-	 * @param  Query $query
-	 * @return Query
-	 */
-	public function scopeNotSent($query)
-	{
-		return $query->where('sent', 0);
-	}
-
 }
+

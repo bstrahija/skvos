@@ -2,39 +2,45 @@
 	"name": "laravel/laravel",
 	"description": "The Laravel Framework.",
 	"keywords": ["framework", "laravel"],
+	"license": "MIT",
 	"require": {
-		"laravel/framework": "4.0.*",
-		"loic-sharma/profiler": "1.1.*",
-		"dflydev/markdown": "1.0.*",
-		"imagine/imagine": "0.4.*",
-		"juy/profiler": "dev-master",
-		"onigoetz/profiler": "dev-master",
-		"edvinaskrucas/notification": "1.*",
-		"iron-io/iron_core": "dev-master",
-		"iron-io/iron_mq": "dev-master",
+		"laravel/framework": "4.1.*",
+		"creolab/image": "dev-master",
+		"creolab/assets": "dev-master",
+		"creolab/alert": "dev-master",
+		"creolab/vault": "dev-master",
 		"mobiledetect/mobiledetectlib": "dev-master",
-		"itsgoingd/clockwork": "dev-master"
+		"itsgoingd/clockwork": "dev-master",
+		"vlucas/phpdotenv": "1.*"
 	},
 	"autoload": {
 		"classmap": [
-			"app/commands",
-			"app/controllers",
-			"app/models",
 			"app/database/migrations",
 			"app/database/seeds",
-			"app/services",
-			"app/facades",
-			"app/helpers"
+			"app/tests/TestCase.php"
+		],
+		"psr-4": {
+			"App\\Commands\\": "app/commands",
+			"App\\Controllers\\": "app/controllers",
+			"App\\Facades\\": "app/facades",
+			"App\\Models\\": "app/models",
+			"App\\Providers\\": "app/providers",
+			"App\\Repositories\\": "app/repositories",
+			"App\\Resources\\": "app/resources",
+			"App\\Services\\": "app/services",
+			"App\\Validation\\": "app/validation"
+		},
+		"files": [
+			"app/helpers.php"
 		]
 	},
 	"scripts": {
 		"post-install-cmd": [
+			"php artisan clear-compiled",
 			"php artisan optimize"
 		],
-		"pre-update-cmd": [
-			"php artisan clear-compiled"
-		],
 		"post-update-cmd": [
+			"php artisan clear-compiled",
 			"php artisan optimize"
 		],
 		"post-create-project-cmd": [

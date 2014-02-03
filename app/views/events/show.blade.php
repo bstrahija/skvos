@@ -1,41 +1,38 @@
-@extends('_layout.default')
+@extends('_layout.master')
 
-@section('content')
+@section('page_title') Termin - {{ $event->title }} @stop
 
-<div class="matches">
-	<?php $from = Carbon::now()->addHours(2); ?>
-	<?php $now  = Carbon::now(); ?>
+@section('main')
 
-	@include('_partial.notifications')
+<div class="event">
 
-	@if ($event->from > $from)
-		<h3 class="c">Termin još nije održan</h3>
-		<br><br><br><br><br><br><br><br><br>
+	<h2 class="pg">
+		<em class="right"><a href="{{ route('events.index') }}" class="button tiny alert round"><i class="fi-arrow-left"></i></a></em>
+		<i class="fi-trophy"></i> Termin<br>
+		<small>{{ $event->title}}</small>
+	</h2>
 
-		<hr>
+	<hr>
+
+	@if ($players and $players->count() > 1)
+
+		@include('events.match_create')
+
+		@include('events.match_results')
+
+		@include('events.event_standings')
+
+		@include('events.match_invitees')
 
 	@else
-		@if ($from >= $event->fromDate and $now->format('Y-m-d') <= $event->toDate->addDay()->format('Y-m-d'))
-			@if ($now >= $event->fromDate and $now <= $event->toDate)
-				<h3>Termin je u tijeku</h3>
-			@elseif ($from >= $event->fromDate and $now <= $event->toDate)
-				<h3>Termin počinje u {{ $event->fromDate->format('H:i') }}</h3>
-			@else
-				<h3>Termin je održan jučer</h3>
-			@endif
-			<hr>
 
-			@include('events._partial.add_match')
-
+		@if (Carbon::now() >= $event->from->subMinutes(30))
+			<p class="not-found"><i class="fi-alert"></i> Nema dovoljno igrača</p>
 		@endif
 
-		@include('events._partial.overview')
+		@include('events.match_create')
 
-		@include('events._partial.results_alt')
-
-		@include('events._partial.results')
-
-		@include('events._partial.media')
+		@include('events.match_invitees')
 
 	@endif
 

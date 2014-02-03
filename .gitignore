@@ -1,9 +1,10 @@
-/app/config/production/*
+/app/config/development/*
 /app/config/local/*
+/app/config/production/*
 /app/database/seeds/production/*
 /bootstrap/compiled.php
 /vendor
 /app/storage/*
+.env
 composer.phar
-composer.lock
 .DS_Store

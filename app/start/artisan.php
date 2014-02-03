@@ -11,6 +11,4 @@
 |
 */
 
-Artisan::add(new AppInstallCommand);
-Artisan::add(new AppRefreshCommand);
-Artisan::add(new AppSeedCommand);
+Artisan::add(new App\Commands\DeployCommand);

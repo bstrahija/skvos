@@ -1,61 +1,65 @@
-@extends('_layout.default')
+@extends('_layout.master')
 
-@section('content')
+@section('page_title') Profil @stop
 
-<div class="users form">
-	<h3>Izmijeni korisnika</h3>
+@section('main')
 
-	@include('_partial.notifications')
+<div class="page profile">
 
-	{{ Form::model($user, array('method' => 'put', 'route' => array('users.update', $user->id))) }}
+	<h2 class="pg">
+		<i class="fi-torso"></i> Izmijeni igrača - <small>[{{ $user->first_name }} {{ $user->last_name }}]</small>
+		<em class="right"><a href="{{ route('users.index') }}" class="button tiny alert round"><i class="fi-arrow-left"></i></a></em>
+	</h2>
 
-		<div class="control-group">
-			<label for="email" class="control-label">Email</label>
-			<div class="controls">
-				{{ Form::text('email') }}
+	<hr>
+
+	{{ Form::open(['route' => ['users.update', $user->id], 'method' => 'put', 'files' => true]) }}
+
+		<fieldset>
+			<div class="row">
+				<div class="columns small-12"><input type="email" name="email" value="{{ $user->email }}" placeholder="Email adresa"></div>
 			</div>
-		</div>
 
-		<div class="row">
-			<div class="span6">
-				<div class="control-group">
-					<label for="first_name" class="control-label">Ime</label>
-					<div class="controls">
-						{{ Form::text('first_name') }}
-					</div>
+			<div class="row">
+				<div class="columns small-6"><input type="text" name="first_name" value="{{ $user->first_name }}" placeholder="Ime"></div>
+				<div class="columns small-6"><input type="text" name="last_name" value="{{ $user->last_name }}" placeholder="Prezime"></div>
+			</div>
+		</fieldset>
+
+		<hr>
+
+		<fieldset>
+			<h3>Slika</h3>
+			<div class="row">
+				<div class="columns small-3">
+					@if ($user->photo)
+						<div class="photo" style="background-image: url({{ Image::thumb('/' . $user->photo, 100) }});"></div>
+					@else
+						<div class="photo" style="background-image: url({{ Image::thumb('/storage/avatars/avatar_dummy.png', 100) }});"></div>
+					@endif
 				</div>
+				<div class="columns small-9"><input type="file" name="photo" accept="image/*" capture="camera"></div>
 			</div>
+		</fieldset>
 
-			<div class="span6">
-				<div class="control-group">
-					<label for="last_name" class="control-label">Prezime</label>
-					<div class="controls">
-						{{ Form::text('last_name') }}
-					</div>
-				</div>
+		<hr>
+
+		<fieldset>
+			<h3>Izmijeni lozinku</h3>
+			<div class="row">
+				<div class="columns small-6"><input type="password" name="password" value="" placeholder="Lozinka"></div>
+				<div class="columns small-6"><input type="password" name="password_confirmation" value="" placeholder="Potvrdi"></div>
 			</div>
-		</div>
+		</fieldset>
 
-		<div class="control-group">
-			<label for="password" class="control-label">Lozinka</label>
-			<div class="controls">
-				{{ Form::text('password', false) }}
-			</div>
-		</div>
+		<hr>
 
-		<div class="control-group">
-			<label for="role" class="control-label">Prava</label>
-			<div class="controls">
-				{{ Form::select('role', array('player' => 'Igrač', 'admin' => 'Administrator', 'superadmin' => 'Superadmin')) }}
-			</div>
-		</div>
-
-		<div class="form-actions">
-			<hr>
-			<a href="#" class="button button-circle button-action button-save submit"><i class="icon-cloud-upload"></i></a>
+		<div class="row actions">
+			<button type="submit" class="button round">Spremi izmjene</button>
 		</div>
 
 	{{ Form::close() }}
+
 </div>
 
 @stop

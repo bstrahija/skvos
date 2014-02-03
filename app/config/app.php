@@ -1,7 +1,5 @@
 <?php
 
-setlocale(LC_TIME, 'hr_HR.UTF8');
-
 return array(
 
 	/*
@@ -28,7 +26,7 @@ return array(
 	|
 	*/
 
-	'url' => 'http://skvosh.dev',
+	'url' => 'http://localhost',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -85,9 +83,8 @@ return array(
 		'Illuminate\Foundation\Providers\ArtisanServiceProvider',
 		'Illuminate\Auth\AuthServiceProvider',
 		'Illuminate\Cache\CacheServiceProvider',
-		'Illuminate\Foundation\Providers\CommandCreatorServiceProvider',
 		'Illuminate\Session\CommandsServiceProvider',
-		'Illuminate\Foundation\Providers\ComposerServiceProvider',
+		'Illuminate\Foundation\Providers\ConsoleSupportServiceProvider',
 		'Illuminate\Routing\ControllerServiceProvider',
 		'Illuminate\Cookie\CookieServiceProvider',
 		'Illuminate\Database\DatabaseServiceProvider',
@@ -95,32 +92,28 @@ return array(
 		'Illuminate\Filesystem\FilesystemServiceProvider',
 		'Illuminate\Hashing\HashServiceProvider',
 		'Illuminate\Html\HtmlServiceProvider',
-		'Illuminate\Foundation\Providers\KeyGeneratorServiceProvider',
 		'Illuminate\Log\LogServiceProvider',
 		'Illuminate\Mail\MailServiceProvider',
-		'Illuminate\Foundation\Providers\MaintenanceServiceProvider',
 		'Illuminate\Database\MigrationServiceProvider',
-		'Illuminate\Foundation\Providers\OptimizeServiceProvider',
 		'Illuminate\Pagination\PaginationServiceProvider',
-		'Illuminate\Foundation\Providers\PublisherServiceProvider',
 		'Illuminate\Queue\QueueServiceProvider',
 		'Illuminate\Redis\RedisServiceProvider',
+		'Illuminate\Remote\RemoteServiceProvider',
 		'Illuminate\Auth\Reminders\ReminderServiceProvider',
-		'Illuminate\Foundation\Providers\RouteListServiceProvider',
 		'Illuminate\Database\SeedServiceProvider',
-		'Illuminate\Foundation\Providers\ServerServiceProvider',
 		'Illuminate\Session\SessionServiceProvider',
-		'Illuminate\Foundation\Providers\TinkerServiceProvider',
 		'Illuminate\Translation\TranslationServiceProvider',
 		'Illuminate\Validation\ValidationServiceProvider',
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 
-		// 'Profiler\ProfilerServiceProvider',
-		'Juy\Profiler\Providers\ProfilerServiceProvider',
-		// 'Onigoetz\Profiler\ProfilerServiceProvider',
-		'Krucas\Notification\NotificationServiceProvider',
+		// My providers
+		'Creolab\Assets\AssetsServiceProvider',
+		'Creolab\Alert\AlertServiceProvider',
+		'Creolab\Image\ImageServiceProvider',
+		'Creolab\Vault\VaultServiceProvider',
 		'Clockwork\Support\Laravel\ClockworkServiceProvider',
+		'App\Providers\SkvoshServiceProvider',
 
 	),
 
@@ -157,7 +150,7 @@ return array(
 		'Cache'           => 'Illuminate\Support\Facades\Cache',
 		'ClassLoader'     => 'Illuminate\Support\ClassLoader',
 		'Config'          => 'Illuminate\Support\Facades\Config',
-		'Controller'      => 'Illuminate\Routing\Controllers\Controller',
+		'Controller'      => 'Illuminate\Routing\Controller',
 		'Cookie'          => 'Illuminate\Support\Facades\Cookie',
 		'Crypt'           => 'Illuminate\Support\Facades\Crypt',
 		'DB'              => 'Illuminate\Support\Facades\DB',
@@ -182,17 +175,19 @@ return array(
 		'Schema'          => 'Illuminate\Support\Facades\Schema',
 		'Seeder'          => 'Illuminate\Database\Seeder',
 		'Session'         => 'Illuminate\Support\Facades\Session',
+		'SSH'             => 'Illuminate\Support\Facades\SSH',
 		'Str'             => 'Illuminate\Support\Str',
 		'URL'             => 'Illuminate\Support\Facades\URL',
 		'Validator'       => 'Illuminate\Support\Facades\Validator',
 		'View'            => 'Illuminate\Support\Facades\View',
 
-		'Profiler'        => 'Juy\Profiler\Facades\Profiler',
+		// My facades
 		'Carbon'          => 'Carbon\Carbon',
-		'Image'           => 'App\Facades\ImageFacade',
-		'Notification'    => 'Krucas\Notification\Facades\Notification',
-		'Stats'           => 'App\Services\Stats',
+		'Image'           => 'Creolab\Image\ImageFacade',
+		'Mailer'          => 'App\Facades\MailerFacade',
+		'Stats'           => 'App\Facades\StatsFacade',
 		'User'            => 'App\Models\User',
+		'Vault'           => 'Creolab\Vault\VaultFacade',
 
 	),
 

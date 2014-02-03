@@ -1,35 +1,28 @@
-@extends('_layout.auth')
+@extends('_layout.master')
 
-@section('content')
+@section('page_title') Login @stop
 
-<h1>Skvosh.in</h1>
+@section('body_class') auth @stop
 
-{{ Form::open(array('route' => 'login.post')) }}
+@section('main')
+	<div class="login">
+		{{ Form::open(['route' => 'login.attempt', 'method' => 'post']) }}
+			<h1>Skvosh.in</h1>
 
-	<div id="login" class="login">
-		@if ($errors->has('login'))
-			<div class="alert alert-error">{{ $errors->first('login', ':message') }}</div>
-		@endif
-
-		<div class="control-group">
-			{{ Form::label('email', 'E-mail') }}
-			<div class="controls">
-				{{ Form::text('email', null, array('placeholder' => 'Email')) }}
+			<div class="row">
+				<div class="large-10 small-10 small-offset-1"><input type="email" name="email" value="{{ Input::old('email') }}" placeholder="{{ trans('messages.Email') }}"></div>
 			</div>
-		</div>
-
-		<div class="control-group">
-			{{ Form::label('password', 'Password') }}
-			<div class="controls">
-				{{ Form::password('password', array('placeholder' => 'Password')) }}
+			<div class="row">
+				<div class="large-10 small-10 small-offset-1"><input type="password" name="password" value="" placeholder="{{ trans('messages.Password') }}"></div>
 			</div>
-		</div>
 
-		<div class="form-actions">
-			<button type="submit" class="button glow button-pill button-action btn-login"><i class="icon-lock"></i> Login</button>
-		</div>
+			<div class="row actions">
+				<button type="submit" class="button round">{{ trans('messages.Login') }}</button>
+			</div>
+		{{ Form::close() }}
+
+		<p class="copy">
+			<a href="http://creolab.hr" target="_blank">&copy; 2014 Skvoš &amp; Beer inc.</a>
+		</p>
 	</div>
-
-{{ Form::close() }}
-
 @stop

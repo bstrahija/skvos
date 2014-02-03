@@ -1,47 +1,56 @@
-@extends('_layout.default')
+@extends('_layout.master')
 
-@section('content')
+@section('page_title') Statistika @stop
 
-	<h3 class="c">Mečevi i setovi</h3>
+@section('main')
+
+<div class="stats row">
+
+	<h2 class="pg">
+		<i class="fi-graph-bar"></i> Statistika
+	</h2>
+
 	<hr>
 
-	<table class="table" style="text-align: center;">
+	<table>
 		<thead>
 			<tr>
-				<th><i class="icon-user"></i></th>
-				<th title="Matches played / Odigrani mečevi">MP</th>
-				<th title="Matches won / Dobiveni mečeva">MW</th>
-				<th title="Matches lost / Izgubljeni mečevi">ML</th>
-				<th title="Match efficiency / Efikasnost">ME</th>
-
-				<th title="Sets played / Odigrani setovi">SP</th>
-				<th title="Sets won / Dobiveni setovi">SW</th>
-				<th title="Sets lost / Izgubljeni setovi">SL</th>
-				<th title="Set efficiency / Efikasnost">SE</th>
+				<th class="l">{{ icn('torso') }}</th>
+				<th title="Mečevi" class="r">Mečevi</th>
+				<th title="Setovi" class="r">Setovi</th>
 			</tr>
 		</thead>
 		<tbody>
 			@foreach ($leaderboard as $user)
-				<tr>
-					<td>{{ $user->first_name }}</td>
-					<td>{{ (int) $user->matches_played }}</td>
-					<td style="color: #0a0;"><strong>{{ (int) $user->matches_won }}</strong></td>
-					<td style="color: #c00;">{{ (int) $user->matches_played - $user->matches_won }}</td>
-					<td>{{ ($user->matches_played) ? round($user->matches_won / $user->matches_played, 3) * 100 : 0 }}%</td>
+				@if ($user->matches_played > 5)
+					<tr>
+						<td class="l">{{ $user->nickname }}</td>
 
-					<td>{{ (int) $user->sets_played }}</td>
-					<td style="color: #0a0;">{{ (int) $user->sets_won }}</td>
-					<td style="color: #c00;">{{ (int) $user->sets_played - $user->sets_won }}</td>
-					<td>{{ ($user->sets_played) ? round($user->sets_won / $user->sets_played, 3) * 100 : 0 }}%</td>
-				</tr>
+						<td class="r">
+							<strong>{{ ($user->matches_played) ? number_format(($user->matches_won / $user->matches_played) * 100, 2) : 0 }}%</strong><br>
+							{{ (int) $user->matches_won }} /
+							{{ (int) $user->matches_played }}
+						</td>
+
+						<td class="r">
+							<strong>{{ ($user->sets_played) ? number_format(($user->sets_won / $user->sets_played) * 100, 2) : 0 }}%</strong><br>
+							{{ (int) $user->sets_played }} /
+							{{ (int) $user->sets_won }}
+						</td>
+					</tr>
+				@endif
 			@endforeach
 		</tbody>
 	</table>
 
-	<hr><br>
+	<hr>
 
-	<p style="text-align: center;"><a href="{{ route('stats.players') }}" class="button button-success">Odnos između igrača</a></p>
+	<div class="button-actions">
+		<a href="{{ route('stats.players') }}" class="button round small">{{ icn('torsos') }} Odnos između igrača</a>
+	</div>
 
-	<br><hr>
+	<hr>
+
+</div>
 
 @stop

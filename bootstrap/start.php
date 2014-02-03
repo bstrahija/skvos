@@ -1,5 +1,7 @@
 <?php
 
+setlocale(LC_TIME, 'hr_HR.UTF-8');
+
 /*
 |--------------------------------------------------------------------------
 | Create The Application
@@ -13,7 +15,12 @@
 
 $app = new Illuminate\Foundation\Application;
 
-$app->redirectIfTrailingSlash();
+/*
+|--------------------------------------------------------------------------
+| Try to load file with environment variables
+|--------------------------------------------------------------------------
+*/
+try { @Dotenv::load(__DIR__.'/../'); } catch(Exception $e) { }
 
 /*
 |--------------------------------------------------------------------------
@@ -21,17 +28,16 @@ $app->redirectIfTrailingSlash();
 |--------------------------------------------------------------------------
 |
 | Laravel takes a dead simple approach to your application environments
-| so you can just specify a machine name or HTTP host that matches a
+| so you can just specify a machine name for the host that matches a
 | given environment, then we will automatically detect it for you.
 |
 */
 
-$env = $app->detectEnvironment(array(
+$env = $app->detectEnvironment(function() {
 
-	'production' => array('skvosh.in', 'www.skvosh.in', 'creo', 'krustr', 'creolab.hr'),
-	'local'      => array('skvosh.dev', '127.0.0.1', 'MBP', 'MBP.local', ''),
+	return getenv('APP_ENV') ?: 'development';
 
-));
+});
 
 /*
 |--------------------------------------------------------------------------
@@ -51,7 +57,7 @@ $app->bindInstallPaths(require __DIR__.'/paths.php');
 | Load The Application
 |--------------------------------------------------------------------------
 |
-| Here we will load the Illuminate application. We'll keep this is in a
+| Here we will load this Illuminate application. We will keep this in a
 | separate location so we can isolate the creation of an application
 | from the actual running of the application with a given request.
 |

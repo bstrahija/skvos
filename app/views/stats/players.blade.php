@@ -1,30 +1,32 @@
-@extends('_layout.default')
+@extends('_layout.master')
 
-@section('content')
+@section('page_title') Statistika @stop
 
-	<h3 class="c">Mečevi i setovi</h3>
+@section('main')
+
+<div class="stats row">
+
+	<h2 class="pg">
+		<i class="fi-graph-bar"></i> Statistika
+	</h2>
+
 	<hr>
 
-	{{ Form::open(array('route' => 'stats.players', 'method' => 'get', 'style' => 'text-align: center;')) }}
-		<br>
+	{{ Form::open(['route' => 'stats.players', 'method' => 'get']) }}
+		<ul class="small-block-grid-2 medium-block-grid-3 player-picker">
+			@foreach ($players as $player)
+				<li>
+					<input type="checkbox" name="players[]" value="{{ $player->id }}" id="players_{{ $player->id }}" {{ in_array($player->id, (array) Input::get('players')) ? ' checked="checked"' : null }}>
+					<label for="players_{{ $player->id }}">{{ $player->nickname }}</label>
+				</li>
+			@endforeach
+		</ul>
 
-		{{ Form::select('player1', $users->lists('first_name', 'id'), Input::get('player1')) }}
+		<hr>
 
-		<p>Vs</p>
-
-		{{ Form::select('player2', $player_select, Input::get('player2')) }}
-
-		<p>Vs</p>
-
-		{{ Form::select('player3', $player_select, Input::get('player3')) }}
-
-		<p>Vs</p>
-
-		{{ Form::select('player4', $player_select, Input::get('player4')) }}
-
-		<br>
-		<button type="submit" class="button button-rounded button-action button-save submit">Prikaži</button>
-
+		<div class="button-actions">
+			<button type="submit" class="button small round">Prikaži</button>
+		</div>
 	{{ Form::close() }}
 
 	<hr>
@@ -33,19 +35,12 @@
 		@foreach ($player_stats as $stats)
 			<?php //echo '<pre>'; print_r(var_dump($stats)); echo '</pre>'; ?>
 
-			<table class="table" style="text-align: center;">
+			<table>
 				<thead>
 					<tr>
-						<th>{{ $stats[0]['stats']->first_name }}</th>
-						<th title="Matches played / Odigrani mečevi">MP</th>
-						<th title="Matches won / Dobiveni mečeva">MW</th>
-						<th title="Matches lost / Izgubljeni mečevi">ML</th>
-						<th title="Match efficiency / Efikasnost">ME</th>
-
-						<th title="Sets played / Odigrani setovi">SP</th>
-						<th title="Sets won / Dobiveni setovi">SW</th>
-						<th title="Sets lost / Izgubljeni setovi">SL</th>
-						<th title="Set efficiency / Efikasnost">SE</th>
+						<th class="l">{{ $stats[0]['stats']->nickname }}</th>
+						<th title="Mečevi" class="r">Mečevi</th>
+						<th title="Setovi" class="r">Setovi</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -56,16 +51,18 @@
 
 					@foreach ($stats as $stat)
 						<tr>
-							<td><i style="color: #aaa; font-size: 10px;">vs</i> {{ $stat['opponent']->first_name }}</td>
-							<td>{{ (int) $stat['stats']->matches_played }}</td>
-							<td style="color: #0a0;"><strong>{{ (int) $stat['stats']->matches_won }}</strong></td>
-							<td style="color: #c00;">{{ (int) $stat['stats']->matches_played - $stat['stats']->matches_won }}</td>
-							<td>{{ ($stat['stats']->matches_played) ? round($stat['stats']->matches_won / $stat['stats']->matches_played, 3) * 100 : 0 }}%</td>
+							<td><i style="color: #aaa; font-size: 10px;">vs</i> {{ $stat['opponent']->nickname }}</td>
+							<td class="r">
+								<strong>{{ ($stat['stats']->matches_played) ? number_format(($stat['stats']->matches_won / $stat['stats']->matches_played) * 100, 2) : 0 }}%</strong><br>
+								{{ (int) $stat['stats']->matches_won }} /
+								{{ (int) $stat['stats']->matches_played }}
+							</td>
 
-							<td>{{ (int) $stat['stats']->sets_played }}</td>
-							<td style="color: #0a0;">{{ (int) $stat['stats']->sets_won }}</td>
-							<td style="color: #c00;">{{ (int) $stat['stats']->sets_played - $stat['stats']->sets_won }}</td>
-							<td>{{ ($stat['stats']->sets_played) ? round($stat['stats']->sets_won / $stat['stats']->sets_played, 3) * 100 : 0 }}%</td>
+							<td class="r">
+								<strong>{{ ($stat['stats']->sets_played) ? number_format(($stat['stats']->sets_won / $stat['stats']->sets_played) * 100, 2) : 0 }}%</strong><br>
+								{{ (int) $stat['stats']->sets_won }} /
+								{{ (int) $stat['stats']->sets_played }}
+							</td>
 						</tr>
 
 						<?php
@@ -81,16 +78,16 @@
 					@endforeach
 
 					<tr>
-						<th>Total</th>
-						<th>{{ $mp }}</th>
-						<th>{{ $mw }}</th>
-						<th>{{ $ml }}</th>
-						<th>{{ ($mp) ? round($mw / $mp, 3) * 100 : 0 }}%</th>
+						<th class="l">Total</th>
+						<th class="r">
+							<strong style="color: rgba(100,255,100,.7);">{{ ($mp) ? number_format(($mw / $mp) * 100, 2) : 0 }}%</strong><br>
+							{{ $mw }} / {{ $mp }}
+						</th>
 
-						<th>{{ $sp }}</th>
-						<th>{{ $sw }}</th>
-						<th>{{ $sl }}</th>
-						<th>{{ ($sp) ? round($sw / $sp, 3) * 100 : 0 }}%</th>
+						<th class="r">
+							<strong style="color: rgba(100,255,100,.5);">{{ ($sp) ? number_format(($sw / $sp) * 100, 2) : 0 }}%</strong><br>
+							{{ $sw }} / {{ $sp }}
+						</th>
 					</tr>
 				</tbody>
 			</table>
@@ -98,17 +95,11 @@
 			<hr><br>
 		@endforeach
 	@else
-		<br>
-		<p>Nema statistike</p>
-		<br><br><br>
-		<hr>
+
+		<p class="not-found"><i class="fi-alert"></i> Nema statistike. <br>Probaj ponovno odabrati igrače.</p>
+
 	@endif
 
-
-
-
-	<p style="text-align: center;"><a href="{{ route('stats') }}" class="button button-success">Odnos između svih igrača</a></p>
-
-	<br><hr>
+</div>
 
 @stop

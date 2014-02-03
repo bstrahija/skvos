@@ -1,102 +1,84 @@
-@extends('_layout.default')
+@extends('_layout.master')
 
-@section('content')
+@section('page_title') Izmijeni termin @stop
 
-	<div class="form">
-		<h2>Izmijeni termin</h2>
+@section('main')
 
-		@include('_partial.notifications')
+	<h2 class="pg">
+		<i class="fi-trophy"></i> Izmijeni termin
+		<em class="right"><a href="{{ route('events.index') }}" class="button tiny alert round"><i class="fi-arrow-left"></i></a></em>
+	</h2>
 
-		{{ Form::model($event, array('route' => array('events.update', $event->id), 'method' => 'put')) }}
+	<hr>
 
-			<div class="control-group">
-				<label for="title" class="control-label">Title</label>
-				<div class="controls">
-					{{ Form::text('title', null, array('class' => 'title')) }}
+	{{ Form::open(['route' => ['events.update', $event->id], 'method' => 'put']) }}
+
+		<div class="row">
+			<div class="columns">
+				<label for="title">Naziv</label>
+				<input type="text" name="title" id="title" placeholder="" value="{{ Input::old('title', $event->title) }}">
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="columns">
+				<label for="">Kada?</label>
+				<select name="date" id="date">
+					@for ($days = 0; $days <= 60; $days++)
+						<option value="{{ Carbon::now()->addDays($days)->format('Y-m-d') }}" {{ Carbon::now()->addDays($days)->format('Y-m-d') == $event->date->format('Y-m-d') ? 'selected="selected"' : null }}>
+							{{ Carbon::now()->addDays($days)->format('d.m.Y. l') }}
+						</option>
+					@endfor
+				</select>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="columns">
+				<label for="time">Vrijeme</label>
+
+				<div class="row">
+					<div class="columns small-6">
+						<select name="from" id="from" class="select2">
+							@for ($hours = 0; $hours <= 23; $hours++)
+							<option value="{{ $hours }}:00" {{ ($hours == $event->from->format('H'))                                     ? 'selected="selected"' : '' }}>{{ $hours }}:00</option>
+							<option value="{{ $hours }}:30" {{ ($hours == $event->from->format('H') and $event->from->format('i') == 30) ? 'selected="selected"' : '' }}>{{ $hours }}:30</option>
+							@endfor
+						</select>
+					</div>
+
+					<div class="columns small-6">
+						<select name="to" id="to" class="select2" placeholder="Test 123">
+							@for ($hours = 0; $hours <= 23; $hours++)
+								<option value="{{ $hours }}:00" {{ ($hours == $event->to->format('H'))                                   ? 'selected="selected"' : '' }}>{{ $hours }}:00</option>
+								<option value="{{ $hours }}:30" {{ ($hours == $event->to->format('H') and $event->to->format('i') == 30) ? 'selected="selected"' : '' }}>{{ $hours }}:30</option>
+							@endfor
+						</select>
+					</div>
 				</div>
 			</div>
+		</div>
 
-			<div class="control-group">
-				<label for="date" class="control-label">Datum</label>
-				<div class="controls">
-					<select name="date" id="date" class="select2">
-						@for ($days = 0; $days <= 60; $days++)
-							<option value="{{ Carbon::now()->addDays($days)->format('Y-m-d') }}" <?php echo ($event->date == Carbon::now()->addDays($days)->format('Y-m-d')) ? 'selected="selected"' : '' ?>>
-								{{ Carbon::now()->addDays($days)->format('d.m.Y. l') }}
-							</option>
-						@endfor
-					</select>
-				</div>
+		<div class="row">
+			<div class="columns">
+				<label for="players">Igrači</label>
+
+				<ul class="small-block-grid-2 medium-block-grid-3 player-picker">
+					@foreach ($event->invitees as $player)
+						<li>
+							<input type="checkbox" name="players[]" value="{{ $player->id }}" id="players_{{ $player->id }}"><label for="players_{{ $player->id }}">{{ $player->full_name }}</label>
+						</li>
+					@endforeach
+				</ul>
 			</div>
+		</div>
 
-			<div class="control-group">
-				<label for="time" class="control-label">Vrijeme</label>
-				<div class="controls">
-					<select name="from" id="from" class="select2">
-						@for ($hours = 0; $hours <= 23; $hours++)
-							<option value="{{ $hours }}:00" <?php echo (date('H:i', strtotime($event->from)) == $hours.':00') ? 'selected="selected"' : ''; ?>>{{ $hours }}:00</option>
-							<option value="{{ $hours }}:30" <?php echo (date('H:i', strtotime($event->from)) == $hours.':30') ? 'selected="selected"' : ''; ?>>{{ $hours }}:30</option>
-						@endfor
-					</select>
+		<hr>
 
-					<br><br>
-					<select name="to" id="to" class="select2" placeholder="Test 123">
-						@for ($hours = 0; $hours <= 23; $hours++)
-							<option value="{{ $hours }}:00" <?php echo (date('H:i', strtotime($event->to)) == $hours.':00') ? 'selected="selected"' : ''; ?>>{{ $hours }}:00</option>
-							<option value="{{ $hours }}:30" <?php echo (date('H:i', strtotime($event->to)) == $hours.':30') ? 'selected="selected"' : ''; ?>>{{ $hours }}:30</option>
-						@endfor
-					</select>
-				</div>
-			</div>
+		<div class="row actions">
+			<button type="submit" class="button round">Spremi izmjene</button>
+		</div>
 
-			<div class="control-group">
-				<label for="players" class="control-label">Igrači</label>
-				<div class="controls">
-					<select name="players[]" id="players" class="multiselect" multiple>
-						@foreach ($users as $user)
-							<option value="{{ $user->id }}" <?php echo ($event->isUserInvited($user->id)) ? 'selected="selected"' : '' ?>>{{ $user->full_name }}</option>
-						@endforeach
-					</select>
-				</div>
-			</div>
-
-			<div class="control-group">
-				<label for="players" class="control-label">Potvrde</label>
-				<div class="controls attendance">
-					<table class="table">
-						<thead>
-							<tr>
-								<th><i class="icon-check-sign"></i></th>
-								<th>Igrač</th>
-								<th><i class="icon-thumbs-up"></i> / <i class="icon-thumbs-down"></i></th>
-							</tr>
-						</thead>
-						<tbody>
-							@foreach ($invitees as $user)
-								<?php $status = $event->isUserConfirmed($user->id) ? 'confirmed' : 'unknown'; ?>
-								<?php $status = $event->isUserCancelled($user->id) ? 'cancelled' : $status; ?>
-
-								<tr class="status status-{{ $status }}">
-									<td class="status"><i class="icon-check-sign"></i></td>
-									<td>{{ $user->full_name }}</td>
-									<td><select name="attendance[{{ $user->id }}]" id="attendance" style="font-size: 11px; height: 130%;">
-										<option value="">Neizjašnjen</option>
-										<option value="confirmed" <?php echo ($event->isUserConfirmed($user->id)) ? 'selected="selected"' : '' ?>>Dolazi</option>
-										<option value="cancelled" <?php echo ($event->isUserCancelled($user->id)) ? 'selected="selected"' : '' ?>>Ne dolazi</option>
-									</select></td>
-								</tr>
-							@endforeach
-						</tbody>
-					</table>
-				</div>
-			</div>
-
-			<div class="form-actions">
-				<hr>
-				<a href="#" class="button button-circle button-action button-save submit"><i class="icon-cloud-upload"></i></a>
-			</div>
-
-		{{ Form::close() }}
-	</div>
+	{{ Form::close() }}
 
 @stop

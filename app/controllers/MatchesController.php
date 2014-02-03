@@ -1,80 +1,74 @@
 <?php namespace App\Controllers;
 
-use App\Models\Event, App\Models\Invitation, App\Models\Match, App\Models\User;
-use Auth, Input, Notification, Redirect, Request, View;
+use App, Input, Redirect, View;
+use App\Repositories\MatchRepository;
+use App\Repositories\EventRepository;
 
 class MatchesController extends BaseController {
 
 	/**
-	 * Restrict access to some methods
+	 * Match repository
+	 * @var MatchRepository
 	 */
-	public function __construct()
+	protected $matches;
+
+	/**
+	 * Event repo
+	 * @var EventRepository
+	 */
+	protected $events;
+
+	/**
+	 * Init dependencies
+	 * @param MatchRepository $matches
+	 * @param EventRepository $events
+	 */
+	public function __construct(MatchRepository $matches, EventRepository $events)
 	{
-		// Protect some methods
-		$this->beforeFilter('admin', array('only' => array('create', 'store')));
+		$this->matches = $matches;
+		$this->events  = $events;
 	}
 
 	/**
-	 * Store a new match result
-	 * @return Redirect
-	 */
-	public function store()
-	{
-		$match = new Match;
-		$match->player1_id       = Input::get('player1_id');
-		$match->player2_id       = Input::get('player2_id');
-		$match->player1_sets_won = Input::get('player1_sets_won');
-		$match->player2_sets_won = Input::get('player2_sets_won');
-		$match->event_id         = Input::get('event_id');
-
-		// Determine winner
-		if ($match->player1_sets_won > $match->player2_sets_won) $match->winner_id = $match->player1_id;
-		else                                                     $match->winner_id = $match->player2_id;
-
-		// Save it
-		$match->save();
-
-		Notification::success("Meč je uspješno upisan");
-
-		return Redirect::back();
-	}
-
-	/**
-	 * Edit a match result
-	 * @param  integer $id
+	 * Edit a match
+	 * @param  int $id
 	 * @return View
 	 */
 	public function edit($id)
 	{
-		$match  = Match::find($id);
-		$scores = array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15);
+		$match   = $this->matches->find($id);
+		$event   = $this->events->find($match->event_id);
+		$players = $event->attendees;
 
-		return View::make('matches.edit', array('match' => $match, 'scores' => $scores));
+		return View::make('matches.edit', compact('match', 'event', 'players'));
 	}
 
 	/**
-	 * Update match data
-	 * @param  integer $id
+	 * Update a match
+	 * @param  int $id
 	 * @return Redirect
 	 */
 	public function update($id)
 	{
-		$match = Match::find($id);
-		$match->player1_id       = Input::get('player1_id');
-		$match->player2_id       = Input::get('player2_id');
-		$match->player1_sets_won = Input::get('player1_sets_won');
-		$match->player2_sets_won = Input::get('player2_sets_won');
+		if ($match = $this->matches->update($id, Input::all()))
+		{
+			return Redirect::route('events.show', $match->event_id)->withAlertSuccess('Spremljeno.');
+		}
 
-		// Determine winner
-		if ($match->player1_sets_won > $match->player2_sets_won) $match->winner_id = $match->player1_id;
-		else                                                     $match->winner_id = $match->player2_id;
+		return Redirect::back()->withErrors($this->matches->errors());
+	}
 
-		// Save it
-		$match->save();
+	/**
+	 * Delete a match
+	 * @param  int $id
+	 * @return Redirect
+	 */
+	public function destroy($id)
+	{
+		$match = $this->matches->find($id);
+		$this->matches->delete($id);
 
-		Notification::success("Meč je uspješno upisan");
-
-		return Redirect::back();
+		return Redirect::route('events.show', $match->event_id)->withAlertSuccess('Obrisano.');
 	}
 
 }

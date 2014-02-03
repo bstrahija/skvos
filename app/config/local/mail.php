@@ -2,12 +2,16 @@
 
 return array(
 
-	'driver'    => 'smtp',
-	'host'      => 'smtp.mandrillapp.com',
-	'port'      => 2525,
-	'username'  => 'bstrahija@gmail.com',
-	'password'  => 'mdeL85811IMLygAZ8jdRTg',
-	'from'      => array('address' => 'info@skvosh.in', 'name' => 'Skvosh.in'),
-	'whitelist' => array('bstrahija@gmail.com', 'boris@creolab.hr', 'strija@gmail.com', 'boris.strahija@nth.ch', 'office@creolab.hr'),
+	'pretend' => true,
+
+	'host'       => 'smtp.mandrillapp.com',
+	'port'       => 587,
+	'from'       => array('address' => 'info@skvosh.in', 'name' => 'Skvosh.in'),
+	'encryption' => 'tls',
+	'username'   => 'bstrahija@gmail.com',
+	'password'   => 'mdeL85811IMLygAZ8jdRTg',
+
+	'whitelist' => array('bstrahija@gmail.com'),
+	'blacklist' => array(),
 
 );

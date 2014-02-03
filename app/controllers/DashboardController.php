@@ -1,21 +1,53 @@
 <?php namespace App\Controllers;
 
-use App\Models\Event, App\Models\Match, Redirect, Request, View;
+use Auth, View;
+use App\Repositories\EventRepository;
+use App\Repositories\InvitationRepository;
+use App\Services\Stats;
 
 class DashboardController extends BaseController {
 
-	public function getIndex()
-	{
-		// Get all upcoming events and last 5 past events
-		$nextEvent      = Event::next()->first();
-		$upcomingEvents = Event::upcoming()->skip(1)->take(10)->get();
-		$pastEvents     = Event::past()->take(5)->get();
+	/**
+	 * Events repository
+	 * @var EventRepository
+	 */
+	protected $events;
 
-		return View::make('dashboard.index', array(
-			'events' => $upcomingEvents,
-			'event'  => $nextEvent,
-			'past'   => $pastEvents,
-		));
+	/**
+	 * Stats service
+	 * @var Stats
+	 */
+	protected $stats;
+
+	/**
+	 * Init rependencies
+	 * @param EventRepository      $events
+	 * @param InvitationRepository $invitations
+	 * @param Stats                $stats
+	 */
+	public function __construct(EventRepository $events, InvitationRepository $invitations, Stats $stats)
+	{
+		$this->events      = $events;
+		$this->invitations = $invitations;
+		$this->stats       = $stats;
+	}
+
+	/**
+	 * Display the user dashboard
+	 * @return View
+	 */
+	public function index()
+	{
+		// Get next event that I'm invited to
+		$event = $this->events->nextForUser(Auth::user()->id);
+		$last  = $this->events->lastForUser(Auth::user()->id);
+		$stats = $this->stats->forUser(Auth::user()->id);
+
+		// Also get invitation for event
+		if ($event) $invitation = $this->invitations->forEventAndUser($event->id, Auth::user()->id);
+		else        $invitation = null;
+
+		return View::make('dashboard.index')->withEvent($event)->withStats($stats)->withInvitation($invitation)->withLast($last);
 	}
 
 }

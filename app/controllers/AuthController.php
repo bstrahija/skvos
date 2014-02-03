@@ -1,43 +1,37 @@
 <?php namespace App\Controllers;
 
-use App\Models\User;
-use Auth, Input, Redirect, Request, View;
+use Auth, Input, Redirect, View;
 
 class AuthController extends BaseController {
 
 	/**
-	 * Display login screen
+	 * Display login form
 	 * @return View
 	 */
-	public function getLogin()
+	public function login()
 	{
 		return View::make('auth.login');
 	}
 
 	/**
-	 * Attempt to login with credentials
+	 * Attempt to login a user
 	 * @return Redirect
 	 */
-	public function postLogin()
+	public function attempt()
 	{
-		$credentials = array(
-			'email'    => Input::get('email'),
-			'password' => Input::get('password')
-		);
-
-		if (Auth::attempt($credentials, true))
+		if (Auth::attempt(Input::only('email', 'password'), true))
 		{
-			return Redirect::route('dashboard');
+			return Redirect::route('home');
 		}
 
-		return Redirect::route('login')->withErrors(array('login' => 'Wrong username or password!'));
+		return Redirect::route('login')->withInput()->withErrors(array('login' => trans('messages.Wrong email or password')));
 	}
 
 	/**
-	 * Terminate user session
+	 * Logout a user
 	 * @return Redirect
 	 */
-	public function getLogout()
+	public function logout()
 	{
 		Auth::logout();
 
