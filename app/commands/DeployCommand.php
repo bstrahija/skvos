@@ -35,7 +35,7 @@ class DeployCommand extends Command {
 		$this->info("Deploying to $target...");
 		$this->line("");
 		$this->line("Target directory: [$dir] ...");
-		$this->line("---");
+		$this->line("");
 
 		SSH::into('ocean')->run(array(
 			"cd $dir",
@@ -52,7 +52,6 @@ class DeployCommand extends Command {
 			"php artisan up",
 		));
 
-		$this->line("---");
 		$this->info("Done.");
 	}
 
