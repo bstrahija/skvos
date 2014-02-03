@@ -92,9 +92,9 @@
 	<hr>
 
 	<div class="button-actions">
-		<a href="https://twitter.com/intent/tweet?text={{ urlencode($user->full_name.': squash rezultati #squash #skvoshin') }}&amp;url={{ urlencode(route('showcase', $user->id)) }}" class="button tiny round" data-ajax="false" target="_blank">{{ icn('social-twitter') }} Tweet</a>
+		<a href="https://twitter.com/intent/tweet?text={{ urlencode($user->full_name.': squash rezultati #squash #skvoshin') }}&amp;url={{ urlencode(route('showcase', strtolower($user->nickname))) }}" class="button tiny round" data-ajax="false" target="_blank">{{ icn('social-twitter') }} Tweet</a>
 		&nbsp;&nbsp;
-		<a href="http://www.facebook.com/sharer/sharer.php?u={{ urlencode(route('showcase', $user->id)) }}" class="button tiny round" data-ajax="false" target="_blank">{{ icn('social-facebook') }} Like</a>
+		<a href="http://www.facebook.com/sharer/sharer.php?u={{ urlencode(route('showcase', strtolower($user->nickname))) }}" class="button tiny round" data-ajax="false" target="_blank">{{ icn('social-facebook') }} Like</a>
 	</div>
 
 </div>
