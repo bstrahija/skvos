@@ -52,14 +52,17 @@
 		</div>
 	{{ Form::close() }}
 
-	<hr>
+	@if (role('admin'))
+		<hr>
 
-	<div class="row button-actions match-add-actions button-actions">
-		{{ Form::open(['route' => ['matches.destroy', $match->id], 'method' => 'delete', 'class' => 'match-delete-form']) }}
-			<button type="submit" class="button alert success round">{{ icn('trash') }} Obriši meč</button>
-		{{ Form::close() }}
-	</div>
+		<p class="not-found">{{ icn('alert') }} Pažnja!</p>
 
+		<div class="row button-actions match-add-actions button-actions">
+			{{ Form::open(['route' => ['matches.destroy', $match->id], 'method' => 'delete', 'class' => 'match-delete-form']) }}
+				<button type="submit" class="button alert success round">{{ icn('trash') }} Obriši meč</button>
+			{{ Form::close() }}
+		</div>
+	@endif
 
 </div>
 
