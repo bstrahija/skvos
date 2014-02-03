@@ -114,6 +114,7 @@
 					$target.html($page.html());
 
 					// Init
+					localStorage.removeItem("lasturl");
 					if (App.initAlways) App.initAlways();
 
 					// Done

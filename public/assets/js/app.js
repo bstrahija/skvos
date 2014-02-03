@@ -52,6 +52,40 @@ App = {
 		App.Matches.initAlways();
 		App.Invitations.initAlways();
 		App.Events.initAlways();
+		App.initState();
+	},
+
+	/**
+	 * Init last state from local storage
+	 * @return {void}
+	 */
+	initState: function() {
+		// Only when supported and on homepage
+		if ($("html").hasClass("localstorage")) {
+			if (document.URL == APP_URL+"/") {
+				var lastUrl = localStorage.getItem("lasturl");
+
+				if (lastUrl && lastUrl != APP_URL && lastUrl != APP_URL+"/" && lastUrl != APP_URL+"/login" && ! document.referrer)
+				{
+					localStorage.removeItem("lasturl");
+					Crajax.init();
+					Crajax.load(lastUrl, true, true);
+				}
+			}
+
+			// Save the state on all other pages
+			else {
+				App.saveState();
+			}
+		}
+	},
+
+	/**
+	 * Save the state for easy recovery
+	 * @return {void}
+	 */
+	saveState: function() {
+		localStorage.setItem("lasturl", document.URL);
 	}
 
 };
