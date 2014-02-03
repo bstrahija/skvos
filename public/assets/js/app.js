@@ -17,9 +17,12 @@ App = {
 
 		// ! Toggle the menu
 		$(".menu-toggle").click(function() {
-			$("#nav, #main, #hd1").toggleClass("menu-active");
+			$("#nav, #main, #hd1, #off-canvas").toggleClass("menu-active");
 
 			return false;
+		});
+		$("#off-canvas").click(function() {
+			$("#nav, #main, #hd1, #off-canvas").removeClass("menu-active");
 		});
 
 		App.initAlways();

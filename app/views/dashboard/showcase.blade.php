@@ -102,6 +102,8 @@
 		<a href="http://www.facebook.com/sharer/sharer.php?u={{ urlencode(route('showcase', strtolower($user->nickname))) }}" class="button tiny round" data-ajax="false" target="_blank">{{ icn('social-facebook') }} Like</a>
 	</div>
 
+	<hr>
+
 </div>
 
 @stop

@@ -20,7 +20,7 @@
 
 	</div>
 
-	<a class="exit-off-canvas"></a>
+	<a id="off-canvas"></a>
 </div>
 
 <script>

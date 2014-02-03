@@ -10,7 +10,10 @@
 			</div>
 
 			<div class="columns small-10">
-				<h3>Bok, <em>{{ Auth::user()->nickname }}</em></h3>
+				<h3>
+					Bok, <em>{{ Auth::user()->nickname }}</em>
+					<a href="#" onclick="window.location.reload(true); return false;" class="refresh right"><i class="fi-refresh"></i></a>
+				</h3>
 			</div>
 		</div>
 
