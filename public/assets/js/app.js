@@ -60,6 +60,8 @@ App = {
 	 * @return {void}
 	 */
 	initState: function() {
+		var loading = false;
+
 		// Only when supported and on homepage
 		if ($("html").hasClass("localstorage")) {
 			if (document.URL == APP_URL+"/") {
@@ -67,6 +69,7 @@ App = {
 
 				if (lastUrl && lastUrl != APP_URL && lastUrl != APP_URL+"/" && lastUrl != APP_URL+"/login" && ! document.referrer)
 				{
+					loading = true;
 					localStorage.removeItem("lasturl");
 					Crajax.init();
 					Crajax.load(lastUrl, true, true);
@@ -78,6 +81,8 @@ App = {
 				App.saveState();
 			}
 		}
+
+		if ( ! loading) $("#main").show();
 	},
 
 	/**
