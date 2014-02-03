@@ -9,7 +9,7 @@
 		MVP :
 		<strong class="mvp">{{ icn('trophy') }} {{ $event->mvp->full_name }}</strong><br>
 		<small>
-			<span>ME : <strong>{{ $leaderboard->first()->stats->match_efficiency }}%</strong> ({{ $leaderboard->first()->stats->matches_won }}/{{ $leaderboard->first()->stats->matches_lost }})</span>
+			<span><strong>{{ $leaderboard->first()->stats->match_efficiency }}%</strong> ({{ $leaderboard->first()->stats->matches_won }}/{{ $leaderboard->first()->stats->matches_played }})</span>
 			<span>Bodovi: <strong>{{ $leaderboard->first()->points }}</strong></span>
 		</small>
 	@else
