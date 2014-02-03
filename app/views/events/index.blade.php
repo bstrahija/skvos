@@ -5,7 +5,7 @@
 @section('main')
 
 	<div class="events">
-		<h2 class="pg"><i class="fi-trophy"></i> Slijedeći termin</h2><hr>
+		<h2 class="pg">{{ icn('trophy') }} Slijedeći termin</h2><hr>
 
 		@if (isset($event) and $event)
 			<ul class="event-list upcoming">
@@ -28,7 +28,7 @@
 
 		<!-- ! Upcoming -->
 
-		<h2 class="pg"><i class="fi-calendar"></i> Budući termini</h2><hr>
+		<h2 class="pg">{{ icn('calendar') }} Budući termini</h2><hr>
 
 		@if (isset($upcoming) and ! $upcoming->isEmpty())
 			<ul class="event-list upcoming">
@@ -45,7 +45,7 @@
 
 		<!-- ! Past -->
 
-		<h2 class="pg"><i class="fi-archive"></i> Prošli Termini</h2><hr>
+		<h2 class="pg">{{ icn('archive') }} Prošli Termini</h2><hr>
 
 		@if (isset($past) and ! $past->isEmpty())
 			<ul class="event-list past">

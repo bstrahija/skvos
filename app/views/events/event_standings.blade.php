@@ -4,7 +4,7 @@
 
 	<table>
 		<thead>
-			<th class="l"><i class="fi-torso"></i></th>
+			<th class="l">{{ icn('torso') }}</th>
 			<th class="r">Mečevi</th>
 			<th class="r">Setovi</th>
 			<th class="r">Bodovi</th>

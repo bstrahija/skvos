@@ -16,9 +16,9 @@
 					</select>
 
 					<ul class="button-group round">
-						<li><a href="#" class="inc-dec dec button"><i class="fi-minus"></i></a></li>
+						<li><a href="#" class="inc-dec dec button">{{ icn('minus') }}</a></li>
 						<li><span class="button secondary res1 res"><input type="text" name="player1_score" class="score" value="0" readonly="readonly"></span></li>
-						<li><a href="#" class="inc-dec inc button success"><i class="fi-plus"></i></a></li>
+						<li><a href="#" class="inc-dec inc button success">{{ icn('plus') }}</a></li>
 					</ul>
 				</div>
 
@@ -30,9 +30,9 @@
 					</select>
 
 					<ul class="button-group round right">
-						<li><a href="#" class="inc-dec dec button"><i class="fi-minus"></i></a></li>
+						<li><a href="#" class="inc-dec dec button">{{ icn('minus') }}</a></li>
 						<li><span class="button secondary res2 res"><input type="text" name="player2_score" class="score" value="0" readonly="readonly"></span></li>
-						<li><a href="#" class="inc-dec inc button success"><i class="fi-plus"></i></a></li>
+						<li><a href="#" class="inc-dec inc button success">{{ icn('plus') }}</a></li>
 					</ul>
 				</div>
 			</div>
@@ -59,13 +59,13 @@
 			@endif<br>
 
 			MVP :
-			<strong class="mvp"><i class="fi-trophy"></i> {{ $event->mvp->full_name }}</strong>
+			<strong class="mvp">{{ icn('trophy') }} {{ $event->mvp->full_name }}</strong>
 		@else
 			Temin je završio.
 		@endif
 	</h3><hr>
 
-	<!-- <p class="warning"><i class="fi-alert"></i> Ne može se unijeti meč jer temin nije počeo ili je već završio.</p> -->
+	<!-- <p class="warning">{{ icn('alert') }} Ne može se unijeti meč jer temin nije počeo ili je već završio.</p> -->
 
 @else
 

@@ -7,7 +7,7 @@
 <div class="page match edit-match">
 
 	<h2 class="pg">
-		<i class="fi-trophy"></i> Izmijeni meč
+		{{ icn('trophy') }} Izmijeni meč
 		<em class="right"><a href="{{ route('events.show') }}" class="button tiny alert round">{{ icn('arrow-left') }}</a></em>
 	</h2>
 
@@ -24,9 +24,9 @@
 				</select>
 
 				<ul class="button-group round">
-					<li><a href="#" class="inc-dec dec button"><i class="fi-minus"></i></a></li>
+					<li><a href="#" class="inc-dec dec button">{{ icn('minus') }}</a></li>
 					<li><span class="button secondary res1 res"><input type="text" name="player1_score" class="score" value="{{ $match->player1_score }}" readonly="readonly"></span></li>
-					<li><a href="#" class="inc-dec inc button success"><i class="fi-plus"></i></a></li>
+					<li><a href="#" class="inc-dec inc button success">{{ icn('plus') }}</a></li>
 				</ul>
 			</div>
 
@@ -38,9 +38,9 @@
 				</select>
 
 				<ul class="button-group round right">
-					<li><a href="#" class="inc-dec dec button"><i class="fi-minus"></i></a></li>
+					<li><a href="#" class="inc-dec dec button">{{ icn('minus') }}</a></li>
 					<li><span class="button secondary res2 res"><input type="text" name="player2_score" class="score" value="{{ $match->player2_score }}" readonly="readonly"></span></li>
-					<li><a href="#" class="inc-dec inc button success"><i class="fi-plus"></i></a></li>
+					<li><a href="#" class="inc-dec inc button success">{{ icn('plus') }}</a></li>
 				</ul>
 			</div>
 		</div>

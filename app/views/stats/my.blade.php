@@ -7,7 +7,7 @@
 <div class="stats row">
 
 	<h2 class="pg">
-		<i class="fi-graph-bar"></i> Statistika
+		{{ icn('graph-bar') }} Statistika
 		<em class="right">{{ Auth::user()->nickname }}</em>
 	</h2>
 

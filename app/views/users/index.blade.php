@@ -7,8 +7,8 @@
 <div class="page users">
 
 	<h2 class="pg">
-		<i class="fi-torsos"></i> Igrači
-		<em class="right"><a href="{{ route('users.create') }}" class="button tiny round success"><i class="fi-plus"></i> Dodaj</a></em>
+		{{ icn('torsos') }} Igrači
+		<em class="right"><a href="{{ route('users.create') }}" class="button tiny round success">{{ icn('plus') }} Dodaj</a></em>
 	</h2>
 
 	<hr>

@@ -25,8 +25,8 @@
 					</em>
 				</a>
 				<a href="#" data-reveal-id="event-attendance-popup-{{ $event->id }}" data-reveal>
-					<span class="attendees"><i class="fi-like"></i> {{ count($event->attendees) }}</span> /
-					<span class="invitees"><i class="fi-torso"></i> {{ count($event->invitees) }}</span>
+					<span class="attendees">{{ icn('like') }} {{ count($event->attendees) }}</span> /
+					<span class="invitees">{{ icn('torso') }} {{ count($event->invitees) }}</span>
 				</a>
 
 				<div id="event-attendance-popup-{{ $event->id }}" class="reveal-modal" data-reveal>
@@ -66,7 +66,7 @@
 
 			@if (role('admin'))
 				<div class="confirmation">
-					<a href="{{ route('events.create') }}" class="button success tiny round"><i class="fi-plus"></i></a>
+					<a href="{{ route('events.create') }}" class="button success tiny round">{{ icn('plus') }}</i></a>
 				</div>
 			@endif
 		</h2>
@@ -76,7 +76,7 @@
 
 			<div class="attendance">
 				@if ($last->mvp)
-					MVP : <strong class="mvp"><i class="fi-trophy"></i> {{ $last->mvp->full_name }}</strong>
+					MVP : <strong class="mvp">{{ icn('trophy') }} {{ $last->mvp->full_name }}</strong>
 				@endif
 			</div>
 		</div>

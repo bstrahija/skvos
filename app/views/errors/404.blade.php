@@ -7,7 +7,7 @@
 <div class="page error-page">
 
 	<h2 class="pg">
-		<i class="fi-alert"></i> Error 404
+		{{ icn('alert') }} Error 404
 	</h2>
 
 	<hr>

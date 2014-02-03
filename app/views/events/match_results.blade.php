@@ -42,7 +42,7 @@
 
 		@else
 
-			<p class="not-found"><i class="fi-alert"></i> Nema rezultata.</p>
+			<p class="not-found">{{ icn('alert') }} Nema rezultata.</p>
 
 		@endif
 	</div>

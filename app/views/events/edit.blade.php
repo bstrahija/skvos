@@ -5,8 +5,8 @@
 @section('main')
 
 	<h2 class="pg">
-		<i class="fi-trophy"></i> Izmijeni termin
-		<em class="right"><a href="{{ route('events.index') }}" class="button tiny alert round"><i class="fi-arrow-left"></i></a></em>
+		{{ icn('trophy') }} Izmijeni termin
+		<em class="right"><a href="{{ route('events.index') }}" class="button tiny alert round">{{ icn('arrow-left') }}</a></em>
 	</h2>
 
 	<hr>

@@ -7,8 +7,8 @@
 <div class="page profile">
 
 	<h2 class="pg">
-		<i class="fi-torso"></i> Izmijeni igrača - <small>[{{ $user->first_name }} {{ $user->last_name }}]</small>
-		<em class="right"><a href="{{ route('users.index') }}" class="button tiny alert round"><i class="fi-arrow-left"></i></a></em>
+		{{ icn('torso') }} Izmijeni igrača - <small>[{{ $user->first_name }} {{ $user->last_name }}]</small>
+		<em class="right"><a href="{{ route('users.index') }}" class="button tiny alert round">{{ icn('arrow-left') }}</a></em>
 	</h2>
 
 	<hr>

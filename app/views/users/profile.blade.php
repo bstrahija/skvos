@@ -7,8 +7,8 @@
 <div class="page profile">
 
 	<h2 class="pg">
-		<i class="fi-torso"></i> Profil
-		<em class="right"><a href="{{ route('home') }}" class="button tiny alert round"><i class="fi-arrow-left"></i></a></em>
+		{{ icn('torso') }} Profil
+		<em class="right"><a href="{{ route('home') }}" class="button tiny alert round">{{ icn('arrow-left') }}</a></em>
 	</h2>
 
 	<hr>

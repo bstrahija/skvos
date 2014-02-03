@@ -7,7 +7,7 @@
 <div class="stats row">
 
 	<h2 class="pg">
-		<i class="fi-graph-bar"></i> Statistika
+		{{ icn('graph-bar') }} Statistika
 	</h2>
 
 	<hr>
@@ -96,7 +96,7 @@
 		@endforeach
 	@else
 
-		<p class="not-found"><i class="fi-alert"></i> Nema statistike. <br>Probaj ponovno odabrati igrače.</p>
+		<p class="not-found">{{ icn('alert') }} Nema statistike. <br>Probaj ponovno odabrati igrače.</p>
 
 	@endif
 

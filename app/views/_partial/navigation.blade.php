@@ -12,7 +12,10 @@
 			<div class="columns small-10">
 				<h3>
 					Bok, <em>{{ Auth::user()->nickname }}</em>
-					<a href="#" onclick="window.location.reload(true); return false;" class="refresh right"><i class="fi-refresh"></i></a>
+
+					@if (role('admin'))
+						<a href="#" onclick="window.location.reload(true); return false;" class="refresh right">{{ icn('refresh') }}</a>
+					@endif
 				</h3>
 			</div>
 		</div>
@@ -20,17 +23,17 @@
 		<hr>
 
 		<ul>
-			<li><a href="{{ route('home')         }}"><i class="fi-home"></i>      Pregled</a></li>
-			<li><a href="{{ route('events.index') }}"><i class="fi-calendar"></i>  Termini</a></li>
-			<li><a href="{{ route('stats')        }}"><i class="fi-graph-bar"></i> Statistika</a></li>
-			<li><a href="{{ route('profile')      }}"><i class="fi-torso"></i>     Profil</a></li>
+			<li><a href="{{ route('home')         }}">{{ icn('home') }}      Pregled</a></li>
+			<li><a href="{{ route('events.index') }}">{{ icn('calendar') }}  Termini</a></li>
+			<li><a href="{{ route('stats')        }}">{{ icn('graph-bar') }} Statistika</a></li>
+			<li><a href="{{ route('profile')      }}">{{ icn('torso') }}     Profil</a></li>
 
 			@if (role('admin'))
-				<li class="sep"><a href="{{ route('events.create') }}"><i class="fi-plus"></i> Novi termin</a></li>
-				<li><a href="{{ route('users.index') }}"><i class="fi-torso"></i> Igrači</a></li>
+				<li class="sep"><a href="{{ route('events.create') }}">{{ icn('plus') }} Novi termin</a></li>
+				<li><a href="{{ route('users.index') }}">{{ icn('torsos') }} Igrači</a></li>
 			@endif
 
-			<li class="sep"><a href="{{ route('logout') }}" data-ajax="false"><i class="fi-lock"></i> Odjava</a></li>
+			<li class="sep"><a href="{{ route('logout') }}" data-ajax="false">{{ icn('lock') }} Odjava</a></li>
 		</ul>
 	</aside>
 @endif

@@ -7,8 +7,8 @@
 <div class="event">
 
 	<h2 class="pg">
-		<em class="right"><a href="{{ route('events.index') }}" class="button tiny alert round"><i class="fi-arrow-left"></i></a></em>
-		<i class="fi-trophy"></i> Termin<br>
+		<em class="right"><a href="{{ route('events.index') }}" class="button tiny alert round">{{ icn('arrow-left') }}</a></em>
+		{{ icn('trophy') }} Termin<br>
 		<small>{{ $event->title}}</small>
 	</h2>
 
@@ -27,7 +27,7 @@
 	@else
 
 		@if (Carbon::now() >= $event->from->subMinutes(30))
-			<p class="not-found"><i class="fi-alert"></i> Nema dovoljno igrača</p>
+			<p class="not-found">{{ icn('alert') }} Nema dovoljno igrača</p>
 		@endif
 
 		@include('events.match_create')

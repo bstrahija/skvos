@@ -7,7 +7,7 @@
 <div class="page match edit-match">
 
 	<h2 class="pg">
-		<i class="fi-trophy"></i> {{ $user->full_name }}
+		{{ icn('trophy') }} {{ $user->full_name }}
 	</h2>
 
 	<hr>

@@ -7,7 +7,7 @@
 <div class="page error-page">
 
 	<h2 class="pg">
-		<i class="fi-alert"></i> Greška 403
+		{{ icn('alert') }} Greška 403
 	</h2>
 
 	<hr>

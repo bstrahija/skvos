@@ -7,7 +7,7 @@
 <div class="stats row">
 
 	<h2 class="pg">
-		<i class="fi-graph-bar"></i> Statistika
+		{{ icn('graph-bar') }} Statistika
 	</h2>
 
 	<hr>
