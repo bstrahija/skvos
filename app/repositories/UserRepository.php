@@ -1,6 +1,6 @@
 <?php namespace App\Repositories;
 
-use Hash;
+use DB, Hash;
 use App\Models\User;
 use App\Resources\Collections\UserCollection;
 use App\Resources\Items\UserItem;
@@ -35,11 +35,22 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface {
 
 	/**
 	 * Return single user
-	 * @return UserCollection
+	 * @return UserItem
 	 */
 	public function find($id, $options = null)
 	{
 		$user = User::find($id);
+
+		if ($user) return new UserItem($user->toArray());
+	}
+
+	/**
+	 * Return single user by nickname
+	 * @return UserItem
+	 */
+	public function findByNickname($nickname, $options = null)
+	{
+		$user = User::where(DB::raw("LOWER(nickname)"), DB::raw("LOWER('$nickname')"))->first();
 
 		if ($user) return new UserItem($user->toArray());
 	}

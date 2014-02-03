@@ -1,6 +1,6 @@
 <?php namespace App\Controllers;
 
-use Auth, Stats, View;
+use App, Auth, Stats, View;
 use App\Repositories\EventRepository;
 use App\Repositories\InvitationRepository;
 use App\Repositories\UserRepository;
@@ -62,13 +62,19 @@ class DashboardController extends BaseController {
 	 * @param  int $id
 	 * @return View
 	 */
-	public function showcase($id)
+	public function showcase($nickname)
 	{
 		// Get the user stats
-		$stats = Stats::forUser($id);
-		$user  = $this->users->find($id);
+		$user  = $this->users->findByNickname($nickname);
 
-		return View::make('dashboard.showcase')->withStats($stats)->withUser($user);
+		if ($user)
+		{
+			$stats = Stats::forUser($user->id);
+
+			return View::make('dashboard.showcase')->withStats($stats)->withUser($user);
+		}
+
+		App::abort(404);
 	}
 
 }

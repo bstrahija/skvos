@@ -52,7 +52,7 @@ Route::group(array('before' => 'auth'), function()
 });
 
 // ! Public routes
-Route::get('showcase/{id}',                ['as' => 'showcase',                 'uses' => 'App\Controllers\DashboardController@showcase']);
+Route::get('showcase/{nickname}',          ['as' => 'showcase',                 'uses' => 'App\Controllers\DashboardController@showcase']);
 Route::get('event-stats/{hash}',           ['as' => 'events.public.stats',      'uses' => 'App\Controllers\EventsController@publicStats']);
 Route::get('event-stats/{hash}',           ['as' => 'events.public.stats',      'uses' => 'App\Controllers\EventsController@publicStats']);
 Route::get('users/{nickname}/stats',       ['as' => 'users.public.stats',       'uses' => 'App\Controllers\UsersController@publicStats']);
