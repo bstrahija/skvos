@@ -1,8 +1,14 @@
 @if ($event)
 
-	<div class="row event next-event {{ ($invitation and $invitation->confirmed) ? 'event-confirmed' : '' }} {{ ($invitation and $invitation->cancelled) ? 'event-cancelled' : '' }}">
+	<div class="row event next-event {{
+		($invitation and $invitation->confirmed) ? 'event-confirmed' : ''
+	}} {{
+		($invitation and $invitation->cancelled) ? 'event-cancelled' : ''
+	}} {{
+		(Carbon::now() > $event->from and Carbon::now() < $event->to) ? 'event-now' : ''
+	}}">
 		<h2 class="small-3 columns">
-			Uskoro:
+			{{ (Carbon::now() > $event->from and Carbon::now() < $event->to) ? 'Upravo:' : 'Uskoro:' }}
 
 			@if ($invitation and ! $invitation->confirmed)
 				<div class="confirmation">
