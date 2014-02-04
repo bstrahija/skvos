@@ -69,9 +69,10 @@ class DashboardController extends BaseController {
 
 		if ($user)
 		{
-			$stats = Stats::forUser($user->id);
+			$stats = Stats::extendedForUser($user->id);
+			$rival = Stats::userRival($user->id);
 
-			return View::make('dashboard.showcase')->withStats($stats)->withUser($user);
+			return View::make('dashboard.showcase')->withStats($stats)->withUser($user)->withRival($rival);
 		}
 
 		App::abort(404);

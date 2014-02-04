@@ -96,6 +96,10 @@
 
 	<hr>
 
+	@include('stats.my_table')
+
+	<hr>
+
 	<div class="button-actions">
 		<a href="https://twitter.com/intent/tweet?text={{ urlencode($user->full_name.': squash rezultati #squash #skvoshin') }}&amp;url={{ urlencode(route('showcase', strtolower($user->nickname))) }}" class="button tiny round" data-ajax="false" target="_blank">{{ icn('social-twitter') }} Tweet</a>
 		&nbsp;&nbsp;
