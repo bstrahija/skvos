@@ -159,6 +159,21 @@ class EventRepository extends BaseRepository implements EventRepositoryInterface
 	}
 
 	/**
+	 * Find single event by hash
+	 * @param  string $hash
+	 * @param  array  $options
+	 * @return EventItem
+	 */
+	public function findByHash($hash, $options = null)
+	{
+		$this->query = Event::with(['author', 'invitees', 'attendees', 'mvp'])
+		                    ->where('hash', $hash);
+
+		// Result
+		return $this->item($options);
+	}
+
+	/**
 	 * Return related matches
 	 * @param  int $eventId
 	 * @return MacthCollection
@@ -281,6 +296,7 @@ class EventRepository extends BaseRepository implements EventRepositoryInterface
 			$event            = new Event;
 			$event->author_id = Auth::user()->id;
 			$event->title     = array_get($data, 'title');
+			$event->hash      = Str::random(16);
 			$event->date      = array_get($data, 'date');
 			$event->from      = array_get($data, 'date') . ' ' . array_get($data, 'from');
 			$event->to        = array_get($data, 'date') . ' ' . array_get($data, 'to');

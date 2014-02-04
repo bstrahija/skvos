@@ -5,6 +5,13 @@ Route::get('login',  ['as' => 'login',         'uses' => 'App\Controllers\AuthCo
 Route::post('login', ['as' => 'login.attempt', 'uses' => 'App\Controllers\AuthController@attempt']);
 Route::get('logout', ['as' => 'logout',        'uses' => 'App\Controllers\AuthController@logout']);
 
+// ! Public routes
+Route::get('showcase/{nickname}',          ['as' => 'showcase',                 'uses' => 'App\Controllers\DashboardController@showcase']);
+Route::get('showcase/{nickname}/{event}',  ['as' => 'showcase.event',           'uses' => 'App\Controllers\DashboardController@showcaseEvent']);
+Route::get('events/results/{hash}',        ['as' => 'events.public.stats',      'uses' => 'App\Controllers\EventsController@results']);
+Route::get('invitations/confirm/{hash}',   ['as' => 'invitations.confirm',      'uses' => 'App\Controllers\InvitationsController@preconfirm']);
+Route::post('invitations/confirm/{hash}',  ['as' => 'invitations.confirm.post', 'uses' => 'App\Controllers\InvitationsController@confirm']);
+
 /* ! Main routes */
 Route::group(array('before' => 'auth'), function()
 {
@@ -18,6 +25,7 @@ Route::group(array('before' => 'auth'), function()
 	Route::get('events/{id}/matches',       ['as' => 'events.matches',           'uses' => 'App\Controllers\EventsController@matches']);
 	Route::get('invitations/{event}/send',  ['as' => 'invitations.send.preview', 'uses' => 'App\Controllers\InvitationsController@presend']);
 	Route::post('invitations/{event}/send', ['as' => 'invitations.send',         'uses' => 'App\Controllers\InvitationsController@send']);
+	Route::get('events/hashes',             ['as' => 'events.hashes',            'uses' => 'App\Controllers\EventsController@hashes']);
 
 	// Resources
 	Route::resource('events',      'App\Controllers\EventsController');
@@ -50,16 +58,6 @@ Route::group(array('before' => 'auth'), function()
 		Route::resource('users',       'App\Controllers\Api\UsersController');
 	});
 });
-
-// ! Public routes
-Route::get('showcase/{nickname}',          ['as' => 'showcase',                 'uses' => 'App\Controllers\DashboardController@showcase']);
-Route::get('event-stats/{hash}',           ['as' => 'events.public.stats',      'uses' => 'App\Controllers\EventsController@publicStats']);
-Route::get('event-stats/{hash}',           ['as' => 'events.public.stats',      'uses' => 'App\Controllers\EventsController@publicStats']);
-Route::get('users/{nickname}/stats',       ['as' => 'users.public.stats',       'uses' => 'App\Controllers\UsersController@publicStats']);
-Route::get('users/{nickname}/event-stats', ['as' => 'users.public.event_stats', 'uses' => 'App\Controllers\UsersController@publicEventStats']);
-Route::get('invitations/confirm/{hash}',   ['as' => 'invitations.confirm',      'uses' => 'App\Controllers\InvitationsController@preconfirm']);
-Route::post('invitations/confirm/{hash}',  ['as' => 'invitations.confirm.post', 'uses' => 'App\Controllers\InvitationsController@confirm']);
-
 
 
 

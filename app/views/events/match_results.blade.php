@@ -25,7 +25,7 @@
 
 					<div class="row event-result {{ $sep }}">
 						<div class="small-9 columns">
-							<a href="{{ route('matches.edit', $match->id) }}">
+							<a href="{{ role('admin') ? route('matches.edit', $match->id) : '#' }}">
 								{{ $key+1 }}.
 								<span class="{{ $match->winner_id != $match->player1_id ? 'loser' : 'winner' }}">{{ $match->player1->nickname }}</span>
 								Vs.
@@ -34,7 +34,9 @@
 						</div>
 
 						<div class="small-3 columns text-right">
-							<a href="{{ route('matches.edit', $match->id) }}"><strong>{{ $match->player1_score }} : {{ $match->player2_score }}</strong></a>
+							<a href="{{ role('admin') ? route('matches.edit', $match->id) : '#' }}">
+								<strong>{{ $match->player1_score }} : {{ $match->player2_score }}</strong>
+							</a>
 						</div>
 					</div>
 				@endforeach

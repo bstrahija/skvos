@@ -34,4 +34,16 @@
 			@endforeach
 		</tbody>
 	</table>
+
+
+	<hr>
+
+	<div class="button-actions">
+		<a href="https://twitter.com/intent/tweet?text={{ urlencode('Squash rezultati za: '.$event->title.' #squash #skvoshin') }}&amp;url={{ urlencode(route('events.public.stats', $event->hash)) }}" class="button tiny round" data-ajax="false" target="_blank">{{ icn('social-twitter') }} Tweet</a>
+		&nbsp;&nbsp;
+		<a href="http://www.facebook.com/sharer/sharer.php?u={{ urlencode(route('events.public.stats', $event->hash)) }}" class="button tiny round" data-ajax="false" target="_blank">{{ icn('social-facebook') }} Like</a>
+	</div>
+
+	<hr>
+
 @endif

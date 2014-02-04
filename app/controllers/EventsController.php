@@ -1,6 +1,6 @@
 <?php namespace App\Controllers;
 
-use Auth, Input, Redirect, Stats, Vault, View;
+use App, Auth, Input, Redirect, Stats, Vault, View;
 use App\Repositories\EventRepository;
 use App\Repositories\MatchRepository;
 use App\Repositories\UserRepository;
@@ -72,6 +72,22 @@ class EventsController extends BaseController {
 	}
 
 	/**
+	 * Create hashes for all events if missing
+	 * @return Response
+	 */
+	public function hashes()
+	{
+		$events = $this->events->all(['limit' => 999]);
+
+		foreach ($events as $event)
+		{
+			if ( ! $event->hash) $this->events->update($event->id, ['hash' => \Str::random(16)]);
+		}
+
+		return ['events' => $events->count()];
+	}
+
+	/**
 	 * Display single event
 	 * @param  int $id
 	 * @return View
@@ -96,6 +112,20 @@ class EventsController extends BaseController {
 			'event', 'mvp', 'players', 'invitees', 'matches', 'leaderboard', 'event_type',
 			'next_match_player_1', 'next_match_player_2'
 		));
+	}
+
+	/**
+	 * Show public results for an event
+	 * @param  string $hash
+	 * @return View
+	 */
+	public function results($hash)
+	{
+		$event = $this->events->findByHash($hash);
+
+		if ($event) return $this->show($event->id);
+
+		App::abort(404);
 	}
 
 	/**
