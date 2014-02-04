@@ -14,6 +14,7 @@ body.fullscreen { padding-top: 16px; }
 #app h2.pg            { color: rgba(255,255,255,.8); font-size: 26px; padding: 10px 15px 0 15px; }
 #app h2.pg > i        { color: rgba(220,255,220,1); margin-right: 5px; }
 #app h2.pg em         { font-size: 16px; opacity: .8; font-style: normal; font-weight: 100 !important; position: relative; top: 11px; }
+#app h2.pg em a       { color: #fff; }
 #app h2.pg small      { color: rgba(255,255,255,.7); }
 #app h2.pg .button    { position: relative; margin: 0; position: relative; top: -9px; }
 #app h3.pg            { color: rgba(255,255,255,.8); font-size: 18px; padding: 0px 15px 0 15px; margin: -5px 0; }

@@ -8,7 +8,7 @@
 
 	<h2 class="pg">
 		{{ icn('graph-bar') }} Statistika
-		<em class="right">{{ Auth::user()->nickname }}</em>
+		<em class="right"><a href="{{ route('showcase', strtolower(Auth::user()->nickname)) }}">{{ Auth::user()->nickname }}</a></em>
 	</h2>
 
 	<hr>
