@@ -4,7 +4,7 @@
 
 @section('main')
 
-<div class="stats row">
+<div class="stats page row">
 
 	<h2 class="pg">
 		{{ icn('graph-bar') }} Statistika
@@ -28,15 +28,15 @@
 			<div class="button-actions">
 				<button type="submit" class="button small round">Prikaži</button>
 			</div>
+
+			<br><br>
 		</div>
 	{{ Form::close() }}
 
-	<hr>
 
 	@if (isset($player_stats) and $player_stats)
+		<hr>
 		@foreach ($player_stats as $stats)
-			<?php //echo '<pre>'; print_r(var_dump($stats)); echo '</pre>'; ?>
-
 			<table>
 				<thead>
 					<tr>
@@ -97,6 +97,7 @@
 			<hr><br>
 		@endforeach
 	@else
+		<hr>
 
 		<p class="not-found">{{ icn('alert') }} Nema statistike. <br>Probaj ponovno odabrati igrače.</p>
 
