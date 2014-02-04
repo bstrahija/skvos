@@ -13,19 +13,21 @@
 	<hr>
 
 	{{ Form::open(['route' => 'stats.players', 'method' => 'get']) }}
-		<ul class="small-block-grid-2 medium-block-grid-3 player-picker">
-			@foreach ($players as $player)
-				<li>
-					<input type="checkbox" name="players[]" value="{{ $player->id }}" id="players_{{ $player->id }}" {{ in_array($player->id, (array) Input::get('players')) ? ' checked="checked"' : null }}>
-					<label for="players_{{ $player->id }}">{{ $player->nickname }}</label>
-				</li>
-			@endforeach
-		</ul>
+		<div class=" columns">
+			<ul class="small-block-grid-2 medium-block-grid-3 player-picker">
+				@foreach ($players as $player)
+					<li>
+						<input type="checkbox" name="players[]" value="{{ $player->id }}" id="players_{{ $player->id }}" {{ in_array($player->id, (array) Input::get('players')) ? ' checked="checked"' : null }}>
+						<label for="players_{{ $player->id }}">{{ $player->nickname }}</label>
+					</li>
+				@endforeach
+			</ul>
 
-		<hr>
+			<hr>
 
-		<div class="button-actions">
-			<button type="submit" class="button small round">Prikaži</button>
+			<div class="button-actions">
+				<button type="submit" class="button small round">Prikaži</button>
+			</div>
 		</div>
 	{{ Form::close() }}
 
