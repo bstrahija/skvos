@@ -32,6 +32,7 @@ Route::group(array('before' => 'auth'), function()
 	Route::resource('matches',     'App\Controllers\MatchesController');
 	Route::resource('invitations', 'App\Controllers\InvitationsController');
 	Route::resource('users',       'App\Controllers\UsersController');
+	Route::resource('groups',      'App\Controllers\GroupsController');
 
 	/* ! API routes */
 	Route::group(array('prefix' => 'api'), function()
@@ -56,6 +57,7 @@ Route::group(array('before' => 'auth'), function()
 
 		// Users
 		Route::resource('users',       'App\Controllers\Api\UsersController');
+		Route::resource('groups',      'App\Controllers\Api\GroupController');
 	});
 });
 

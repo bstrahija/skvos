@@ -31,6 +31,7 @@
 			@if (role('admin'))
 				<li class="sep"><a href="{{ route('events.create') }}">{{ icn('plus') }} Novi termin</a></li>
 				<li><a href="{{ route('users.index') }}">{{ icn('torsos') }} Igrači</a></li>
+				<li><a href="{{ route('groups.index') }}">{{ icn('torsos-all') }} Grupe</a></li>
 			@endif
 
 			<li class="sep"><a href="{{ route('logout') }}">{{ icn('lock') }} Odjava</a></li>

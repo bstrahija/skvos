@@ -183,10 +183,15 @@ return array(
 
 		// My facades
 		'Carbon'          => 'Carbon\Carbon',
+		'Groups'          => 'App\Facades\GroupsFacade',
+		'Events'          => 'App\Facades\EventsFacade',
 		'Image'           => 'Creolab\Image\ImageFacade',
+		'Invitations'     => 'App\Facades\InvitationsFacade',
 		'Mailer'          => 'App\Facades\MailerFacade',
+		'Matches'         => 'App\Facades\MatchesFacade',
 		'Stats'           => 'App\Facades\StatsFacade',
 		'User'            => 'App\Models\User',
+		'Users'           => 'App\Facades\UsersFacade',
 		'Vault'           => 'Creolab\Vault\VaultFacade',
 
 	),
