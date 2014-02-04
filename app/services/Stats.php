@@ -64,8 +64,8 @@ class Stats {
 				'sets_played'      => (int) DB::table('matches')->select(DB::raw('(SUM(player1_score) + SUM(player2_score)) AS set_count'))->where('event_id', $eventId)->where(function($q) use ($userId) {
 				                      	$q->where('player1_id', $userId)->orWhere('player2_id', $userId);
 				                      })->first()->set_count,
-				'sets_won'         => (int) DB::table('matches')->select(DB::raw('SUM(player1_score) AS set_count'))->where('event_id', $eventId)->where('winner_id', $userId)->where('player1_id', $userId)->first()->set_count +
-				                      (int) DB::table('matches')->select(DB::raw('SUM(player2_score) AS set_count'))->where('event_id', $eventId)->where('winner_id', $userId)->where('player2_id', $userId)->first()->set_count,
+				'sets_won'         => (int) DB::table('matches')->select(DB::raw('SUM(player1_score) AS set_count'))->where('event_id', $eventId)->where('player1_id', $userId)->first()->set_count +
+				                      (int) DB::table('matches')->select(DB::raw('SUM(player2_score) AS set_count'))->where('event_id', $eventId)->where('player2_id', $userId)->first()->set_count,
 			);
 		}
 		else
@@ -75,8 +75,8 @@ class Stats {
 				'matches_played'   => DB::table('matches')->where('player1_id', $userId)->orWhere('player2_id', $userId)->count(),
 				'matches_won'      => DB::table('matches')->where('winner_id', $userId)->count(),
 				'sets_played'      => (int) DB::table('matches')->select(DB::raw('(SUM(player1_score) + SUM(player2_score)) AS set_count'))->where('player1_id', $userId)->orWhere('player2_id', $userId)->first()->set_count,
-				'sets_won'         => (int) DB::table('matches')->select(DB::raw('SUM(player1_score) AS set_count'))->where('winner_id', $userId)->where('player1_id', $userId)->first()->set_count +
-				                      (int) DB::table('matches')->select(DB::raw('SUM(player2_score) AS set_count'))->where('winner_id', $userId)->where('player2_id', $userId)->first()->set_count,
+				'sets_won'         => (int) DB::table('matches')->select(DB::raw('SUM(player1_score) AS set_count'))->where('player1_id', $userId)->first()->set_count +
+				                      (int) DB::table('matches')->select(DB::raw('SUM(player2_score) AS set_count'))->where('player2_id', $userId)->first()->set_count,
 			);
 		}
 

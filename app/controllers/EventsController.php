@@ -61,10 +61,11 @@ class EventsController extends BaseController {
 	 */
 	public function mvps()
 	{
-		$events = $this->events->all();
+		$events = $this->events->all(['limit' => 999]);
 
 		foreach ($events as $event)
 		{
+			$this->events->update($event->id, ['mvp_id' => null]);
 			$this->events->mvp($event->id);
 		}
 

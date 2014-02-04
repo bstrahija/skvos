@@ -2,6 +2,7 @@ html, body { height: 100% !important; min-height: 100% !important; }
 html { overflow-y: scroll; }
 body { color: #fff; background: #111 url(../img/bg_full.jpg) repeat-y center top; font-family: 'Roboto', Helvetica, sans-serif !important; font-weight: 100; /*-webkit-background-size: cover;*/ }
 body.fullscreen { padding-top: 16px; }
+#app a { outline: 0 !important; }
 #app button, #app input[type=submit] { font-family: 'Roboto', Helvetica, sans-serif; font-size: 12px; }
 #app button i { margin-right: 4px; }
 

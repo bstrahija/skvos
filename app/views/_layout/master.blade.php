@@ -7,6 +7,11 @@
 </head>
 <body id="app">
 
+<?php
+echo '<pre>'; print_r(var_dump($_SERVER['HTTP_USER_AGENT'])); echo '</pre>';
+
+ ?>
+
 <div id="canvas" class="@yield('body_class')" data-role="canvas">
 	@include('_partial.navigation')
 
