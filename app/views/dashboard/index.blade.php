@@ -45,9 +45,9 @@
 
 	<div class="info">
 		@if ($user->photo)
-			<div class="photo" style="background-image: url({{ Image::thumb('/' . $user->photo, 100) }});"></div>
+			<div class="photo" style="background-image: url({{ Image::thumb('/' . $user->photo, 100) }});" data-ajax="true" data-href="{{ route('showcase', strtolower($user->nickname)) }}"></div>
 		@else
-			<div class="photo" style="background-image: url({{ Image::thumb('/storage/avatars/avatar_dummy.png', 100) }});"></div>
+			<div class="photo" style="background-image: url({{ Image::thumb('/storage/avatars/avatar_dummy.png', 100) }});" data-ajax="true" data-href="{{ route('showcase', strtolower($user->nickname)) }}"></div>
 		@endif
 
 		<h3>{{ $user->first_name }} {{ $user->last_name }}</h3>
