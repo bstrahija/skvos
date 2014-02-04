@@ -49,8 +49,8 @@ class EventRepository extends BaseRepository implements EventRepositoryInterface
 	public function upcoming($options = null)
 	{
 		$this->query = Event::with(['author', 'invitees', 'attendees', 'mvp'])
-		                    ->where('date', '>=', Carbon::now()->format('Y-m-d'))
-		                    ->orderBy('date', 'asc');
+		                    ->where('from', '>=', Carbon::now()->format('Y-m-d H:i:s'))
+		                    ->orderBy('from', 'asc');
 
 		// Result
 		return $this->collection($options);
@@ -64,8 +64,8 @@ class EventRepository extends BaseRepository implements EventRepositoryInterface
 	public function next($options = null)
 	{
 		$this->query = Event::with(['author', 'invitees', 'attendees', 'mvp'])
-		                    ->where('date', '>=', Carbon::now()->format('Y-m-d'))
-		                    ->orderBy('date', 'asc');
+		                    ->where('from', '>=', Carbon::now()->format('Y-m-d H:i:s'))
+		                    ->orderBy('from', 'asc');
 
 		// Result
 		return $this->item($options);
@@ -79,11 +79,11 @@ class EventRepository extends BaseRepository implements EventRepositoryInterface
 	public function nextForUser($userId, $options = null)
 	{
 		$this->query = Event::with(['author', 'invitees', 'attendees', 'mvp'])
-		                    ->where('date', '>=', Carbon::now()->format('Y-m-d'))
+		                    ->where('from', '>=', Carbon::now()->format('Y-m-d H:i:s'))
 		                    ->whereHas('invitees', function($q) use ($userId) {
 		                    	$q->where('user_id', $userId);
 		                    })
-		                    ->orderBy('date', 'asc');
+		                    ->orderBy('from', 'asc');
 
 		// Result
 		return $this->item($options);
@@ -118,8 +118,8 @@ class EventRepository extends BaseRepository implements EventRepositoryInterface
 	public function past($options = null)
 	{
 		$this->query = Event::with(['author', 'invitees', 'attendees', 'mvp'])
-		                    ->where('date', '<', Carbon::now()->format('Y-m-d'))
-		                    ->orderBy('date', 'desc');
+		                    ->where('from', '<', Carbon::now()->format('Y-m-d H:i:s'))
+		                    ->orderBy('from', 'desc');
 
 		// Result
 		return $this->collection($options);
