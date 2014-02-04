@@ -1,25 +1,14 @@
 <?php namespace App\Controllers;
 
 use Auth, Input, Redirect, View;
-use App\Repositories\UserRepository;
 
 class UsersController extends BaseController {
 
 	/**
-	 * User repository
-	 * @var UserRepository
+	 * Init
 	 */
-	protected $users;
-
-	/**
-	 * Init dependencies
-	 * @param UserRepository $users
-	 */
-	public function __construct(UserRepository $users)
+	public function __construct()
 	{
-		$this->users = $users;
-
-		// Filters
 		$this->beforeFilter('admin', ['except' => ['profile', 'update']]);
 	}
 
@@ -29,7 +18,7 @@ class UsersController extends BaseController {
 	 */
 	public function index()
 	{
-		$users = $this->users->all(Input::all());
+		$users = Users::all(Input::all());
 
 		return View::make('users.index')->withUsers($users);
 	}
@@ -49,12 +38,12 @@ class UsersController extends BaseController {
 	 */
 	public function store()
 	{
-		if ($user = $this->users->create(Input::all()))
+		if ($user = Users::create(Input::all()))
 		{
 			return Redirect::route('users.edit', $user->id)->withAlertSuccess('Spremljeno.');
 		}
 
-		return Redirect::back()->withErrors($this->users->errors())->withInput();
+		return Redirect::back()->withErrors(Users::errors())->withInput();
 	}
 
 	/**
@@ -63,7 +52,7 @@ class UsersController extends BaseController {
 	 */
 	public function profile()
 	{
-		$user = $this->users->find(Auth::user()->id);
+		$user = Users::find(Auth::user()->id);
 
 		return View::make('users.profile')->withUser($user);
 	}
@@ -75,7 +64,7 @@ class UsersController extends BaseController {
 	 */
 	public function edit($id)
 	{
-		$user = $this->users->find($id);
+		$user = Users::find($id);
 
 		return View::make('users.edit')->withUser($user);
 	}
@@ -87,12 +76,12 @@ class UsersController extends BaseController {
 	 */
 	public function update($id)
 	{
-		if ($this->users->update($id, Input::all()))
+		if (Users::update($id, Input::all()))
 		{
 			return Redirect::route('profile')->withAlertSuccess('Spremljeno.');
 		}
 
-		return Redirect::back()->withErrors($this->users->errors())->withInput();
+		return Redirect::back()->withErrors(Users::errors())->withInput();
 	}
 
 }

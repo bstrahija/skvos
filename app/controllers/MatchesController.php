@@ -1,33 +1,8 @@
 <?php namespace App\Controllers;
 
-use App, Input, Redirect, View;
-use App\Repositories\MatchRepository;
-use App\Repositories\EventRepository;
+use App, Events, Input, Matches, Redirect, View;
 
 class MatchesController extends BaseController {
-
-	/**
-	 * Match repository
-	 * @var MatchRepository
-	 */
-	protected $matches;
-
-	/**
-	 * Event repo
-	 * @var EventRepository
-	 */
-	protected $events;
-
-	/**
-	 * Init dependencies
-	 * @param MatchRepository $matches
-	 * @param EventRepository $events
-	 */
-	public function __construct(MatchRepository $matches, EventRepository $events)
-	{
-		$this->matches = $matches;
-		$this->events  = $events;
-	}
 
 	/**
 	 * Edit a match
@@ -36,8 +11,8 @@ class MatchesController extends BaseController {
 	 */
 	public function edit($id)
 	{
-		$match   = $this->matches->find($id);
-		$event   = $this->events->find($match->event_id);
+		$match   = Matches::find($id);
+		$event   = Events::find($match->event_id);
 		$players = $event->attendees;
 
 		return View::make('matches.edit', compact('match', 'event', 'players'));
@@ -50,15 +25,15 @@ class MatchesController extends BaseController {
 	 */
 	public function update($id)
 	{
-		if ($match = $this->matches->update($id, Input::all()))
+		if ($match = Matches::update($id, Input::all()))
 		{
-			$this->events->update($match->event_id, ['mvp_id' => null]);
-			$this->events->mvp($match->event_id);
+			Events::update($match->event_id, ['mvp_id' => null]);
+			Events::mvp($match->event_id);
 
 			return Redirect::route('events.show', $match->event_id)->withAlertSuccess('Spremljeno.');
 		}
 
-		return Redirect::back()->withErrors($this->matches->errors());
+		return Redirect::back()->withErrors(Matches::errors());
 	}
 
 	/**
@@ -68,8 +43,8 @@ class MatchesController extends BaseController {
 	 */
 	public function destroy($id)
 	{
-		$match = $this->matches->find($id);
-		$this->matches->delete($id);
+		$match = Matches::find($id);
+		Matches::delete($id);
 
 		return Redirect::route('events.show', $match->event_id)->withAlertSuccess('Obrisano.');
 	}

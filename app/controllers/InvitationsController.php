@@ -1,41 +1,14 @@
 <?php namespace App\Controllers;
 
-use App, Auth, Input, Mailer, Redirect, View;
-use App\Repositories\EventRepository;
-use App\Repositories\InvitationRepository;
-use App\Repositories\UserRepository;
+use App, Auth, Events, Input, Invitations, Mailer, Redirect, Users, View;
 
 class InvitationsController extends BaseController {
 
 	/**
-	 * Event repository
-	 * @var EventRepository
+	 * Init
 	 */
-	protected $events;
-
-	/**
-	 * Invitation repository
-	 * @var InvitationRepository
-	 */
-	protected $invitations;
-
-	/**
-	 * User repository
-	 * @var UserRepository
-	 */
-	protected $users;
-
-	/**
-	 * Init dependencies
-	 * @param EventRepository $events
-	 */
-	public function __construct(InvitationRepository $invitations, EventRepository $events, UserRepository $users)
+	public function __construct()
 	{
-		$this->events      = $events;
-		$this->invitations = $invitations;
-		$this->users       = $users;
-
-		// Filters
 		$this->beforeFilter('admin', ['only' => ['presend', 'send']]);
 	}
 
@@ -56,7 +29,7 @@ class InvitationsController extends BaseController {
 	 */
 	public function presend($eventId)
 	{
-		$event = $this->events->find($eventId);
+		$event = Events::find($eventId);
 
 		return View::make('invitations.presend', compact('event'));
 	}
@@ -80,11 +53,11 @@ class InvitationsController extends BaseController {
 	 */
 	public function preconfirm($hash)
 	{
-		$invitation = $this->invitations->findByHash($hash);
+		$invitation = Invitations::findByHash($hash);
 
 		if ($invitation)
 		{
-			$user = $this->users->find($invitation->user_id);
+			$user = Users::find($invitation->user_id);
 
 			// Login the user
 			if ($user and $user->role == 'player')
@@ -105,18 +78,18 @@ class InvitationsController extends BaseController {
 	 */
 	public function confirm($hash)
 	{
-		$invitation = $this->invitations->findByHash($hash);
+		$invitation = Invitations::findByHash($hash);
 
 		if ($invitation)
 		{
 			if (Input::get('action') == 'cancel')
 			{
-				$this->invitations->cancel($invitation->id);
+				Invitations::cancel($invitation->id);
 				$message = 'Hvala, tvoj dolazak je otkazan.';
 			}
 			else
 			{
-				$this->invitations->confirm($invitation->id);
+				Invitations::confirm($invitation->id);
 				$message = 'Hvala, tvoj dolazak je potvrđen.';
 			}
 

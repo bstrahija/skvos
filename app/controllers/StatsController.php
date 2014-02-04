@@ -1,24 +1,8 @@
 <?php namespace App\Controllers;
 
 use Auth, Input, Redirect, Stats, View;
-use App\Repositories\UserRepository;
 
 class StatsController extends BaseController {
-
-	/**
-	 * User repository
-	 * @var UserRepository
-	 */
-	protected $users;
-
-	/**
-	 * Init dependencies
-	 * @param UserRepository $users
-	 */
-	public function __construct(UserRepository $users)
-	{
-		$this->users = $users;
-	}
 
 	/**
 	 * Show stats
@@ -56,7 +40,7 @@ class StatsController extends BaseController {
 	 */
 	public function players()
 	{
-		$players       = $this->users->all();
+		$players       = Users::all();
 		$player_stats  = Stats::playerStats(Input::get('players'));
 
 		return View::make('stats.players', compact('players', 'player_stats'));

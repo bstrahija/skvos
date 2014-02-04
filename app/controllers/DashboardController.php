@@ -1,42 +1,8 @@
 <?php namespace App\Controllers;
 
-use App, Auth, Stats, View;
-use App\Repositories\EventRepository;
-use App\Repositories\InvitationRepository;
-use App\Repositories\UserRepository;
+use App, Auth, Events, Invitations, Stats, Users, View;
 
 class DashboardController extends BaseController {
-
-	/**
-	 * Events repository
-	 * @var EventRepository
-	 */
-	protected $events;
-
-	/**
-	 * Invitation repository
-	 * @var InvitationRepository
-	 */
-	protected $invitations;
-
-	/**
-	 * User repository
-	 * @var UserRepository
-	 */
-	protected $users;
-
-	/**
-	 * Init rependencies
-	 * @param EventRepository      $events
-	 * @param InvitationRepository $invitations
-	 * @param UserRepository       $users
-	 */
-	public function __construct(EventRepository $events, InvitationRepository $invitations, UserRepository $users)
-	{
-		$this->events      = $events;
-		$this->invitations = $invitations;
-		$this->users       = $users;
-	}
 
 	/**
 	 * Display the user dashboard
@@ -45,13 +11,13 @@ class DashboardController extends BaseController {
 	public function index()
 	{
 		// Get next event that I'm invited to
-		$user  = $this->users->find(Auth::user()->id);
-		$event = $this->events->nextForUser($user->id);
-		$last  = $this->events->lastForUser($user->id);
+		$user  = Users::find(Auth::user()->id);
+		$event = Events::nextForUser($user->id);
+		$last  = Events::lastForUser($user->id);
 		$stats = Stats::forUser($user->id);
 
 		// Also get invitation for event
-		if ($event) $invitation = $this->invitations->forEventAndUser($event->id, Auth::user()->id);
+		if ($event) $invitation = Invitations::forEventAndUser($event->id, Auth::user()->id);
 		else        $invitation = null;
 
 		return View::make('dashboard.index')->withEvent($event)->withStats($stats)->withInvitation($invitation)->withLast($last)->withUser($user);
@@ -65,7 +31,7 @@ class DashboardController extends BaseController {
 	public function showcase($nickname)
 	{
 		// Get the user stats
-		$user  = $this->users->findByNickname($nickname);
+		$user  = Users::findByNickname($nickname);
 
 		if ($user)
 		{

@@ -1,43 +1,14 @@
 <?php namespace App\Controllers;
 
-use App, Auth, Input, Redirect, Stats, Vault, View;
-use App\Repositories\EventRepository;
-use App\Repositories\MatchRepository;
-use App\Repositories\UserRepository;
+use App, Auth, Events, Input, Matches, Redirect, Stats, Vault, Users, View;
 
 class EventsController extends BaseController {
 
 	/**
-	 * Event repository
-	 * @var EventRepository
+	 * Init
 	 */
-	protected $events;
-
-	/**
-	 * Match repository
-	 * @var MatchRepository
-	 */
-	protected $matches;
-
-	/**
-	 * User repository
-	 * @var UserRepository
-	 */
-	protected $users;
-
-	/**
-	 * Init rependencies
-	 * @param EventRepository $events
-	 * @param MatchRepository $matches
-	 * @param UserRepository  $users
-	 */
-	public function __construct(EventRepository $events, MatchRepository $matches, UserRepository $users)
+	public function __construct()
 	{
-		$this->events  = $events;
-		$this->matches = $matches;
-		$this->users   = $users;
-
-		// Filters
 		$this->beforeFilter('admin', ['only' => ['create', 'update', 'store', 'edit', 'mvps', 'destroy']]);
 	}
 
@@ -48,9 +19,9 @@ class EventsController extends BaseController {
 	public function index()
 	{
 		// Get data
-		$event    = $this->events->next();
-		$upcoming = $this->events->upcoming();
-		$past     = $this->events->past();
+		$event    = Events::next();
+		$upcoming = Events::upcoming();
+		$past     = Events::past();
 
 		return View::make('events.index', compact('event', 'upcoming', 'past'));
 	}
@@ -61,12 +32,12 @@ class EventsController extends BaseController {
 	 */
 	public function mvps()
 	{
-		$events = $this->events->all(['limit' => 999]);
+		$events = Events::all(['limit' => 999]);
 
 		foreach ($events as $event)
 		{
-			$this->events->update($event->id, ['mvp_id' => null]);
-			$this->events->mvp($event->id);
+			Events::update($event->id, ['mvp_id' => null]);
+			Events::mvp($event->id);
 		}
 
 		return $events;
@@ -78,11 +49,11 @@ class EventsController extends BaseController {
 	 */
 	public function hashes()
 	{
-		$events = $this->events->all(['limit' => 999]);
+		$events = Events::all(['limit' => 999]);
 
 		foreach ($events as $event)
 		{
-			if ( ! $event->hash) $this->events->update($event->id, ['hash' => \Str::random(16)]);
+			if ( ! $event->hash) Events::update($event->id, ['hash' => \Str::random(16)]);
 		}
 
 		return ['events' => $events->count()];
@@ -95,11 +66,11 @@ class EventsController extends BaseController {
 	 */
 	public function show($id)
 	{
-		$event       = $this->events->find($id);
-		$mvp         = $this->events->mvp($id);
+		$event       = Events::find($id);
+		$mvp         = Events::mvp($id);
 		$players     = $event->attendees;
 		$invitees    = $event->invitees;
-		$matches     = $this->matches->forEvent($event->id);
+		$matches     = Matches::forEvent($event->id);
 		$leaderboard = Stats::eventLeaderboard($event->id);
 		$event_type  = $event->attendees->count() == 2 ? 'double'    : null;
 		$event_type  = $event->attendees->count() == 3 ? 'tripple'   : $event_type;
@@ -122,7 +93,7 @@ class EventsController extends BaseController {
 	 */
 	public function results($hash)
 	{
-		$event = $this->events->findByHash($hash);
+		$event = Events::findByHash($hash);
 
 		if ($event) return $this->show($event->id);
 
@@ -136,8 +107,8 @@ class EventsController extends BaseController {
 	 */
 	public function matches($id)
 	{
-		$event       = $this->events->find($id);
-		$matches     = $this->matches->forEvent($event->id);
+		$event       = Events::find($id);
+		$matches     = Matches::forEvent($event->id);
 		$event_type  = $event->attendees->count() == 2 ? 'double'    : null;
 		$event_type  = $event->attendees->count() == 3 ? 'tripple'   : $event_type;
 		$event_type  = $event->attendees->count() == 4 ? 'quadruple' : $event_type;
@@ -151,7 +122,7 @@ class EventsController extends BaseController {
 	 */
 	public function create()
 	{
-		$players = $this->users->all();
+		$players = Users::all();
 
 		return View::make('events.create')->withPlayers($players);
 	}
@@ -162,12 +133,12 @@ class EventsController extends BaseController {
 	 */
 	public function store()
 	{
-		if ($event = $this->events->create(Input::all()))
+		if ($event = Events::create(Input::all()))
 		{
 			return Redirect::route('events.index')->withAlertSuccess('Spremljeno.');
 		}
 
-		return Redirect::back()->withErrors($this->events->errors())->withInput();
+		return Redirect::back()->withErrors(Events::errors())->withInput();
 	}
 
 	/**
@@ -177,7 +148,7 @@ class EventsController extends BaseController {
 	 */
 	public function edit($id)
 	{
-		$event      = $this->events->find($id);
+		$event      = Events::find($id);
 		$atendeeIds = (array) $event->attendees->lists('id');
 
 		return View::make('events.edit')->withEvent($event)->withAttendeeIds($atendeeIds);
@@ -190,12 +161,12 @@ class EventsController extends BaseController {
 	 */
 	public function update($id)
 	{
-		if ($event = $this->events->update($id, Input::all()))
+		if ($event = Events::update($id, Input::all()))
 		{
 			return Redirect::route('events.edit', $id)->withAlertSuccess('Spremljeno.');
 		}
 
-		return Redirect::back()->withErrors($this->events->errors());
+		return Redirect::back()->withErrors(Events::errors());
 	}
 
 	/**
