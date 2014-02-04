@@ -38,7 +38,8 @@ App.Matches = {
 		});
 
 		// Submit form
-		$(".new-match-form").submit(function() {
+		$(".match-form").submit(function() {
+			var $el = $(this);
 			var data = {
 				player1_id: $("select[name=player1_id]").val(),
 				player2_id: $("select[name=player2_id]").val(),
@@ -59,30 +60,64 @@ App.Matches = {
 				return false;
 			}
 
-			$(".new-match-form").stop().fadeTo(100, .2);
+			$(".match-form").stop().fadeTo(100, .2);
 
 			// Send request
-			$.ajax({
-				url: API_URL+'/matches',
-				type: 'POST',
-				data: data,
-			})
-			.done(function() {
-				$("select[name=player1_id]").val(1);
-				$("select[name=player2_id]").val(1);
-				$("input[name=player1_score], input[name=player1_score]").val(0);
-
-				// Refresh results
-				App.Matches.refresResults();
-			})
-			.fail(function() {
-				alert("Greška!");
-			})
-			.always(function() {
-				$(".new-match-form").stop().fadeTo(100, 1);
-			});
+			if ($el.hasClass("new-match-form")) App.Matches.storeMatch(data);
+			else                                App.Matches.updateMatch(data);
 
 			return false;
+		});
+	},
+
+	/**
+	 * Store a new match
+	 * @param  {object} data
+	 * @return {void}
+	 */
+	storeMatch: function(data) {
+		$.ajax({
+			url: API_URL+'/matches',
+			type: 'POST',
+			data: data,
+		})
+		.done(function() {
+			$("select[name=player1_id]").val(1);
+			$("select[name=player2_id]").val(1);
+			$("input[name=player1_score], input[name=player1_score]").val(0);
+
+			// Refresh results
+			App.Matches.refresResults();
+		})
+		.fail(function() {
+			alert("Greška!");
+		})
+		.always(function() {
+			$(".match-form").stop().fadeTo(100, 1);
+		});
+	},
+
+	/**
+	 * Update existing match
+	 * @param  {object} data
+	 * @return {void}
+	 */
+	updateMatch: function(data) {
+		data['_method'] = 'put';
+		$.ajax({
+			url: $(".edit-match-form").attr("action"),
+			type: 'POST',
+			data: data,
+		})
+		.done(function() {
+			// Refresh results
+			// App.Matches.refresResults();
+		})
+		.fail(function() {
+			alert("Greška!");
+		})
+		.always(function() {
+			$(".match-form").stop().fadeTo(100, 1);
 		});
 	},
 

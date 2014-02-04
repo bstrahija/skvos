@@ -8,12 +8,12 @@
 
 	<h2 class="pg">
 		{{ icn('trophy') }} Izmijeni meč
-		<em class="right"><a href="{{ route('events.show') }}" class="button tiny alert round">{{ icn('arrow-left') }}</a></em>
+		<em class="right"><a href="{{ route('events.show', $match->event_id) }}" class="button tiny alert round">{{ icn('arrow-left') }}</a></em>
 	</h2>
 
 	<hr>
 
-	{{ Form::open(['route' => ['matches.update', $match->id], 'method' => 'put', 'class' => 'edit-match-form']) }}
+	{{ Form::open(['route' => ['matches.update', $match->id], 'method' => 'put', 'class' => 'match-form edit-match-form']) }}
 
 		<div class="match-playing row">
 			<div class="columns small-6">

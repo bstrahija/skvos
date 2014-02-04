@@ -1,6 +1,6 @@
 @if ($event->can_enter_match)
 	@if ($players and $players->count() > 1)
-		{{ Form::open(['route' => 'matches.store', 'class' => 'new-match-form']) }}
+		{{ Form::open(['route' => 'matches.store', 'class' => 'match-form new-match-form']) }}
 			<input type="hidden" name="event_id" value="{{ $event->id }}">
 
 			<h3 class="pg">Novi meč</h3>

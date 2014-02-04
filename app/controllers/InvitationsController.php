@@ -13,16 +13,6 @@ class InvitationsController extends BaseController {
 	}
 
 	/**
-	 * Update data for an invitation
-	 * @param  int $id
-	 * @return Redirect
-	 */
-	public function update($id)
-	{
-
-	}
-
-	/**
 	 * Show template before sending invites
 	 * @param  int $eventId
 	 * @return View
