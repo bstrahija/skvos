@@ -5,9 +5,9 @@
 
 	@assets('app.css')
 </head>
-<body id="app" class="@yield('body_class')">
+<body id="app">
 
-<div id="canvas">
+<div id="canvas" class="@yield('body_class')" data-role="canvas">
 	@include('_partial.navigation')
 
 	@include('_partial.header')

@@ -97,10 +97,13 @@
 					dataType: 'html',
 				})
 				.done(function(data) {
-					$src  = $(data);
-					title = $src.attr('title');
-					$page = $src.find("div[data-role=page]");
-					$(document).find("title").text(title);
+					var $src    = $(data);
+					var title   = $src.attr('title');
+					var $page   = $src.find("div[data-role=page]");
+					var $canvas = $src.filter('#canvas');
+
+					// The page class
+					$("#canvas").addClass($canvas.attr("class"));
 
 					// Scroll to top
 					window.scrollTo(0, 0);

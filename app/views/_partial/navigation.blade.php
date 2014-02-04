@@ -33,7 +33,7 @@
 				<li><a href="{{ route('users.index') }}">{{ icn('torsos') }} Igrači</a></li>
 			@endif
 
-			<li class="sep"><a href="{{ route('logout') }}" data-ajax="false">{{ icn('lock') }} Odjava</a></li>
+			<li class="sep"><a href="{{ route('logout') }}">{{ icn('lock') }} Odjava</a></li>
 		</ul>
 	</aside>
 @endif

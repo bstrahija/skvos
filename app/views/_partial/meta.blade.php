@@ -7,14 +7,15 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="">
 
-<link rel="apple-touch-icon" href="<?php echo asset('assets/img/icons/iTunesArtwork.png'); ?>">
+<link rel="apple-touch-icon" href="{{ asset('assets/img/icons/iTunesArtwork.png') }}">
+<link rel="apple-touch-startup-image" href="{{ asset('assets/img/startup.png') }}">
 
 <meta name="description" content="Skvosh.in">
 <meta name="HandheldFriendly" content="True">
 <meta name="MobileOptimized" content="320">
 <meta http-equiv="cleartype" content="on">
 
-<link rel="shortcut icon" href="{{ asset('favicon.png') }}">
+<link rel="shortcut icon" href="{{ asset('assets/img/icons/iTunesArtwork.png') }}">
 
 <meta name="msapplication-TileColor" content="#222222">
 
@@ -23,7 +24,7 @@
 <meta name="description" content="Weekly squash meetups">
 
 <meta name="robots" content="all">
-<meta name="copyright" content="Coffeenjuice">
+<meta name="copyright" content="Creolab">
 
 <meta property="fb:app_id" content="596696940410826">
 <meta property="fb:admins" content="834197248">
