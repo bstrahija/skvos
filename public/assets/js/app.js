@@ -52,6 +52,7 @@ App = {
 		App.Matches.initAlways();
 		App.Invitations.initAlways();
 		App.Events.initAlways();
+		App.Stats.initAlways();
 		App.initState();
 	},
 

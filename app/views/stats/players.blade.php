@@ -36,13 +36,27 @@
 
 	@if (isset($player_stats) and $player_stats)
 		<hr>
-		@foreach ($player_stats as $stats)
-			<table>
+		<table>
+			<thead>
+				<tr>
+					<th class="l"></th>
+					<th title="Mečevi" class="r">Mečevi</th>
+					<th title="Setovi" class="r">Setovi</th>
+				</tr>
+			</thead>
+
+			@foreach ($player_stats as $stats)
 				<thead>
-					<tr>
-						<th class="l">{{ $stats[0]['stats']->nickname }}</th>
-						<th title="Mečevi" class="r">Mečevi</th>
-						<th title="Setovi" class="r">Setovi</th>
+					<tr style="border-top: 1px solid rgba(255,255,255,.1); border-bottom: 1px solid rgba(255,255,255,.1);">
+						<th class="l"><a href="#" class="inter-player-toggle" data-toggle="{{ $stats[0]['stats']->id }}">{{ $stats[0]['stats']->nickname }}</a></th>
+						<td class="r total-matches-text-target">
+							<strong style="color: rgba(100,255,100,.7);">0%</strong><br>
+							0 / 0
+						</td>
+						<td class="r total-sets-text-target">
+							<strong style="color: rgba(100,255,100,.7);">0%</strong><br>
+							0 / 0
+						</td>
 					</tr>
 				</thead>
 				<tbody>
@@ -52,7 +66,7 @@
 					?>
 
 					@foreach ($stats as $stat)
-						<tr>
+						<tr class="inter-player inter-player-{{ $stats[0]['stats']->id }}">
 							<td><i style="color: #aaa; font-size: 10px;">vs</i> {{ $stat['opponent']->nickname }}</td>
 							<td class="r">
 								<strong>{{ ($stat['stats']->matches_played) ? number_format(($stat['stats']->matches_won / $stat['stats']->matches_played) * 100, 2) : 0 }}%</strong><br>
@@ -79,23 +93,23 @@
 
 					@endforeach
 
-					<tr>
-						<th class="l">Total</th>
-						<th class="r">
+					<tr style="display: none;">
+						<th class="l"></th>
+						<th class="r total-matches-text">
 							<strong style="color: rgba(100,255,100,.7);">{{ ($mp) ? number_format(($mw / $mp) * 100, 2) : 0 }}%</strong><br>
 							{{ $mw }} / {{ $mp }}
 						</th>
 
-						<th class="r">
+						<th class="r total-sets-text">
 							<strong style="color: rgba(100,255,100,.5);">{{ ($sp) ? number_format(($sw / $sp) * 100, 2) : 0 }}%</strong><br>
 							{{ $sw }} / {{ $sp }}
 						</th>
 					</tr>
 				</tbody>
-			</table>
+			@endforeach
+		</table>
 
-			<hr><br>
-		@endforeach
+		<br><br><br>
 	@else
 		<hr>
 

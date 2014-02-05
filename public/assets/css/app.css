@@ -252,6 +252,7 @@ body.fullscreen #nav { padding-top: 32px; }
 #app .stats-table td { color: rgba(255,255,255,.9); font-weight: 400; font-size: 17px; line-height: 160%; }
 #app .stats-table td span { display: block; font-size: 14px; }
 #app .stats-table td em { font-style: normal; display: block; font-weight: 100; font-size: 13px; opacity: .7; line-height: 120%; }
+#app tr.inter-player { display: none; }
 
 
 /* Users */

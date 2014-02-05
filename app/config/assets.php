@@ -29,6 +29,7 @@ return array(
 			'js/events.js',
 			'js/invitations.js',
 			'js/matches.js',
+			'js/stats.js',
 			'js/init.js',
 		),
 		'name'    => 'app.js',
