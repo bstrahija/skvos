@@ -12,7 +12,20 @@
 
 	<hr>
 
-	<?php echo '<pre>'; print_r(var_dump($groups)); echo '</pre>'; ?>
+	<table>
+		<thead>
+			<th>Grupa</th>
+			<th>{{ icn('torsos-all') }}</th>
+		</thead>
+		<tbody>
+			@foreach ($groups as $group)
+				<tr>
+					<td>{{ $group->title }} [{{ $group->members->count() }}]</td>
+					<td>by {{ $group->owner->full_name }}</td>
+				</tr>
+			@endforeach
+		</tbody>
+	</table>
 
 </div>
 

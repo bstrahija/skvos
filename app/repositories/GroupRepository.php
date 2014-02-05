@@ -28,7 +28,7 @@ class GroupRepository extends BaseRepository implements GroupRepositoryInterface
 	 */
 	public function all($options = null)
 	{
-		$users = Group::all();
+		$users = Group::with(['owner', 'members'])->get();
 
 		return new GroupCollection($users->toArray());
 	}

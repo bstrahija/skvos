@@ -8,5 +8,23 @@ class Group extends \Eloquent {
 	 */
 	protected $guarded = array('id');
 
+	/**
+	 * Group owner
+	 * @return Query
+	 */
+	public function owner()
+	{
+		return $this->belongsTo('App\Models\User');
+	}
+
+	/**
+	 * Members for group
+	 * @return Query
+	 */
+	public function members()
+	{
+		return $this->belongsToMany('App\Models\User', 'groups_users');
+	}
+
 }
 
