@@ -1,6 +1,6 @@
 <?php namespace App\Controllers;
 
-use Auth, Input, Redirect, Stats, View;
+use Auth, Input, Redirect, Stats, Users, View;
 
 class StatsController extends BaseController {
 
