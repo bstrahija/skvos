@@ -20,7 +20,7 @@ class EventsController extends BaseController {
 	{
 		// Get data
 		$event    = Events::next();
-		$upcoming = Events::upcoming();
+		$upcoming = Events::upcoming(['skip_id' => $event->id]);
 		$past     = Events::past();
 
 		return View::make('events.index', compact('event', 'upcoming', 'past'));

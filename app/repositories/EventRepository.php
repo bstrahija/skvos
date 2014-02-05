@@ -52,6 +52,12 @@ class EventRepository extends BaseRepository implements EventRepositoryInterface
 		                    ->where('from', '>=', Carbon::now()->format('Y-m-d H:i:s'))
 		                    ->orderBy('from', 'asc');
 
+		// Skip the next event
+		if ($skip = array_get($options, 'skip_id'))
+		{
+			$this->query->where('id', '<>', $skip);
+		}
+
 		// Result
 		return $this->collection($options);
 	}
