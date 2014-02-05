@@ -12,30 +12,10 @@
 
 	<hr>
 
-	{{ Form::open(['route' => 'stats.players', 'method' => 'get']) }}
-		<div class=" columns">
-			<ul class="small-block-grid-2 medium-block-grid-3 player-picker">
-				@foreach ($players as $player)
-					<li>
-						<input type="checkbox" name="players[]" value="{{ $player->id }}" id="players_{{ $player->id }}" {{ in_array($player->id, (array) Input::get('players')) ? ' checked="checked"' : null }}>
-						<label for="players_{{ $player->id }}">{{ $player->nickname }}</label>
-					</li>
-				@endforeach
-			</ul>
-
-			<hr>
-
-			<div class="button-actions">
-				<button type="submit" class="button small round">Prikaži</button>
-			</div>
-
-			<br><br>
-		</div>
-	{{ Form::close() }}
-
-
-	@if (isset($player_stats) and $player_stats)
+	@if (isset($player_stats) and $player_stats and isset($player_stats[0]) and isset($player_stats[0][0]))
+		<h3 class="pg">Rezultati</h3>
 		<hr>
+
 		<table>
 			<thead>
 				<tr>
@@ -110,12 +90,41 @@
 		</table>
 
 		<br><br><br>
-	@else
+	@elseif (Input::get('players'))
 		<hr>
 
 		<p class="not-found">{{ icn('alert') }} Nema statistike. <br>Probaj ponovno odabrati igrače.</p>
 
 	@endif
+
+
+	<h3 class="pg">Biraj igrače</h3>
+	<hr>
+
+	{{ Form::open(['route' => 'stats.players', 'method' => 'get']) }}
+		<div class=" columns">
+			<ul class="small-block-grid-2 medium-block-grid-3 player-picker">
+				@foreach ($players as $player)
+					<li>
+						<input type="checkbox" name="players[]" value="{{ $player->id }}" id="players_{{ $player->id }}" {{ in_array($player->id, (array) Input::get('players')) ? ' checked="checked"' : null }}>
+						<label for="players_{{ $player->id }}">{{ $player->nickname }}</label>
+					</li>
+				@endforeach
+			</ul>
+
+			<br><br><br><br>
+			<hr>
+
+			<div class="button-actions">
+				<button type="submit" class="button small round">Prikaži</button>
+			</div>
+
+			<hr>
+
+			<br><br>
+		</div>
+	{{ Form::close() }}
+
 
 </div>
 
