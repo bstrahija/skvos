@@ -114,6 +114,7 @@ class BaseItem {
 				if     ($rule == 'parse_datetime')                $data[$key] = Carbon::parse($data[$key]);
 				elseif ($rule == 'parse_time')                    $data[$key] = Carbon::parse($data[$key]);
 				elseif ($rule == 'parse_date')                    $data[$key] = Carbon::parse($data[$key]);
+				elseif ($rule == 'strip_tags')                    $data[$key] = strip_tags($data[$key]);
 				elseif (is_string($rule) and class_exists($rule)) $data[$key] = new $rule($data[$key]);
 				elseif (is_array($rule))                          $data[$key] = $data[$key];
 			}

@@ -11,6 +11,7 @@ class CommentItem extends BaseItem {
 	 */
 	protected $transform = array(
 		'author'    => 'App\Resources\Items\UserItem',
+		'text'      => 'strip_tags',
 	);
 
 }
