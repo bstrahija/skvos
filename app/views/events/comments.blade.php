@@ -1,26 +1,25 @@
-@if ($event->comments)
+@if (Auth::check() and $event->comments)
 
-	<h4 class="pg">Komentari</h4>
+	<h4 class="pg">{{ icn('comment') }} Komentari</h4>
 
 	<hr>
 
-	@if ($event->comments->count())
-
+	<div class="comments-container" id="comments-container">
 		<ul class="comments comments-{{ $event->id }}">
-			@foreach ($event->comments as $comment)
-				<li>
-					<em>{{ icn('comment') }} {{ $comment->author->full_name }}</em>:
-					{{ $comment->text }}
-				</li>
-			@endforeach
+			@include('events.comment_items')
 		</ul>
-
 		<hr>
+		{{ Form::open(['route' => 'api.comments.store']) }}
+			<input type="hidden" name="event_id" value="{{ $event->id }}">
+			<input type="hidden" name="author_id" value="{{ Auth::user()->id }}">
 
-	@else
+			<div class="row">
+				<input type="text" name="text" placeholder="Tvoja poruka...." autocomplete="off">
+			</div>
 
-		<p class="not-found">Nema komentara.</p>
+		{{ Form::close() }}
+	</div>
 
-	@endif
+	<hr>
 
 @endif

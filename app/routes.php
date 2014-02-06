@@ -26,6 +26,7 @@ Route::group(array('before' => 'auth'), function()
 	Route::get('invitations/{event}/send',  ['as' => 'invitations.send.preview', 'uses' => 'App\Controllers\InvitationsController@presend']);
 	Route::post('invitations/{event}/send', ['as' => 'invitations.send',         'uses' => 'App\Controllers\InvitationsController@send']);
 	Route::get('events/hashes',             ['as' => 'events.hashes',            'uses' => 'App\Controllers\EventsController@hashes']);
+	Route::get('comments/items/{event}',    ['as' => 'comments.items',           'uses' => 'App\Controllers\CommentsController@items']);
 
 	// Resources
 	Route::resource('events',      'App\Controllers\EventsController');
@@ -47,6 +48,9 @@ Route::group(array('before' => 'auth'), function()
 		Route::get('events/home',         ['as' => 'events.home',     'uses' => 'App\Controllers\Api\EventsController@home']);
 		Route::get('events/{id}/matches', ['as' => 'events.matches', 'uses' => 'App\Controllers\Api\EventsController@matches']);
 		Route::resource('events',         'App\Controllers\Api\EventsController');
+
+		// Comments
+		Route::resource('comments',    'App\Controllers\Api\CommentsController');
 
 		// Matches
 		Route::resource('matches',     'App\Controllers\Api\MatchesController');

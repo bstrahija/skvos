@@ -38,7 +38,7 @@ App = {
 		$(".knob").knob();
 
 		// ! Some fancy rotations
-		$(".stat canvas").addClass("rotate-reverse")
+		$(".stat canvas").addClass("rotate-reverse");
 		$(".stat").click(function() {
 			$(this).find("canvas").toggleClass("rotate");
 			$(this).find("canvas").toggleClass("rotate-reverse");
@@ -53,6 +53,7 @@ App = {
 		App.Invitations.initAlways();
 		App.Events.initAlways();
 		App.Stats.initAlways();
+		App.Comments.initAlways();
 		App.initState();
 	},
 

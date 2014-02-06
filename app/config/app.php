@@ -184,6 +184,7 @@ return array(
 
 		// My facades
 		'Carbon'          => 'Carbon\Carbon',
+		'Comments'        => 'App\Facades\CommentsFacade',
 		'Groups'          => 'App\Facades\GroupsFacade',
 		'Events'          => 'App\Facades\EventsFacade',
 		'Image'           => 'Creolab\Image\ImageFacade',

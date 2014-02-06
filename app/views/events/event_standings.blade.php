@@ -46,4 +46,8 @@
 
 	<hr>
 
+	@include('events.comments')
+
+	<hr>
+
 @endif
