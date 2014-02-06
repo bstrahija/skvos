@@ -124,7 +124,7 @@ class EventRepository extends BaseRepository implements EventRepositoryInterface
 	public function past($options = null)
 	{
 		$this->query = Event::with(['author', 'invitees', 'attendees', 'mvp'])
-		                    ->where('from', '<', Carbon::now()->format('Y-m-d H:i:s'))
+		                    ->where('date', '<', Carbon::now()->format('Y-m-d'))
 		                    ->orderBy('from', 'desc');
 
 		// Result
