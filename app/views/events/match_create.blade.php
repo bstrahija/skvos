@@ -55,6 +55,8 @@
 
 @else
 
+	@include('events.comments')
+
 	<h4 class="pg">
 		Temin se održava: {{ $event->period }}.
 	</h4><hr>

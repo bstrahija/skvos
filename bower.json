@@ -1,0 +1,13 @@
+{
+	"name": "Skvosh.in",
+	"version": "1.0.0",
+	"dependencies": {
+		"jquery": "~2.1.0",
+		"momentjs": "latest",
+		"selectize" : "latest",
+		"foundation": "~5",
+		"foundation-icon-fonts": "latest",
+		"font-awesome": "latest",
+		"jquery-knob": "latest"
+	}
+}

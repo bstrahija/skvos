@@ -44,5 +44,14 @@ class Event extends \Eloquent {
 		return $this->belongsTo('App\Models\User');
 	}
 
+	/**
+	 * Related comments
+	 * @return mixed
+	 */
+	public function comments()
+	{
+		return $this->hasMany('App\Models\Comment')->orderBy('created_at', 'desc');
+	}
+
 }
 

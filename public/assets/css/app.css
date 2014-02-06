@@ -261,6 +261,17 @@ body.fullscreen #nav { padding-top: 32px; }
 #app .user-table td { padding: 15px 10px; }
 
 
+/* Comments */
+#app .comments { list-style-type: none; padding: 0; margin: 0; font-size: 12px; max-height: 100px; overflow-y: auto; }
+#app .comments-container { background: rgba(0,0,0,.3); padding: 10px; margin: -20px 0; }
+#app .comments em     { color: rgba(255,255,255,.5); font-style: normal; margin-right: 6px; font-size: 11px; }
+#app .comments em b { font-weight: normal; }
+#app .comments li  { padding-bottom: 4px; }
+#app .comments .photo { width: 16px; height: 16px; border-radius: 8px; position: relative; top: 3px; margin-right: 4px; background: rgba(255,255,255,.2) no-repeat center center; -webkit-background-size: cover; background-size: cover; border: 1px solid #1a1a1a; display: inline-block; }
+#app .comments-container input { font-size: 12px; margin: 0; line-height: 100%; padding-top: 2px; padding-bottom: 2px; height: 26px; }
+#app .comments-container hr { margin: 6px 0 10px 0; }
+
+
 
 /* Auth */
 #app .auth      { text-align: center; }

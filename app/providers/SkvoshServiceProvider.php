@@ -20,6 +20,7 @@ class SkvoshServiceProvider extends ServiceProvider {
 		$this->app->bind('skvosh.invitation_repository', 'App\Repositories\InvitationRepository');
 		$this->app->bind('skvosh.match_repository',      'App\Repositories\MatchRepository');
 		$this->app->bind('skvosh.user_repository',       'App\Repositories\UserRepository');
+		$this->app->bind('skvosh.comment_repository',    'App\Repositories\CommentRepository');
 	}
 
 	/**

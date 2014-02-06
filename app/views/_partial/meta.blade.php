@@ -36,8 +36,8 @@
 <meta property="og:image" content="{{ asset('assets/img/fb.jpg') }}">
 <meta property="og:description" content="Weekly squash meetups">
 
-<script src="<?php echo asset('assets/vendor/modernizr.js'); ?>"></script>
-<script src="<?php echo asset('assets/vendor/fastclick.js'); ?>"></script>
+<script src="<?php echo asset('assets/vendor/components/modernizr/modernizr.js'); ?>"></script>
+<script src="<?php echo asset('assets/vendor/components/fastclick/lib/fastclick.js'); ?>"></script>
 
 <link href='http://fonts.googleapis.com/css?family=Lobster+Two:400|Roboto:400,100,700,300&amp;subset=latin,latin-ext' rel='stylesheet' type='text/css'>
 
