@@ -44,12 +44,13 @@ class CommentRepository extends BaseRepository implements CommentRepositoryInter
 
 	/**
 	 * Create new comment
-	 * @param  arra $data
+	 * @param  array $data
 	 * @return groupItem
 	 */
 	public function create($data)
 	{
 		$comment = new Comment;
+		$data['text'] = strip_tags(array_get($data, 'text'));
 		$comment->fill($data);
 		$comment->save();
 

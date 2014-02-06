@@ -21,7 +21,7 @@ class AuthController extends BaseController {
 	{
 		if (Auth::attempt(Input::only('email', 'password'), true))
 		{
-			return Redirect::intended('home');
+			return Redirect::intended(route('home'));
 		}
 
 		return Redirect::route('login')->withInput()->withErrors(array('login' => trans('messages.Wrong email or password')));

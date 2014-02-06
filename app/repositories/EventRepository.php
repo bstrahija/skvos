@@ -70,7 +70,7 @@ class EventRepository extends BaseRepository implements EventRepositoryInterface
 	public function next($options = null)
 	{
 		$this->query = Event::with(['author', 'invitees', 'attendees', 'mvp', 'comments.author'])
-		                    ->where('from', '>=', Carbon::now()->format('Y-m-d H:i:s'))
+		                    ->where('date', '>=', Carbon::now()->format('Y-m-d'))
 		                    ->orderBy('from', 'asc');
 
 		// Result
@@ -85,7 +85,7 @@ class EventRepository extends BaseRepository implements EventRepositoryInterface
 	public function nextForUser($userId, $options = null)
 	{
 		$this->query = Event::with(['author', 'invitees', 'attendees', 'mvp', 'comments'])
-		                    ->where('from', '>=', Carbon::now()->format('Y-m-d H:i:s'))
+		                    ->where('date', '>=', Carbon::now()->format('Y-m-d'))
 		                    ->whereHas('invitees', function($q) use ($userId) {
 		                    	$q->where('user_id', $userId);
 		                    })
