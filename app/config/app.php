@@ -108,7 +108,6 @@ return array(
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 
 		// My providers
-		'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider',
 		'Creolab\Assets\AssetsServiceProvider',
 		'Creolab\Alert\AlertServiceProvider',
 		'Creolab\Image\ImageServiceProvider',
