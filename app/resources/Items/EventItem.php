@@ -1,6 +1,7 @@
 <?php namespace App\Resources\Items;
 
 use Carbon;
+use App\Resources\Collections\CommentCollection;
 use App\Resources\Collections\EventCollection;
 use App\Resources\Collections\UserCollection;
 
@@ -17,6 +18,7 @@ class EventItem extends BaseItem {
 		'author'    => 'App\Resources\Items\UserItem',
 		'invitees'  => 'App\Resources\Collections\UserCollection',
 		'attendees' => 'App\Resources\Collections\UserCollection',
+		'comments'  => 'App\Resources\Collections\CommentCollection',
 		'mvp'       => 'App\Resources\Items\UserItem',
 	);
 

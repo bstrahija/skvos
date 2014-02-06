@@ -1,6 +1,6 @@
 @if (Auth::check())
 	<aside id="nav">
-		<div class="meta row">
+		<div class="meta row" data-ajax="true" data-href="{{ route('profile') }}">
 			<div class="columns small-2">
 				@if (Auth::user()->photo)
 					<div class="photo" style="background-image: url({{ Image::thumb('/' . Auth::user()->photo, 50) }});"></div>

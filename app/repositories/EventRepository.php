@@ -69,7 +69,7 @@ class EventRepository extends BaseRepository implements EventRepositoryInterface
 	 */
 	public function next($options = null)
 	{
-		$this->query = Event::with(['author', 'invitees', 'attendees', 'mvp'])
+		$this->query = Event::with(['author', 'invitees', 'attendees', 'mvp', 'comments.author'])
 		                    ->where('from', '>=', Carbon::now()->format('Y-m-d H:i:s'))
 		                    ->orderBy('from', 'asc');
 
@@ -84,7 +84,7 @@ class EventRepository extends BaseRepository implements EventRepositoryInterface
 	 */
 	public function nextForUser($userId, $options = null)
 	{
-		$this->query = Event::with(['author', 'invitees', 'attendees', 'mvp'])
+		$this->query = Event::with(['author', 'invitees', 'attendees', 'mvp', 'comments'])
 		                    ->where('from', '>=', Carbon::now()->format('Y-m-d H:i:s'))
 		                    ->whereHas('invitees', function($q) use ($userId) {
 		                    	$q->where('user_id', $userId);
@@ -102,7 +102,7 @@ class EventRepository extends BaseRepository implements EventRepositoryInterface
 	 */
 	public function lastForUser($userId, $options = null)
 	{
-		$this->query = Event::with(['author', 'invitees', 'attendees', 'mvp'])
+		$this->query = Event::with(['author', 'invitees', 'attendees', 'mvp', 'comments.author'])
 		                    ->where('date', '<', Carbon::now()->format('Y-m-d'))
 		                    ->whereHas('invitees', function($q) use ($userId) {
 		                    	$q->where('user_id', $userId);
@@ -157,7 +157,7 @@ class EventRepository extends BaseRepository implements EventRepositoryInterface
 	 */
 	public function find($id, $options = null)
 	{
-		$this->query = Event::with(['author', 'invitees', 'attendees', 'mvp'])
+		$this->query = Event::with(['author', 'invitees', 'attendees', 'mvp', 'comments.author'])
 		                    ->where('id', $id);
 
 		// Result
@@ -172,7 +172,7 @@ class EventRepository extends BaseRepository implements EventRepositoryInterface
 	 */
 	public function findByHash($hash, $options = null)
 	{
-		$this->query = Event::with(['author', 'invitees', 'attendees', 'mvp'])
+		$this->query = Event::with(['author', 'invitees', 'attendees', 'mvp', 'comments.author'])
 		                    ->where('hash', $hash);
 
 		// Result

@@ -14,13 +14,14 @@ class DashboardController extends BaseController {
 		$user  = Users::find(Auth::user()->id);
 		$event = Events::nextForUser($user->id);
 		$last  = Events::lastForUser($user->id);
-		$stats = Stats::forUser($user->id);
+		$stats = Stats::extendedForUser($user->id);
+		$rival = Stats::userRival($user->id);
 
 		// Also get invitation for event
 		if ($event) $invitation = Invitations::forEventAndUser($event->id, Auth::user()->id);
 		else        $invitation = null;
 
-		return View::make('dashboard.index')->withEvent($event)->withStats($stats)->withInvitation($invitation)->withLast($last)->withUser($user);
+		return View::make('dashboard.index', compact('event', 'stats', 'rival', 'invitation', 'last', 'user'));
 	}
 
 	/**
