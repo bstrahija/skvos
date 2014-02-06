@@ -11,7 +11,7 @@
 				<div class="columns small-6">
 					<select name="player1_id" id="player1">
 						@foreach ($players as $player)
-							<option value="{{ $player->id }}" {{ $player->id == $next_match_player_1 ? 'selected="selected"' : null }}>{{ $player->nickname }}</option>
+							<option value="{{ $player->id }}" {{ $player->id == $next_players[0] ? 'selected="selected"' : null }}>{{ $player->nickname }}</option>
 						@endforeach
 					</select>
 
@@ -25,7 +25,7 @@
 				<div class="columns small-6">
 					<select name="player2_id" id="player1">
 						@foreach ($players as $player)
-							<option value="{{ $player->id }}" {{ $player->id == $next_match_player_2 ? 'selected="selected"' : null }}>{{ $player->nickname }}</option>
+							<option value="{{ $player->id }}" {{ $player->id == $next_players[1] ? 'selected="selected"' : null }}>{{ $player->nickname }}</option>
 						@endforeach
 					</select>
 

@@ -66,24 +66,16 @@ class EventsController extends BaseController {
 	 */
 	public function show($id)
 	{
-		$event       = Events::find($id);
-		$mvp         = Events::mvp($id);
-		$players     = $event->attendees;
-		$invitees    = $event->invitees;
-		$matches     = Matches::forEvent($event->id);
-		$leaderboard = Stats::eventLeaderboard($event->id);
-		$event_type  = $event->attendees->count() == 2 ? 'double'    : null;
-		$event_type  = $event->attendees->count() == 3 ? 'tripple'   : $event_type;
-		$event_type  = $event->attendees->count() == 4 ? 'quadruple' : $event_type;
+		$event        = Events::find($id);
+		$mvp          = Events::mvp($id);
+		$players      = $event->attendees;
+		$invitees     = $event->invitees;
+		$matches      = Matches::forEvent($event->id);
+		$leaderboard  = Stats::eventLeaderboard($event->id);
+		$event_type   = Events::eventType($players->count());
+		$next_players = Matches::nextMatchPlayers($event->id);
 
-		// Calculate next match
-		$next_match_player_1 = $event->attendees->count() ? $event->attendees->first()->id : 1;
-		$next_match_player_2 = $event->attendees->count() ? $event->attendees->last()->id  : 2;
-
-		return View::make('events.show', compact(
-			'event', 'mvp', 'players', 'invitees', 'matches', 'leaderboard', 'event_type',
-			'next_match_player_1', 'next_match_player_2'
-		));
+		return View::make('events.show', compact('event', 'mvp', 'players', 'invitees', 'matches', 'leaderboard', 'event_type', 'next_players'));
 	}
 
 	/**

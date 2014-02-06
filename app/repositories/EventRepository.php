@@ -375,4 +375,18 @@ class EventRepository extends BaseRepository implements EventRepositoryInterface
 		}
 	}
 
+	/**
+	 * Event type by number of players
+	 * @param  integer $playerCount
+	 * @return string
+	 */
+	public function eventType($playerCount = 2)
+	{
+		$event_type  = $playerCount == 2 ? 'double'    : 'unknown';
+		$event_type  = $playerCount == 3 ? 'tripple'   : $event_type;
+		$event_type  = $playerCount == 4 ? 'quadruple' : $event_type;
+
+		return $event_type;
+	}
+
 }

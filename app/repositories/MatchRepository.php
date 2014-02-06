@@ -1,6 +1,6 @@
 <?php namespace App\Repositories;
 
-use Carbon;
+use Carbon, Events;
 use App\Models\Match;
 use App\Resources\Collections\EventCollection;
 use App\Resources\Items\EventItem;
@@ -135,6 +135,85 @@ class MatchRepository extends BaseRepository implements MatchRepositoryInterface
 		$match = Match::find($id);
 
 		return $match->delete($id);
+	}
+
+	/**
+	 * Get players for next match
+	 * @param  int $eventId
+	 * @return array
+	 */
+	public function nextMatchPlayers($eventId)
+	{
+		// Get event and players
+		$event      = Events::find($eventId);
+		$players    = $event->attendees;
+		$event_type = Events::eventType($players->count());
+		$matches    = $this->forEvent($event->id);
+
+		// Calculate next match (by default first and last player)
+		$player1 = $players->count() ? $players->first()->id : 1;
+		$player2 = $players->count() ? $players->last()->id  : 2;
+
+		// For quadrupple match
+		if ($players->count() >= 4 and $event_type == 'quadruple')
+		{
+			if ($matches->count() % 4 == 1)
+			{
+				$allIds     = $players->lists('id');
+				$prevMatch  = $matches->last();
+				$shouldPlay = array_values(array_diff($allIds, array($prevMatch->player1_id, $prevMatch->player2_id)));
+				$player1    = isset($shouldPlay[0]) ? $shouldPlay[0] : $allIds[0];
+				$player2    = isset($shouldPlay[1]) ? $shouldPlay[1] : $allIds[1];
+			}
+			elseif ($matches->count() % 4 == 2)
+			{
+				$prevMatch1 = $matches[$matches->count() - 2];
+				$prevMatch2 = $matches[$matches->count() - 1];
+				$player1    = ($prevMatch1->winner_id == $prevMatch1->player1_id) ? $prevMatch1->player2_id : $prevMatch1->player1_id;
+				$player2    = ($prevMatch2->winner_id == $prevMatch2->player1_id) ? $prevMatch2->player2_id : $prevMatch2->player1_id;
+			}
+			elseif ($matches->count() % 4 == 3)
+			{
+				$prevMatch1 = $matches[$matches->count() - 3];
+				$prevMatch2 = $matches[$matches->count() - 2];
+				$player1    = $prevMatch1->winner_id;
+				$player2    = $prevMatch2->winner_id;
+			}
+		}
+
+		// For tripple match
+		elseif ($players->count() >= 3 and $event_type == 'tripple')
+		{
+			$allIds = $players->lists('id');
+
+			if ($matches->count() == 1)
+			{
+				$prevMatch  = $matches->last();
+				$loserId    = ($prevMatch->winner_id == $prevMatch->player1_id) ? $prevMatch->player2_id : $prevMatch->player1_id;
+				$shouldPlay = array_values(array_diff($allIds, array($prevMatch->winner_id, $loserId)));
+				$player1    = isset($shouldPlay[0]) ? $shouldPlay[0] : $allIds[1];
+				$player2    = $prevMatch->winner_id;
+			}
+			elseif ($matches->count() >= 2)
+			{
+				$prevMatch1 = $matches[$matches->count() - 1];
+				$prevMatch2 = $matches[$matches->count() - 2];
+
+				foreach ($allIds as $notPlaying)
+				{
+					if (($notPlaying == $prevMatch1->player1_id or $notPlaying == $prevMatch1->player2_id) and ($notPlaying == $prevMatch2->player1_id or $notPlaying == $prevMatch2->player2_id)) break;
+				}
+
+				$shouldPlay = array_values(array_diff($allIds, array($notPlaying)));
+				$player1    = isset($shouldPlay[0]) ? $shouldPlay[0] : $allIds[0];
+				$player2    = isset($shouldPlay[1]) ? $shouldPlay[1] : $allIds[1];
+			}
+		}
+
+		return array(
+			$player1,
+			$player2,
+		);
 	}
 
 }
