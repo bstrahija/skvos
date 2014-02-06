@@ -190,6 +190,7 @@ body.fullscreen #nav { padding-top: 32px; }
 #app .event-list h3 .button { padding: 6px 11px; position: relative; top: -3px; margin: 0; }
 #app .event-list h6         { font-size: 13px; color: rgba(255,255,255,.6); margin: 0; }
 #app .event-list h6 strong { display: block; padding-top: 10px; font-size: 11px; }
+#app .event-list a.toggle  { color: rgba(255,255,255,.7); }
 #app .event-list .stats { width: 64px; text-align: right; }
 #app .event-list .stats i { margin-right: 3px; }
 #app .attending-count { color: rgba(100,220,100,.8); margin-right: 2px; }

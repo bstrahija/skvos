@@ -30,7 +30,7 @@
 						{{ $event->date->format('d.m.') }} @ {{ $event->from->format('H:i') }}
 					</em>
 				</a>
-				<a href="#" data-reveal-id="event-attendance-popup-{{ $event->id }}" data-reveal>
+				<a href="#" data-reveal-id="event-attendance-popup-{{ $event->id }}" data-ajax="false" data-reveal>
 					<span class="attendees">{{ icn('like') }} {{ count($event->attendees) }}</span> /
 					<span class="invitees">{{ icn('torso') }} {{ count($event->invitees) }}</span>
 				</a>

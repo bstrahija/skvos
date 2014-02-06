@@ -46,7 +46,6 @@ App = {
 
 		// ! Foundation
 		$(document).foundation();
-		// Foundation.libs.reveal.init();
 
 		// ! Dependencies
 		App.Matches.initAlways();

@@ -1,4 +1,4 @@
-<div data-ajax="true" data-href="{{ route('events.show', $event->id) }}">
+<div>
 	<h3 class="clearfix row">
 		<div class="columns">
 			@if (role('admin'))
@@ -10,11 +10,11 @@
 	</h3>
 	<h6 class="clearfix">
 		<div class="row">
-			<div class="columns small-8">{{ $event->period }}</div>
+			<div class="columns small-8"><a href="{{ route('events.show', $event->id) }}" class="toggle t">{{ $event->period }}</a></div>
 
 			<div class="columns small-4">
 				<span class="stats right">
-					<a href="#" data-reveal-id="event-attendance-popup-{{ $event->id }}" data-reveal>
+					<a href="#" data-reveal-id="event-attendance-popup-{{ $event->id }}" data-ajax="false" data-reveal>
 						<span class="attending-count">{{ icn('like') }}</i> {{ count($event->attendees) }}</span>
 						/
 						<span class="invited-count">{{ icn('torso') }}</i> {{ count($event->invitees) }}</span>
