@@ -5,7 +5,6 @@
 	"license": "MIT",
 	"require": {
 		"laravel/framework": "4.1.*",
-        "barryvdh/laravel-ide-helper": "1.*",
 		"creolab/image": "dev-master",
 		"creolab/assets": "dev-master",
 		"creolab/alert": "dev-master",
