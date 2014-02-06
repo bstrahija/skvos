@@ -7,7 +7,9 @@ class UserItem extends BaseItem {
 	 * @var array
 	 */
 	protected $transform = array(
-		'photo' => 'image_manager',
+		'photo'      => 'image_manager',
+		'first_name' => 'strip_tags',
+		'last_name'  => 'strip_tags',
 	);
 
 	/**
