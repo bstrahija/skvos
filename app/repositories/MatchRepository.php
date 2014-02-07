@@ -179,6 +179,22 @@ class MatchRepository extends BaseRepository implements MatchRepositoryInterface
 				$player1    = $prevMatch1->winner_id;
 				$player2    = $prevMatch2->winner_id;
 			}
+			elseif ($matches->count() and $matches->count() % 4 == 0)
+			{
+				$allIds      = $players->lists('id');
+				$prevMatch   = $matches[$matches->count() - 1];
+				$prevMatches = array($matches[$matches->count() - 2], $matches[$matches->count() - 3], $matches[$matches->count() - 4]);
+				$player1     = $prevMatch->winner_id;
+				$maybe         = array_values(array_diff($allIds, array($prevMatch->player1_id, $prevMatch->player2_id)));
+
+				foreach ($prevMatches as $prevMatch)
+				{
+					if     ($prevMatch->player1_id == $player1) { $key = array_search($prevMatch->player1_id, $maybe); unset($maybe[$key]); }
+					elseif ($prevMatch->player2_id == $player1) { $key = array_search($prevMatch->player2_id, $maybe); unset($maybe[$key]); }
+				}
+				$maybe = array_values($maybe);
+				$player2 = isset($maybe[0]) ? $maybe[0] : 1;
+			}
 		}
 
 		// For tripple match
