@@ -897,12 +897,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "22f6ebb2671bc6594b259a97c323749de9e86902"
+                "reference": "6cabe95f23322735f446b00ca8582b6c875dcbfe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/22f6ebb2671bc6594b259a97c323749de9e86902",
-                "reference": "22f6ebb2671bc6594b259a97c323749de9e86902",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/6cabe95f23322735f446b00ca8582b6c875dcbfe",
+                "reference": "6cabe95f23322735f446b00ca8582b6c875dcbfe",
                 "shasum": ""
             },
             "require": {
@@ -956,7 +956,7 @@
                 "logging",
                 "psr-3"
             ],
-            "time": "2014-02-06 11:51:00"
+            "time": "2014-02-06 20:35:10"
         },
         {
             "name": "natxet/CssMin",
@@ -1052,28 +1052,28 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "6f36a88993a07d0ccd52d813ceff27de022429c3"
+                "reference": "5cab2a78442f4c690866c85017f4e99f732602ce"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/6f36a88993a07d0ccd52d813ceff27de022429c3",
-                "reference": "6f36a88993a07d0ccd52d813ceff27de022429c3",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/5cab2a78442f4c690866c85017f4e99f732602ce",
+                "reference": "5cab2a78442f4c690866c85017f4e99f732602ce",
                 "shasum": ""
             },
             "require": {
                 "ext-tokenizer": "*",
-                "php": ">=5.2"
+                "php": ">=5.3"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.9-dev"
+                    "dev-master": "1.0-dev"
                 }
             },
             "autoload": {
-                "psr-0": {
-                    "PHPParser": "lib/"
-                }
+                "files": [
+                    "lib/bootstrap.php"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -1089,7 +1089,7 @@
                 "parser",
                 "php"
             ],
-            "time": "2014-01-24 19:27:42"
+            "time": "2014-02-06 20:39:57"
         },
         {
             "name": "patchwork/utf8",
