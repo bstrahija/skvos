@@ -248,6 +248,9 @@ class EventRepository extends BaseRepository implements EventRepositoryInterface
 				$attendee->points  = $attendee->stats->matches_won * 2;
 				$attendee->points += $attendee->stats->sets_won * 0.25;
 				$attendee->points -= $attendee->stats->sets_lost * 0.1;
+
+				// Alternate calculation
+				$attendee->points = round(($attendee->stats->match_efficiency + $attendee->stats->set_efficiency) / 2, 2);
 			}
 
 			// Sort calculations
@@ -272,7 +275,7 @@ class EventRepository extends BaseRepository implements EventRepositoryInterface
 
 				foreach ($event->attendees as &$attendee)
 				{
-					if ($attendee->id == $playerStats->first()->id) $attendee->points += 0.1;
+					if ($attendee->id == $playerStats->first()->id) $attendee->points += 1;
 				}
 
 				// Sort calculations
