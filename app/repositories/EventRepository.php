@@ -250,7 +250,7 @@ class EventRepository extends BaseRepository implements EventRepositoryInterface
 				$attendee->points -= $attendee->stats->sets_lost * 0.1;
 
 				// Alternate calculation
-				$attendee->points = round(($attendee->stats->match_efficiency + $attendee->stats->set_efficiency) / 2, 2);
+				$attendee->points = round(($attendee->stats->match_efficiency + $attendee->stats->set_efficiency) / 20, 2);
 			}
 
 			// Sort calculations
