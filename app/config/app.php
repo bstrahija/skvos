@@ -112,7 +112,6 @@ return array(
 		'Creolab\Alert\AlertServiceProvider',
 		'Creolab\Image\ImageServiceProvider',
 		'Creolab\Vault\VaultServiceProvider',
-		'Clockwork\Support\Laravel\ClockworkServiceProvider',
 		'App\Providers\SkvoshServiceProvider',
 
 	),

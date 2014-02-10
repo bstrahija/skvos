@@ -3,7 +3,7 @@
 use App\Resources\Collections\MatchCollection;
 use App\Resources\Collections\UserCollection;
 
-class MatchItem extends BaseItem {
+class MatchItem extends \Creolab\Resources\Item {
 
 	/**
 	 * Init new item

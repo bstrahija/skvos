@@ -3,7 +3,7 @@
 use App\Resources\Items\EventItem;
 use App\Resources\Items\UserItem;
 
-class InvitationItem extends BaseItem {
+class InvitationItem extends \Creolab\Resources\Item {
 
 	/**
 	 * Init new item

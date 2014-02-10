@@ -5,16 +5,16 @@ use App\Resources\Collections\CommentCollection;
 use App\Resources\Collections\EventCollection;
 use App\Resources\Collections\UserCollection;
 
-class EventItem extends BaseItem {
+class EventItem extends \Creolab\Resources\Item {
 
 	/**
 	 * Transform attributes
 	 * @var array
 	 */
 	protected $transform = array(
-		'date'      => 'parse_date',
-		'from'      => 'parse_datetime',
-		'to'        => 'parse_datetime',
+		'date'      => 'date',
+		'from'      => 'datetime',
+		'to'        => 'datetime',
 		'author'    => 'App\Resources\Items\UserItem',
 		'invitees'  => 'App\Resources\Collections\UserCollection',
 		'attendees' => 'App\Resources\Collections\UserCollection',

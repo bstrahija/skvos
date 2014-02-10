@@ -1,13 +1,13 @@
 <?php namespace App\Resources\Items;
 
-class UserItem extends BaseItem {
+class UserItem extends \Creolab\Resources\Item {
 
 	/**
 	 * Transform attributes
 	 * @var array
 	 */
 	protected $transform = array(
-		'photo'      => 'image_manager',
+		'photo'      => 'image',
 		'first_name' => 'strip_tags',
 		'last_name'  => 'strip_tags',
 	);

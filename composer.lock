@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "ea17b41ad29790516b0819aae8f91880",
+    "hash": "9e9996c6cbd74620eb1408c096597885",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -156,12 +156,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/creolab/image.git",
-                "reference": "662d03996502518a5ba429f4b89b0c8df846ad05"
+                "reference": "954a4a44c50c29bacad8f73be8e1e6e1b8ce21de"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/creolab/image/zipball/662d03996502518a5ba429f4b89b0c8df846ad05",
-                "reference": "662d03996502518a5ba429f4b89b0c8df846ad05",
+                "url": "https://api.github.com/repos/creolab/image/zipball/954a4a44c50c29bacad8f73be8e1e6e1b8ce21de",
+                "reference": "954a4a44c50c29bacad8f73be8e1e6e1b8ce21de",
                 "shasum": ""
             },
             "require": {
@@ -180,7 +180,8 @@
                 {
                     "name": "Boris Strahija",
                     "email": "boris@creolab.hr",
-                    "homepage": "http://creolab.hr"
+                    "homepage": "http://creolab.hr/",
+                    "role": "Developer"
                 }
             ],
             "description": "Manipulate images, create thumbs, crop...",
@@ -190,7 +191,56 @@
                 "laravel",
                 "thumb"
             ],
-            "time": "2014-01-02 13:56:50"
+            "time": "2014-02-10 15:08:44"
+        },
+        {
+            "name": "creolab/resources",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/creolab/resources.git",
+                "reference": "6e1bdd266aa373f6dafd2408b230f7d2fa05a637"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/creolab/resources/zipball/6e1bdd266aa373f6dafd2408b230f7d2fa05a637",
+                "reference": "6e1bdd266aa373f6dafd2408b230f7d2fa05a637",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "~4",
+                "nesbot/carbon": "1.*"
+            },
+            "suggest": {
+                "creolab/image": "dev-master"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Creolab\\Resources\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Boris Strahija",
+                    "email": "boris@creolab.hr",
+                    "homepage": "http://creolab.hr/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Helpers classes for dealing with resource collections and items.",
+            "homepage": "http://creolab.hr/",
+            "keywords": [
+                "api",
+                "collections",
+                "json",
+                "resources"
+            ],
+            "time": "2014-02-09 16:08:27"
         },
         {
             "name": "creolab/vault",
@@ -400,7 +450,7 @@
             "authors": [
                 {
                     "name": "Anthony Ferrara",
-                    "email": "ircmaxell@php.net",
+                    "email": "ircmaxell@ircmaxell.com",
                     "homepage": "http://blog.ircmaxell.com"
                 }
             ],
@@ -584,12 +634,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "c4f5e7d5c654a9f8277b1814a7b18a33374eb9e6"
+                "reference": "6160247653c68fc2c6ee81ff233a4e301e98f581"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/c4f5e7d5c654a9f8277b1814a7b18a33374eb9e6",
-                "reference": "c4f5e7d5c654a9f8277b1814a7b18a33374eb9e6",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/6160247653c68fc2c6ee81ff233a4e301e98f581",
+                "reference": "6160247653c68fc2c6ee81ff233a4e301e98f581",
                 "shasum": ""
             },
             "require": {
@@ -693,7 +743,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2014-02-07 15:03:01"
+            "time": "2014-02-10 14:21:32"
         },
         {
             "name": "leafo/lessphp",
@@ -813,7 +863,7 @@
                 {
                     "name": "Joost Faassen",
                     "email": "j.faassen@linkorb.com",
-                    "role": "Packaging for composer"
+                    "role": "Development"
                 },
                 {
                     "name": "Douglas Crockford",
@@ -1778,7 +1828,9 @@
             "authors": [
                 {
                     "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
+                    "email": "fabien@symfony.com",
+                    "homepage": "http://fabien.potencier.org",
+                    "role": "Lead Developer"
                 },
                 {
                     "name": "Symfony Community",
@@ -2100,7 +2152,9 @@
             "authors": [
                 {
                     "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
+                    "email": "fabien@symfony.com",
+                    "homepage": "http://fabien.potencier.org",
+                    "role": "Lead Developer"
                 },
                 {
                     "name": "Symfony Community",
@@ -2231,6 +2285,7 @@
         "creolab/assets": 20,
         "creolab/alert": 20,
         "creolab/vault": 20,
+        "creolab/resources": 20,
         "mobiledetect/mobiledetectlib": 20,
         "itsgoingd/clockwork": 20
     },

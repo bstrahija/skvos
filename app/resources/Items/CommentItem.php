@@ -3,7 +3,7 @@
 use Carbon;
 use App\Resources\Items\UserItem;
 
-class CommentItem extends BaseItem {
+class CommentItem extends \Creolab\Resources\Item {
 
 	/**
 	 * Transform attributes

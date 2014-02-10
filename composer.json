@@ -10,6 +10,7 @@
 		"creolab/assets": "dev-master",
 		"creolab/alert": "dev-master",
 		"creolab/vault": "dev-master",
+		"creolab/resources": "dev-master",
 		"mobiledetect/mobiledetectlib": "dev-master",
 		"itsgoingd/clockwork": "dev-master",
 		"vlucas/phpdotenv": "1.*"
@@ -49,7 +50,7 @@
 		]
 	},
 	"config": {
-		"preferred-install": "dist"
+		"preferred-install": "source"
 	},
 	"minimum-stability": "dev"
 }
