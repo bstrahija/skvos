@@ -29,7 +29,7 @@
 
 	@else
 
-		@if (Carbon::now() >= $event->from->subMinutes(30))
+		@if (Carbon::now() >= $event->from->copy()->subMinutes(30))
 			<p class="not-found">{{ icn('alert') }} Nema dovoljno igrača</p>
 		@endif
 

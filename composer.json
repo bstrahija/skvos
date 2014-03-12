@@ -4,16 +4,16 @@
 	"keywords": ["framework", "laravel"],
 	"license": "MIT",
 	"require": {
-		"php": ">=5.4.0",
-		"laravel/framework": "4.1.*",
-		"creolab/image": "dev-master",
-		"creolab/assets": "dev-master",
-		"creolab/alert": "dev-master",
-		"creolab/vault": "dev-master",
-		"creolab/resources": "dev-master",
+		"php"                         : ">=5.4.0",
+		"laravel/framework"           : "4.1.*@stable",
+		"creolab/image"               : "dev-master",
+		"creolab/assets"              : "dev-master",
+		"creolab/alert"               : "dev-master",
+		"creolab/vault"               : "dev-master",
+		"creolab/resources"           : "dev-master",
 		"mobiledetect/mobiledetectlib": "dev-master",
-		"itsgoingd/clockwork": "dev-master",
-		"vlucas/phpdotenv": "1.*"
+		"itsgoingd/clockwork"         : "dev-master",
+		"vlucas/phpdotenv"            : "1.*"
 	},
 	"autoload": {
 		"classmap": [
@@ -22,15 +22,15 @@
 			"app/tests/TestCase.php"
 		],
 		"psr-4": {
-			"App\\Commands\\": "app/commands",
-			"App\\Controllers\\": "app/controllers",
-			"App\\Facades\\": "app/facades",
-			"App\\Models\\": "app/models",
-			"App\\Providers\\": "app/providers",
+			"App\\Commands\\"    : "app/commands",
+			"App\\Controllers\\" : "app/controllers",
+			"App\\Facades\\"     : "app/facades",
+			"App\\Models\\"      : "app/models",
+			"App\\Providers\\"   : "app/providers",
 			"App\\Repositories\\": "app/repositories",
-			"App\\Resources\\": "app/resources",
-			"App\\Services\\": "app/services",
-			"App\\Validation\\": "app/validation"
+			"App\\Resources\\"   : "app/resources",
+			"App\\Services\\"    : "app/services",
+			"App\\Validation\\"  : "app/validation"
 		},
 		"files": [
 			"app/helpers.php"
@@ -52,5 +52,6 @@
 	"config": {
 		"preferred-install": "source"
 	},
-	"minimum-stability": "dev"
+	"minimum-stability": "dev",
+	"prefer-stable": true
 }
