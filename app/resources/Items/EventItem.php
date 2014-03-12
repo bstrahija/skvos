@@ -1,6 +1,6 @@
 <?php namespace App\Resources\Items;
 
-use Carbon;
+use Carbon\Carbon;
 use App\Resources\Collections\CommentCollection;
 use App\Resources\Collections\EventCollection;
 use App\Resources\Collections\UserCollection;
@@ -60,6 +60,8 @@ class EventItem extends \Creolab\Resources\Item {
 		{
 			return true;
 		}
+
+		return false;
 	}
 
 	/**
@@ -72,6 +74,8 @@ class EventItem extends \Creolab\Resources\Item {
 		$to   = Carbon::parse($this->data['to']);
 
 		if ($now > $to) return true;
+
+		return false;
 	}
 
 }

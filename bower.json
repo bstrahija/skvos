@@ -8,6 +8,7 @@
 		"foundation": "~5",
 		"foundation-icon-fonts": "latest",
 		"font-awesome": "latest",
-		"jquery-knob": "latest"
+		"jquery-knob": "latest",
+		"nnnick-chartjs": "latest"
 	}
 }

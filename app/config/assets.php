@@ -24,6 +24,7 @@ return array(
 			'vendor/components/jquery/jquery.min.js',
 			'vendor/components/foundation/js/foundation.min.js',
 			'vendor/components/jquery-knob/js/jquery.knob.js',
+			'vendor/components/nnnick-chartjs/Chart.min.js',
 			'vendor/crajax/crajax.js',
 			'js/app.js',
 			'js/events.js',

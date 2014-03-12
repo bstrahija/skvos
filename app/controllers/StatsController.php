@@ -1,6 +1,7 @@
 <?php namespace App\Controllers;
 
-use Auth, Input, Redirect, Stats, Users, View;
+use Auth, DB, Events, Input, Redirect, Stats, Users, View;
+use App\Models\Stat;
 
 class StatsController extends BaseController {
 
@@ -44,6 +45,50 @@ class StatsController extends BaseController {
 		$player_stats  = Stats::playerStats(Input::get('players'));
 
 		return View::make('stats.players', compact('players', 'player_stats'));
+	}
+
+	/**
+	 * Generate stats and populate stats tables
+	 * @return Response
+	 */
+	public function generate()
+	{
+		$events = Events::all(['limit' => 9999]);
+
+
+		// Remove old stats
+		DB::table('stats')->where('type', 'player_event_match_efficiency')->delete();
+		DB::table('stats')->where('type', 'player_event_set_efficiency')->delete();
+
+		// Generate new ones
+		foreach ($events as $event)
+		{
+			if ($event->attendees->count() > 1)
+			{
+				foreach ($event->attendees as $user)
+				{
+					$playerStats = Stats::extendedForUser($user->id, $event->id);
+
+					if ($playerStats->matches_played)
+					{
+						$stat = Stat::create([
+							'user_id'  => $user->id,
+							'event_id' => $event->id,
+							'type'     => 'player_event_match_efficiency',
+							'value'    => $playerStats->match_efficiency,
+						]);
+						$stat = Stat::create([
+							'user_id'  => $user->id,
+							'event_id' => $event->id,
+							'type'     => 'player_event_set_efficiency',
+							'value'    => $playerStats->set_efficiency,
+						]);
+					}
+				}
+			}
+		}
+
+		return View::make('stats.chart');
 	}
 
 }

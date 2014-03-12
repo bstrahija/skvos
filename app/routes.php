@@ -21,6 +21,7 @@ Route::group(array('before' => 'auth'), function()
 	Route::get('stats',                     ['as' => 'stats',                    'uses' => 'App\Controllers\StatsController@index']);
 	Route::get('stats/my',                  ['as' => 'stats.my',                 'uses' => 'App\Controllers\StatsController@my']);
 	Route::get('stats/players',             ['as' => 'stats.players',            'uses' => 'App\Controllers\StatsController@players']);
+	Route::get('stats/generate',            ['as' => 'stats.generate',           'uses' => 'App\Controllers\StatsController@generate']);
 	Route::get('events/mvps',               ['as' => 'events.mvps',              'uses' => 'App\Controllers\EventsController@mvps']);
 	Route::get('events/{id}/matches',       ['as' => 'events.matches',           'uses' => 'App\Controllers\EventsController@matches']);
 	Route::get('invitations/{event}/send',  ['as' => 'invitations.send.preview', 'uses' => 'App\Controllers\InvitationsController@presend']);
@@ -42,12 +43,13 @@ Route::group(array('before' => 'auth'), function()
 		Route::get('/', ['as' => 'api', function() { return array('Skvosh.in API v1.0.0'); }]);
 
 		// Events
-		Route::get('events/upcoming',     ['as' => 'events.upcoming', 'uses' => 'App\Controllers\Api\EventsController@upcoming']);
-		Route::get('events/past',         ['as' => 'events.past',     'uses' => 'App\Controllers\Api\EventsController@past']);
-		Route::get('events/next',         ['as' => 'events.next',     'uses' => 'App\Controllers\Api\EventsController@next']);
-		Route::get('events/home',         ['as' => 'events.home',     'uses' => 'App\Controllers\Api\EventsController@home']);
-		Route::get('events/{id}/matches', ['as' => 'events.matches', 'uses' => 'App\Controllers\Api\EventsController@matches']);
-		Route::resource('events',         'App\Controllers\Api\EventsController');
+		Route::get('events/upcoming',       ['as' => 'events.upcoming', 'uses' => 'App\Controllers\Api\EventsController@upcoming']);
+		Route::get('events/past',           ['as' => 'events.past',     'uses' => 'App\Controllers\Api\EventsController@past']);
+		Route::get('events/next',           ['as' => 'events.next',     'uses' => 'App\Controllers\Api\EventsController@next']);
+		Route::get('events/home',           ['as' => 'events.home',     'uses' => 'App\Controllers\Api\EventsController@home']);
+		Route::get('events/{id}/matches',   ['as' => 'events.matches', 'uses' => 'App\Controllers\Api\EventsController@matches']);
+		Route::get('stats/user-chart/{id}', ['as' => 'events.matches', 'uses' => 'App\Controllers\Api\StatsController@userChart']);
+		Route::resource('events',           'App\Controllers\Api\EventsController');
 
 		// Comments
 		Route::resource('comments',    'App\Controllers\Api\CommentsController');

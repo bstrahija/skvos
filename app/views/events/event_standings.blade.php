@@ -26,7 +26,7 @@
 						<strong>{{ $player->stats->set_efficiency }}%</strong><br>
 						{{ $player->stats->sets_won }}/{{ $player->stats->sets_played }}
 					</td>
-					<td class="r"><strong>{{ number_format($player->points, 2) }}</td>
+					<td class="r"><strong>{{ number_format(max($player->points, 0), 2) }}</td>
 
 					<?php $num++; ?>
 				</tr>
