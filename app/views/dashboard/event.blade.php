@@ -8,7 +8,15 @@
 		(Carbon::now() > $event->from and Carbon::now() < $event->to) ? 'event-now' : ''
 	}}">
 		<h2 class="small-3 columns">
-			{{ (Carbon::now() > $event->from and Carbon::now() < $event->to) ? 'Upravo:' : 'Uskoro:' }}
+			@if (Carbon::now() > $event->from and Carbon::now() < $event->to)
+				Upravo:
+			@elseif ($event->from->isToday())
+				Danas:
+			@elseif ($event->from->isTomorrow())
+				Sutra:
+			@else
+				Uskoro:
+			@endif
 
 			@if ($invitation and ! $invitation->confirmed)
 				<div class="confirmation">

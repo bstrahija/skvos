@@ -345,8 +345,8 @@ class EventRepository extends BaseRepository implements EventRepositoryInterface
 		foreach (array_except($data, ['_token', '_method']) as $key => $val)
 		{
 			if     ($key == 'date')    $event->$key = Carbon::parse($val)->format('Y-m-d');
-			elseif ($key == 'from')    $event->$key = Carbon::parse($val)->format('Y-m-d H:i:s');
-			elseif ($key == 'to')      $event->$key = Carbon::parse($val)->format('Y-m-d H:i:s');
+			elseif ($key == 'from')    $event->$key = Carbon::parse(array_get($data, 'date') . ' ' . $val)->format('Y-m-d H:i:s');
+			elseif ($key == 'to')      $event->$key = Carbon::parse(array_get($data, 'date') . ' ' . $val)->format('Y-m-d H:i:s');
 			elseif ($key == 'players') $this->updateInvitations($eventId, $val);
 			else                       $event->$key = $val;
 		}
