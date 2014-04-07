@@ -102,8 +102,8 @@ class Stats {
 		$stats = $this->forUser($userId, $eventId)->toArray();
 
 		// Extended
-		$stats['events_attended']   = Invitation::where('user_id', $userId)->where('confirmed', 1)->count();
-		$stats['events_invited']    = Invitation::where('user_id', $userId)->count();
+		$stats['events_attended']   = Invitation::where('user_id', $userId)->join('events', 'events.id', '=', 'invitations.event_id')->where('events.date', '<=', date('Y-m-d'))->where('confirmed', 1)->count();
+		$stats['events_invited']    = Invitation::where('user_id', $userId)->join('events', 'events.id', '=', 'invitations.event_id')->where('events.date', '<=', date('Y-m-d'))->count();
 		$stats['events_attendance'] = round(($stats['events_attended'] / $stats['events_invited']) * 100);
 
 		return new StatsItem($stats);
