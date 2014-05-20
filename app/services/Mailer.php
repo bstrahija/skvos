@@ -194,14 +194,14 @@ class Mailer {
 
 			if ($sent)
 			{
-				Log::debug("[MAILER] Sent ".$sent." comment notifications to " . @json_encode($emails));
+				Log::debug("[MAILER] Sent ".$sent." comment notifications for event [".$event->id."] to " . @json_encode($emails));
 				$event->comments_sent_at = Carbon::now();
 				$event->save();
 			}
 		}
 		else
 		{
-			Log::debug("[MAILER] No comment notifications sent.");
+			Log::debug("[MAILER] No comment notifications sent for event [".$event->id."].");
 		}
 	}
 
