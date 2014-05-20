@@ -2,6 +2,8 @@
 
 class Event extends \Eloquent {
 
+	protected $dates = ['comments_sent_at'];
+
 	/**
 	 * Guard fields from mass assignment
 	 * @var array

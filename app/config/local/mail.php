@@ -2,10 +2,11 @@
 
 return array(
 
-	'pretend' => true,
+	'pretend' => false,
+	'comment_notification_delay' => 1,
 
 	'host'       => 'smtp.mandrillapp.com',
-	'port'       => 587,
+	'port'       => 2525,
 	'from'       => array('address' => 'info@skvosh.in', 'name' => 'Skvosh.in'),
 	'encryption' => 'tls',
 	'username'   => 'bstrahija@gmail.com',

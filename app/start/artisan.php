@@ -12,3 +12,4 @@
 */
 
 Artisan::add(new App\Commands\DeployCommand);
+Artisan::add(new App\Commands\NotifyCommand);

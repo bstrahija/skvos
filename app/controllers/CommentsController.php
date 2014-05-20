@@ -1,6 +1,6 @@
 <?php namespace App\Controllers;
 
-use Comments, Events, Input, Notification, Response, Stats, View;
+use Comments, Events, Input, Mailer, Notification, Response, Stats, View;
 
 class CommentsController extends BaseController {
 
@@ -13,11 +13,7 @@ class CommentsController extends BaseController {
 
 	public function create($eventId)
 	{
-		$event = Events::find($eventId);
-
-		Notification::gtalkComment('Neki komentar', $eventId);
-
-		echo '<pre>'; print_r(var_dump($event)); echo '</pre>';
+		return Mailer::sendEventCommentNotifications($eventId);
 	}
 
 }

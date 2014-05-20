@@ -1,6 +1,8 @@
 <?php namespace App\Services;
 
-use Config, Mail, URL;
+use Carbon, Config, Mail, URL;
+use App\Models\Comment;
+use App\Models\Event;
 use App\Repositories\EventRepository;
 use App\Repositories\InvitationRepository;
 
@@ -151,6 +153,57 @@ class Mailer {
 		});
 
 		return $sent;
+	}
+
+	/**
+	 * Send notifications for new comments
+	 *
+	 * @param  integer $event
+	 * @return void
+	 */
+	public function sendEventCommentNotifications($id)
+	{
+		$event         = Event::find($id);
+		$now           = Carbon::now();
+		$sent          = $event->comments_sent_at ?: Carbon::create(1200, 1, 1);
+		$lastComment   = Comment::orderBy('created_at', 'desc')->where('event_id', $event->id)->first();
+		$minutesPassed = $sent->diffInMinutes($now);
+		$targetDelay   = (int) Config::get('mail.comment_notification_delay');
+		echo '<pre>'; print_r(var_dump($minutesPassed)); echo '</pre>';
+
+		if ($lastComment and $minutesPassed >= $targetDelay and $sent < $lastComment->created_at)
+		{
+			$oldComments = Comment::where('created_at', '<=', $sent)->orderBy('created_at', 'desc')->where('event_id', $event->id)->take(10)->get();
+			$newComments = Comment::where('created_at', '>',  $sent)->orderBy('created_at', 'desc')->where('event_id', $event->id)->get();
+
+			// Prepare data
+			$data = [
+				'event' => $event,
+				'old_comments' => $oldComments,
+				'new_comments' => $newComments,
+			];
+
+			// Find attendees and filter 'em
+			$emails = $this->getAllowed($event->invitees->lists('email'));
+
+			// Send emails
+			$sent = Mail::send('emails.comments.summary', $data, function($m) use ($event, $emails) {
+				$m->to(Config::get('mail.from.address'));
+				$m->bcc($emails);
+				$m->subject('Novi komentari za termin :"' . $event->title . '"');
+			});
+
+			if ($sent)
+			{
+				$event->comments_sent_at = Carbon::now();
+				$event->save();
+			}
+
+			echo '<pre>'; print_r(var_dump($emails)); echo '</pre>';
+			echo '<pre>'; print_r(var_dump($sent)); echo '</pre>';
+
+			// return $this->send($emails, 'emails.comments.summary', $data);
+		}
 	}
 
 	/**

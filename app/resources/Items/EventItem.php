@@ -12,14 +12,15 @@ class EventItem extends \Creolab\Resources\Item {
 	 * @var array
 	 */
 	protected $transform = array(
-		'date'      => 'date',
-		'from'      => 'datetime',
-		'to'        => 'datetime',
-		'author'    => 'App\Resources\Items\UserItem',
-		'invitees'  => 'App\Resources\Collections\UserCollection',
-		'attendees' => 'App\Resources\Collections\UserCollection',
-		'comments'  => 'App\Resources\Collections\CommentCollection',
-		'mvp'       => 'App\Resources\Items\UserItem',
+		'date'             => 'date',
+		'from'             => 'datetime',
+		'to'               => 'datetime',
+		'author'           => 'App\Resources\Items\UserItem',
+		'invitees'         => 'App\Resources\Collections\UserCollection',
+		'attendees'        => 'App\Resources\Collections\UserCollection',
+		'comments'         => 'App\Resources\Collections\CommentCollection',
+		'mvp'              => 'App\Resources\Items\UserItem',
+		'comments_sent_at' => 'datetime',
 	);
 
 	/**
