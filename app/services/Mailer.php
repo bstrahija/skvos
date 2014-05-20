@@ -201,7 +201,7 @@ class Mailer {
 		}
 		else
 		{
-			Log::debug("[MAILER] No comment notifications sent for event [".$event->id."].");
+			// Log::debug("[MAILER] No comment notifications sent for event [".$event->id."].");
 		}
 	}
 
