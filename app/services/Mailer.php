@@ -1,6 +1,6 @@
 <?php namespace App\Services;
 
-use Carbon, Config, Mail, URL;
+use Carbon, Config, Log, Mail, URL;
 use App\Models\Comment;
 use App\Models\Event;
 use App\Repositories\EventRepository;
@@ -169,7 +169,6 @@ class Mailer {
 		$lastComment   = Comment::orderBy('created_at', 'desc')->where('event_id', $event->id)->first();
 		$minutesPassed = $sent->diffInMinutes($now);
 		$targetDelay   = (int) Config::get('mail.comment_notification_delay');
-		echo '<pre>'; print_r(var_dump($minutesPassed)); echo '</pre>';
 
 		if ($lastComment and $minutesPassed >= $targetDelay and $sent < $lastComment->created_at)
 		{
@@ -195,14 +194,14 @@ class Mailer {
 
 			if ($sent)
 			{
+				Log::debug("[MAILER] Sent ".$sent." comment notifications to " . @json_encode($emails));
 				$event->comments_sent_at = Carbon::now();
 				$event->save();
 			}
-
-			echo '<pre>'; print_r(var_dump($emails)); echo '</pre>';
-			echo '<pre>'; print_r(var_dump($sent)); echo '</pre>';
-
-			// return $this->send($emails, 'emails.comments.summary', $data);
+		}
+		else
+		{
+			Log::debug("[MAILER] No comment notifications sent.");
 		}
 	}
 
