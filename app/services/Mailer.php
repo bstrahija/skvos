@@ -172,8 +172,8 @@ class Mailer {
 
 		if ($lastComment and $minutesPassed >= $targetDelay and $sent < $lastComment->created_at)
 		{
-			$oldComments = Comment::where('created_at', '<=', $sent)->orderBy('created_at', 'desc')->where('event_id', $event->id)->take(10)->get();
-			$newComments = Comment::where('created_at', '>',  $sent)->orderBy('created_at', 'desc')->where('event_id', $event->id)->get();
+			$oldComments = Comment::where('created_at', '<=', $sent)->orderBy('created_at', 'asc')->where('event_id', $event->id)->take(10)->get();
+			$newComments = Comment::where('created_at', '>',  $sent)->orderBy('created_at', 'asc')->where('event_id', $event->id)->get();
 
 			// Prepare data
 			$data = [
