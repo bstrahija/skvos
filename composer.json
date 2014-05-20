@@ -5,14 +5,14 @@
 	"license": "MIT",
 	"require": {
 		"php"                         : ">=5.4.0",
-		"laravel/framework"           : "4.1.*@stable",
+		"laravel/framework"           : "4.1.*",
 		"creolab/image"               : "dev-master",
 		"creolab/assets"              : "dev-master",
 		"creolab/alert"               : "dev-master",
 		"creolab/vault"               : "dev-master",
 		"creolab/resources"           : "dev-master",
-		"mobiledetect/mobiledetectlib": "dev-master",
-		"itsgoingd/clockwork"         : "dev-master",
+		"mobiledetect/mobiledetectlib": "2.*",
+		"itsgoingd/clockwork"         : "1.*",
 		"vlucas/phpdotenv"            : "1.*"
 	},
 	"autoload": {
