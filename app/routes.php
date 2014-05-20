@@ -28,6 +28,7 @@ Route::group(array('before' => 'auth'), function()
 	Route::post('invitations/{event}/send', ['as' => 'invitations.send',         'uses' => 'App\Controllers\InvitationsController@send']);
 	Route::get('events/hashes',             ['as' => 'events.hashes',            'uses' => 'App\Controllers\EventsController@hashes']);
 	Route::get('comments/items/{event}',    ['as' => 'comments.items',           'uses' => 'App\Controllers\CommentsController@items']);
+	Route::get('comments/create/{event}',   ['as' => 'comments.create',          'uses' => 'App\Controllers\CommentsController@create']);
 
 	// Resources
 	Route::resource('events',      'App\Controllers\EventsController');
