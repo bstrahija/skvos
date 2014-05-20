@@ -29,8 +29,8 @@ class DeployCommand extends Command {
 		$target = $this->input->getArgument('target', 'development');
 
 		// Target directory
-		if ($target == 'production') { $dir = '/var/www/skvosh.in';     $branch = 'origin/master'; }
-		else                         { $dir = '/var/www/dev.skvosh.in'; $branch = 'origin/develop'; }
+		if ($target == 'production') { $dir = '/var/apps/skvosh.in';     $branch = 'origin/master'; }
+		else                         { $dir = '/var/apps/dev.skvosh.in'; $branch = 'origin/develop'; }
 
 		$this->info("Deploying to $target...");
 		$this->line("");
