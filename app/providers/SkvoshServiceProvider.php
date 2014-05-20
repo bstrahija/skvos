@@ -11,8 +11,9 @@ class SkvoshServiceProvider extends ServiceProvider {
 	public function boot()
 	{
 		// Register IoC bindings
-		$this->app->bind('skvosh.stats',  'App\Services\Stats');
-		$this->app->bind('skvosh.mailer', 'App\Services\Mailer');
+		$this->app->bind('skvosh.stats',        'App\Services\Stats');
+		$this->app->bind('skvosh.mailer',       'App\Services\Mailer');
+		$this->app->bind('skvosh.notification', 'App\Services\Notification');
 
 		// Also for repositories
 		$this->app->bind('skvosh.event_repository',      'App\Repositories\EventRepository');

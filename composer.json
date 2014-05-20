@@ -13,7 +13,8 @@
 		"creolab/resources"           : "dev-master",
 		"mobiledetect/mobiledetectlib": "dev-master",
 		"itsgoingd/clockwork"         : "dev-master",
-		"vlucas/phpdotenv"            : "1.*"
+		"vlucas/phpdotenv"            : "1.*",
+		"tyrola/xmpphp"               : "1.0.*"
 	},
 	"autoload": {
 		"classmap": [

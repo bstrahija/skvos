@@ -188,6 +188,7 @@ return array(
 		'Image'           => 'Creolab\Image\ImageFacade',
 		'Invitations'     => 'App\Facades\InvitationsFacade',
 		'Mailer'          => 'App\Facades\MailerFacade',
+		'Notification'    => 'App\Facades\NotificationFacade',
 		'Matches'         => 'App\Facades\MatchesFacade',
 		'Stats'           => 'App\Facades\StatsFacade',
 		'User'            => 'App\Models\User',
