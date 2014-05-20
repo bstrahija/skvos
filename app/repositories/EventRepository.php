@@ -245,9 +245,10 @@ class EventRepository extends BaseRepository implements EventRepositoryInterface
 			{
 				$attendee->points  = 0;
 				$attendee->stats   = Stats::extendedForUser($attendee->id, $event->id);
-				$attendee->points  = $attendee->stats->matches_won * 2;
-				$attendee->points += $attendee->stats->sets_won * 0.25;
-				$attendee->points -= $attendee->stats->sets_lost * 0.1;
+				$attendee->points  = $attendee->stats->matches_won  * 2;
+				$attendee->points -= $attendee->stats->matches_lost * 0.3;
+				$attendee->points += $attendee->stats->sets_won     * 0.25;
+				$attendee->points -= $attendee->stats->sets_lost    * 0.1;
 
 				// Alternate calculation
 				// $attendee->points = round(($attendee->stats->match_efficiency + $attendee->stats->set_efficiency) / 20, 2);
