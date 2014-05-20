@@ -32,7 +32,7 @@ class NotifyCommand extends Command {
 		foreach ($events as $event)
 		{
 			Mailer::sendEventCommentNotifications($event->id);
-			// $this->info("Sending for [" . $event->id . "] " . $event->title);
+			$this->info("Sending for [" . $event->id . "] " . $event->title);
 		}
 
 		//echo '<pre>'; print_r($events->toArray()); echo '</pre>';

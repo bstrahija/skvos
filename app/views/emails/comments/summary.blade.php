@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 	</head>
 	<body>
-		<h1>Novi komentari za termin "{{ $event->title }}"</h1>
+		<h1>Novi komentari za termin "<a href="{{ route('events.show', $event->id) }}">{{ $event->title }}</a>"</h1>
 
 		@if (count($new_comments))
 			<table style="color: #272;" border="0">
