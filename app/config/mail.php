@@ -7,7 +7,7 @@ return array(
 	| Send comment notification every 1 minute
 	|--------------------------------------------------------------------------
 	*/
-	'comment_notification_delay' => 15,
+	'comment_notification_delay' => 10,
 
 	/*
 	|--------------------------------------------------------------------------
