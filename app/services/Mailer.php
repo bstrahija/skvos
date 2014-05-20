@@ -189,7 +189,7 @@ class Mailer {
 			$sent = Mail::send('emails.comments.summary', $data, function($m) use ($event, $emails) {
 				$m->to(Config::get('mail.from.address'));
 				$m->bcc($emails);
-				$m->subject('Novi komentari za termin :"' . $event->title . '"');
+				$m->subject('Novi komentari za termin :"' . $event->title . '" [#'.$event->id.']');
 			});
 
 			if ($sent)
