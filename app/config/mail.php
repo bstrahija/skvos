@@ -87,7 +87,7 @@ return array(
 	|
 	*/
 
-	'username' => null,
+	'username' => getenv('MAIL_USERNAME'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -100,7 +100,7 @@ return array(
 	|
 	*/
 
-	'password' => null,
+	'password' => getenv('MAIL_PASSWORD'),
 
 	/*
 	|--------------------------------------------------------------------------

@@ -79,4 +79,6 @@ return array(
 
 	),
 
+	'encrypt' => true,
+
 );
