@@ -88,7 +88,7 @@ class Mailer {
 
 			$this->invitations->update($invitation->id, ['sent' => 1]);
 
-			return $sent;
+			return 1;
 		}
 	}
 
