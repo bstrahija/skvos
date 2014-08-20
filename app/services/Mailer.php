@@ -86,10 +86,7 @@ class Mailer {
 				$m->subject('Pozivnica za: ' . $event->title);
 			});
 
-			if ($sent)
-			{
-				$this->invitations->update($invitation->id, ['sent' => 1]);
-			}
+			$this->invitations->update($invitation->id, ['sent' => 1]);
 
 			return $sent;
 		}
