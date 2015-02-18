@@ -189,12 +189,9 @@ class Mailer {
 				$m->subject('Novi komentari za termin :"' . $event->title . '" [#'.$event->id.']');
 			});
 
-			if ($sent)
-			{
-				Log::debug("[MAILER] Sent ".$sent." comment notifications for event [".$event->id."] to " . @json_encode($emails));
-				$event->comments_sent_at = Carbon::now();
-				$event->save();
-			}
+			Log::debug("[MAILER] Sent ".$sent." comment notifications for event [".$event->id."] to " . @json_encode($emails));
+			$event->comments_sent_at = Carbon::now();
+			$event->save();
 		}
 		else
 		{
