@@ -9,6 +9,7 @@
 		"foundation-icon-fonts": "latest",
 		"font-awesome": "latest",
 		"jquery-knob": "latest",
-		"nnnick-chartjs": "latest"
+		"nnnick-chartjs": "latest",
+		"sweetalert": "latest"
 	}
 }
