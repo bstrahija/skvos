@@ -23,8 +23,17 @@ App.Invitations = {
 	 */
 	initConfirmation: function() {
 		$(".button.confirm-invitation").click(function() {
-			if (confirm('Želiš potvrditi dolazak na termin?')) {
-				var $btn   = $(this);
+			var $btn = $(this);
+
+			swal({
+				title: "Potvrda",
+				text: "Želiš potvrditi dolazak na termin?",
+				type: "success",
+				showCancelButton: true,
+				confirmButtonColor: "#A6DB8A",
+				confirmButtonText: "Da!",
+				cancelButtonText: "Ne"
+			}, function() {
 				var $event = $btn.closest(".event");
 
 				// Progress
@@ -47,7 +56,7 @@ App.Invitations = {
 				.always(function() {
 					NProgress.done();
 				});
-			}
+			});
 
 			return false;
 		});

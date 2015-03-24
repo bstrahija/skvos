@@ -8,8 +8,6 @@ App = {
 	 * @return {void}
 	 */
 	init: function() {
-		console.log("Init");
-
 		// Detect fullscreen app
 		if (window.navigator.standalone) {
 			$("body").addClass("fullscreen");
