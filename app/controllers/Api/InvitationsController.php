@@ -47,4 +47,19 @@ class InvitationsController extends BaseController {
 		return Response::json(array('error' => true), 500);
 	}
 
+	/**
+	 * Cancel invitation
+	 * @param  int $id
+	 * @return Response
+	 */
+	public function cancel($id)
+	{
+		if ($this->invitations->cancel($id))
+		{
+			return Response::json(array('success' => true));
+		}
+
+		return Response::json(array('error' => true), 500);
+	}
+
 }

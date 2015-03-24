@@ -60,6 +60,7 @@ Route::group(array('before' => 'auth'), function()
 
 		// Invitations
 		Route::post('invitations/confirm/{id}', 'App\Controllers\Api\InvitationsController@confirm');
+		Route::post('invitations/cancel/{id}',  'App\Controllers\Api\InvitationsController@cancel');
 		Route::resource('invitations',          'App\Controllers\Api\InvitationsController');
 
 		// Users

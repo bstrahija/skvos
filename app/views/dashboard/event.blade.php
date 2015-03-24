@@ -22,10 +22,10 @@
 				<div class="confirmation">
 					<a href="{{ route('invitations.show', $invitation->id) }}" class="confirm-invitation button success tiny round" data-id="{{ $invitation->id }}">{{ icn('check') }}</a>
 				</div>
-			@elseif ($invitation and ! $invitation->cancelled)
-				<!--<div class="confirmation">
+			@elseif ($invitation and ! $invitation->cancelled and role('admin'))
+				<div class="confirmation">
 					<span class="cancel-invitation button alert tiny round" data-id="{{ $invitation->id }}">{{ icn('dislike') }}</span>
-				</div>-->
+				</div>
 			@endif
 		</h2>
 
