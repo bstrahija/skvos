@@ -17,12 +17,16 @@
 
 		<fieldset>
 			<div class="row">
-				<div class="columns small-12"><input type="email" name="email" value="{{ Input::old('email') }}" placeholder="Email adresa"></div>
+				<div class="columns small-12"><input type="email" name="email" value="{{ Input::old('email') }}" placeholder="Email adresa" required></div>
 			</div>
 
 			<div class="row">
-				<div class="columns small-6"><input type="text" name="first_name" value="{{ Input::old('first_name') }}" placeholder="Ime"></div>
-				<div class="columns small-6"><input type="text" name="last_name" value="{{ Input::old('last_name') }}" placeholder="Prezime"></div>
+				<div class="columns small-6"><input type="text" name="first_name" value="{{ Input::old('first_name') }}" placeholder="Ime" required></div>
+				<div class="columns small-6"><input type="text" name="last_name" value="{{ Input::old('last_name') }}" placeholder="Prezime" required></div>
+			</div>
+
+			<div class="row">
+				<div class="columns small-123"><input type="text" name="nickname" value="{{ Input::old('nickname') }}" placeholder="Nadimak"></div>
 			</div>
 		</fieldset>
 
@@ -43,8 +47,8 @@
 		<fieldset>
 			<h3>Lozinka</h3>
 			<div class="row">
-				<div class="columns small-6"><input type="password" name="password" value="" placeholder="Lozinka"></div>
-				<div class="columns small-6"><input type="password" name="password_confirmation" value="" placeholder="Potvrdi"></div>
+				<div class="columns small-6"><input type="password" name="password" value="" placeholder="Lozinka" required></div>
+				<div class="columns small-6"><input type="password" name="password_confirmation" value="" placeholder="Potvrdi" required></div>
 			</div>
 		</fieldset>
 

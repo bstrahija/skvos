@@ -6,6 +6,7 @@ use App\Resources\Collections\UserCollection;
 use App\Resources\Items\UserItem;
 use App\Repositories\Interfaces\UserRepositoryInterface;
 use App\Validation\UserValidator;
+use App\Validation\UserCreateValidator;
 use App\Validation\UserUpdateValidator;
 
 class UserRepository extends BaseRepository implements UserRepositoryInterface {
@@ -62,7 +63,48 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface {
 	 */
 	public function create($data)
 	{
+		$validation = new UserCreateValidator($data);
 
+		if ($validation->passes())
+		{
+			$user             = new User;
+			$user->email      = array_get($data, 'email');
+			$user->first_name = strip_tags(array_get($data, 'first_name'));
+			$user->last_name  = strip_tags(array_get($data, 'last_name'));
+			$user->nickname   = strip_tags(array_get($data, 'nickname'));
+			$user->password   = Hash::make(array_get($data, 'password'));
+
+			// Also update photo only if any uploaded
+			try {
+				if ($photo = array_get($data, 'photo'))
+				{
+					$target = public_path('storage/avatars');
+					$ext    = $photo->getClientOriginalExtension();
+					$name   = 'avatar_' . $user->id . '.' . $ext;
+
+					if (in_array($ext, ['gif', 'jpg', 'jpeg', 'png']))
+					{
+						$photo->move($target, $name);
+					}
+
+					// Assign value
+					$user->photo = 'storage/avatars/'.$name;
+				}
+			}
+			catch(\Exception $e)
+			{
+				\Log::error($e);
+			}
+
+			// Save data
+			$user->save();
+
+			return new UserItem($user->toArray());
+		}
+
+		$this->errors = $validation->errors();
+
+		return User::create($data);
 	}
 
 	/**
