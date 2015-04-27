@@ -26,7 +26,7 @@
 			</div>
 
 			<div class="row">
-				<div class="columns small-123"><input type="text" name="nickname" value="{{ Input::old('nickname') }}" placeholder="Nadimak"></div>
+				<div class="columns small-12"><input type="text" name="nickname" value="{{ Input::old('nickname') }}" placeholder="Nadimak"></div>
 			</div>
 		</fieldset>
 

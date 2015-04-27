@@ -24,6 +24,10 @@
 				<div class="columns small-6"><input type="text" name="first_name" value="{{ $user->first_name }}" placeholder="Ime"></div>
 				<div class="columns small-6"><input type="text" name="last_name" value="{{ $user->last_name }}" placeholder="Prezime"></div>
 			</div>
+
+			<div class="row">
+				<div class="columns small-12"><input type="text" name="nickname" value="{{ $user->nickname }}" placeholder="Nadimak"></div>
+			</div>
 		</fieldset>
 
 		<hr>

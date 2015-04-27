@@ -124,6 +124,7 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface {
 			$user->email      = array_get($data, 'email');
 			$user->first_name = strip_tags(array_get($data, 'first_name'));
 			$user->last_name  = strip_tags(array_get($data, 'last_name'));
+			$user->nickname   = strip_tags(array_get($data, 'nickname'));
 
 			// Update password only if passed
 			if ($password = array_get($data, 'password'))
