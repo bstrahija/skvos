@@ -29,7 +29,7 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface {
 	 */
 	public function all($options = null)
 	{
-		$users = User::all();
+		$users = User::orderBy('first_name')->get();
 
 		return new UserCollection($users->toArray());
 	}
