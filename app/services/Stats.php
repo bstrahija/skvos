@@ -104,7 +104,7 @@ class Stats {
 		// Extended
 		$stats['events_attended']   = Invitation::where('user_id', $userId)->join('events', 'events.id', '=', 'invitations.event_id')->where('events.date', '<=', date('Y-m-d'))->where('confirmed', 1)->count();
 		$stats['events_invited']    = Invitation::where('user_id', $userId)->join('events', 'events.id', '=', 'invitations.event_id')->where('events.date', '<=', date('Y-m-d'))->count();
-		$stats['events_attendance'] = round(($stats['events_attended'] / $stats['events_invited']) * 100);
+		$stats['events_attendance'] = $stats['events_invited'] ? round(($stats['events_attended'] / $stats['events_invited']) * 100) : 0;
 
 		return new StatsItem($stats);
 	}

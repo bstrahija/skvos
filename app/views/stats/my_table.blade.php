@@ -7,6 +7,7 @@
 				<em>Najbolji igrač termina</em>
 			</td>
 		</tr>
+
 		<tr>
 			<th>Mečevi:</th>
 			<td>
@@ -14,17 +15,21 @@
 				<em>Dobivenih <strong>{{ $stats->matches_won }}</strong> od <strong>{{ $stats->matches_played }}</strong> mečeva</em>
 			</td>
 		</tr>
-		<tr>
-			<th>Rival:</th>
-			<td>
-				{{ $rival->full_name }}
-				<span>(
-					<strong>{{ $rival->efficiency_against }}%</strong> &mdash;
-					<strong>{{ $rival->won_against }}</strong>/<strong>{{ $rival->played_against }}</strong> dobivenih
-				)</span>
-				<em>Najviše odigranih mečeva protiv ovog igrača</em>
-			</td>
-		</tr>
+
+		@if ($rival)
+			<tr>
+				<th>Rival:</th>
+				<td>
+					{{ $rival->full_name }}
+					<span>(
+						<strong>{{ $rival->efficiency_against }}%</strong> &mdash;
+						<strong>{{ $rival->won_against }}</strong>/<strong>{{ $rival->played_against }}</strong> dobivenih
+					)</span>
+					<em>Najviše odigranih mečeva protiv ovog igrača</em>
+				</td>
+			</tr>
+		@endif
+
 		<tr>
 			<th>Sets:</th>
 			<td>
